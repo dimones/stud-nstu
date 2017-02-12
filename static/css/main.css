@@ -1,0 +1,290 @@
+html{height: 100%;}
+body { font-family: "Intro Regular"; letter-spacing: 1px;
+    height: 100%;  }
+header{  width: 100%;  background: linear-gradient(to left, #d90d25, #e90b3f);  color: #fff; }
+.header {
+    width: 1100px;
+    height: 130px;
+    margin: auto;
+    letter-spacing: 1px;
+
+}
+.header::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+.header > div,
+.header > div::before,
+.header nav,
+.header > div h1 {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: "Intro Regular";
+}
+
+.header > div {
+    height: 100%;
+}
+
+.header > div::before,
+.social ul li{
+    content: '';
+    height: 100%;
+}
+
+.header > div h1 {
+    width: 150px;
+    font-size: 8pt;
+}
+
+.sub-nav li, .main-nav li,
+.social ul li
+{
+    display: inline-block;
+}
+
+.sub-nav li a:hover, .main-nav li a:hover{
+    border-color:#ffffff ;
+
+    text-decoration: none;
+
+}
+
+.main-nav {
+    font-size: 12pt;
+}
+.sub-nav {
+    font-size: 9pt;
+}
+
+nav ul li a
+{
+    display: inline-block;
+/* height: 34px; */
+    padding: 8px 8px;
+    border-radius: 20px;
+    border: 2px solid;
+    border-color: transparent;
+}
+.content > div,
+.promo >div{
+    width: 1100px;
+    margin: auto;
+}
+.promo {
+    background-color: #1d1d1d;
+    color: #ffffff;
+    height: 450px;
+}
+.social, .social li
+{
+    display: inline-block;
+    color: #d90d25;
+}
+.social li
+{
+    background-color: white;
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+.social li a
+{
+    position: relative;
+    top: 16px;
+}
+main{
+    box-sizing: border-box;
+    min-height: 90%;
+    padding-bottom: 180px;
+}
+.background{
+    background-image: url('../photo/men.png');
+    height: 319px;
+    width: 215px;
+    display: inline-block;
+    position: relative;
+    top: 61px;
+}
+.promo, .promo >div {
+    height: 380px;
+
+}
+
+.c1, .c2, .c3, .c4
+{
+    background-color: white;
+    border-radius: 100%;
+    position: relative;
+    display: inline-block;
+}
+.promo div .c1
+{
+    bottom:210px ;
+    left: -27px;
+    width: 7px;
+    height: 7px;
+}
+.promo div .c2
+{
+    bottom:210px ;
+    left: -14px;
+    width: 14px;
+    height: 14px;
+}
+.promo div .c3
+{
+    bottom:170px ;
+    left: -15px;
+    width: 28px;
+    height: 28px;
+}
+
+.promo div .c4
+{
+    bottom:143px ;
+    left: -5px;
+    width: 104px;
+    height: 104px;
+}
+.slogan {
+    display: inline-block;
+    width: 200px;
+    color:#828282;
+    position: relative;
+    bottom: 175px;
+    left: 30px;
+}
+.title {
+    display: inline-block;
+    font-family: 'Intro Light';
+    text-transform: uppercase;
+    position: relative;
+    color:#828282;
+    bottom: 105px;
+    left: 265px;
+}
+.title .middle-title {
+    color: #db8112;
+    font-size: 48px;
+    line-height: 48px;
+}
+.title .top-title{
+    padding: 0 0 5px 2px;
+}
+.title .bottom-title{
+    padding: 5px 0 0 2px;
+}
+footer {
+    height: 180px;
+    background-color: #e7e7e7;
+    width: 100%;
+    margin-top: -180px;
+}
+.content> div {
+    width: 1100px;
+    margin: auto;
+    overflow: hidden;
+}
+.content div .side-bar{
+    width: 250px;
+
+}
+div.event{
+    width: 200px;
+}
+.side-bar ul{
+    margin-top: 15px;
+    margin-bottom: 18px;
+}
+.side-bar ul li
+{
+    padding: 7px 0 7px 0;
+}
+.side-bar ul li a
+{
+    color: #474747;
+    font-size: 13pt;
+    font-family: "Intro Light";
+    line-height: 13pt;
+}
+.side-bar ul li a:hover
+{
+    color: #e50b38;
+    text-decoration: none;
+}
+
+.event-image
+{
+    width: 180px;
+    height: 250px;
+    border-radius: 25px;
+}
+
+.event {
+    border-top: solid 1px #e3e3e3;
+    padding-top: 34px;
+
+    border-bottom: solid 1px #e3e3e3;
+}
+.event a {
+    display: inline-block;
+    padding-left: 10px;
+}
+.event-title{
+    padding: 20px 0 16px 8px;
+    color:#727272;
+    font-family: "Intro Regular";
+    font-size: 12px;
+}
+.more a{
+    font-family: "Open Sans";
+    color: #727272;
+    font-size: 10px;
+    padding: 10px 15px;
+}
+div.more{
+    height: 40px;
+margin-top: 12px;
+}
+.side-bar,.main-content {display:block}
+.side-bar {float: left}
+.main-content{  float: left}
+.content div .main-content{
+
+    width: 845px;
+}
+#footer{
+    width: 1100px;
+    margin: auto;
+    height: 100%;
+}
+#footer div{
+    display: inline-block;
+    font-size: 10pt;
+    font-family: "Open Sans";
+    color:#adadad ;
+    vertical-align: middle;
+
+}
+#footer:before { /* для IE8+ */
+  content: "";
+  display: inline-block;
+  min-height: inherit;
+  height: 100%;
+  vertical-align: middle;
+}
+#footer .adress
+{
+    width: 330px;
+
+}
+#footer .info{
+    width: 720px;
+}

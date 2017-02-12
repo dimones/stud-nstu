@@ -1,0 +1,102 @@
+.promo{
+    background: url('../photo/Bgonir.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Intro Light";
+}
+.onir{
+    display: inline-block;
+    position: relative;
+
+    left: 280px;
+
+}
+.onir div {
+    color: #d7d7d7;
+    display: block;
+}
+div.first{
+    width: 190px;
+    font-family: "Intro Light";
+}
+div.second {
+    color: #11ba49;
+    font-family: "Intro Light";
+    font-size: 48px;
+    line-height: 48px;
+    display: inline-block;
+    padding-top: 40px;
+}
+div.third {
+    text-transform: uppercase;
+    padding-top: 20px;
+
+}
+.onir-info{
+    display: inline-block;
+    width: 530px;
+    position: relative;
+    top:50px;
+    left: 300px;
+}
+.about span{
+    color: #11ba49;
+}
+.onir-info .onir-about {
+    padding-top: 50px;
+    color: #11ba49;
+    font-size: 18pt;
+}
+.abb>div{
+    display: inline-block;
+    width: 170px;
+}
+.abb>div a{
+
+    color: #11ba49;
+    padding: 10px;
+    border: 1px solid #11ba49;
+    border-radius: 20px;
+}
+.sub-title{
+    padding-top: 30px;
+    font-family: "Intro Regular";
+}
+.sub-info{
+    padding-top: 20px;
+    font-family: "Open Sans";
+    font-size: 9pt;
+    padding-bottom: 40px;
+}
+.icon30{
+    padding-right: 8px;
+    display: inline-block;
+    height: 11px;
+    width: 19px;
+    background-image: url('../photo/icon30.png');
+    background-repeat: no-repeat;
+}
+.icon31{
+    position: relative;
+    padding-right: 8px;
+    top: 4px;
+    display: inline-block;
+    height: 21px;
+    width: 14px;
+    background-image: url('../photo/icon31.png');
+    background-repeat: no-repeat;
+}
+.icon32{
+    position: relative;
+    padding-right: 8px;
+    top: 4px;
+    display: inline-block;
+    width: 19px;
+    height: 16px;
+    background-image: url('../photo/icon32.png');
+    background-repeat: no-repeat;
+}
+.clearfix{
+    clear: both;
+}

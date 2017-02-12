@@ -1,0 +1,4 @@
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
