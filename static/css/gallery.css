@@ -104,12 +104,20 @@
 
 @media (max-width: 550px) {
     #rig li {
-        width:50%;
+        width:49.5%;
     }
 }
 .gallery{
     padding-top: 50px;
     padding-left: 50px;
+    width: 780px;
+
+}
+.gallery-content{
+    width: 780px;
+    height: 100%;
+    overflow: hidden;
+
 }
 .gallery-head{
     background: linear-gradient(to left, #d90d25, #e90b3f);
@@ -165,14 +173,14 @@
     line-height: 30px;
 }
 .gallery-social-button-group{
-    width: 20%;
+    width: 21%;
     display: block;
     float: right;
     padding-right: 10px;
     margin-top: -10px;
 }
 .gallery-column{
-    width: 49.8%;
+    width: 49.95%;
 }
 .left {
     float: left;
