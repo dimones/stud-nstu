@@ -2,6 +2,9 @@ from flask import Flask , render_template
 
 app = Flask(__name__)
 
+@app.route('/culture')
+def culture():
+    return render_template("culture.html")
 
 @app.route('/garage')
 def hello_world():
