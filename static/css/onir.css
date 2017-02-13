@@ -180,3 +180,13 @@ p.important:last-child {
 p.important{
     width: 800px;
 }
+.person {
+    display: inline-block;
+}
+.person span{
+    display: block;
+}
+.person.img{
+    width: 100px;
+    height: 100px;
+}
