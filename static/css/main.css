@@ -1,5 +1,5 @@
 html{height: 100%;}
-body { font-family: "Intro Regular"; letter-spacing: 1px;
+body { font-family: IntroRegular; letter-spacing: 1px;
     height: 100%;  }
 header{  width: 100%;  background: linear-gradient(to left, #d90d25, #e90b3f);  color: #fff; }
 .header {
@@ -23,7 +23,7 @@ header{  width: 100%;  background: linear-gradient(to left, #d90d25, #e90b3f);  
     vertical-align: middle;
     text-align: left;
     text-transform: uppercase;
-    font-family: "Intro Regular";
+    font-family: IntroRegular;
 }
 
 .header > div {
@@ -104,83 +104,7 @@ main{
     min-height: 90%;
     padding-bottom: 180px;
 }
-.background{
-    background-image: url('../photo/men.png');
-    height: 319px;
-    width: 215px;
-    display: inline-block;
-    position: relative;
-    top: 61px;
-}
-.promo, .promo >div {
-    height: 380px;
 
-}
-
-.c1, .c2, .c3, .c4
-{
-    background-color: white;
-    border-radius: 100%;
-    position: relative;
-    display: inline-block;
-}
-.promo div .c1
-{
-    bottom:210px ;
-    left: -27px;
-    width: 7px;
-    height: 7px;
-}
-.promo div .c2
-{
-    bottom:210px ;
-    left: -14px;
-    width: 14px;
-    height: 14px;
-}
-.promo div .c3
-{
-    bottom:170px ;
-    left: -15px;
-    width: 28px;
-    height: 28px;
-}
-
-.promo div .c4
-{
-    bottom:143px ;
-    left: -5px;
-    width: 104px;
-    height: 104px;
-}
-.slogan {
-    display: inline-block;
-    width: 200px;
-    color: #828282;
-    position: relative;
-    bottom: 175px;
-    left: 30px;
-}
-.title {
-    display: inline-block;
-    font-family: 'Intro Light';
-    text-transform: uppercase;
-    position: relative;
-    color:#828282;
-    bottom: 105px;
-    left: 265px;
-}
-.title .middle-title {
-    color: #db8112;
-    font-size: 48px;
-    line-height: 48px;
-}
-.title .top-title{
-    padding: 0 0 5px 2px;
-}
-.title .bottom-title{
-    padding: 5px 0 0 2px;
-}
 footer {
     height: 180px;
     background-color: #e7e7e7;
@@ -211,7 +135,7 @@ div.event{
 {
     color: #474747;
     font-size: 13pt;
-    font-family: "Intro Light";
+    font-family: IntroLight;
     line-height: 13pt;
 }
 .side-bar ul li a:hover
@@ -240,11 +164,11 @@ div.event{
 .event-title{
     padding: 20px 0 16px 8px;
     color:#727272;
-    font-family: "Intro Regular";
+    font-family: IntroRegular;
     font-size: 12px;
 }
 .more a{
-    font-family: "Open Sans";
+    font-family: OpenSans;
     color: #727272;
     font-size: 10px;
     padding: 10px 15px;
@@ -268,7 +192,7 @@ margin-top: 12px;
 #footer div{
     display: inline-block;
     font-size: 10pt;
-    font-family: "Open Sans";
+    font-family: OpenSans;
     color:#adadad ;
     vertical-align: middle;
 
