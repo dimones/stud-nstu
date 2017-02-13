@@ -2,7 +2,12 @@ from flask import Flask , render_template
 
 app = Flask(__name__)
 
-
+@app.route('/culture')
+def culture():
+    return render_template("culture.html")
+@app.route('/map')
+def map():
+    return render_template("map.html")
 @app.route('/garage')
 def hello_world():
     return render_template("garage.html")

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+    <title>JS Bin</title>
+    <link href="../static/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/output.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/main.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/gallery.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="myModal" class="modal">
+      <span class="close cursor" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+
+        <div class="mySlides">
+          <div class="numbertext">1 / 4</div>
+            <img src="/static/img/test_image.jpg">
+        </div>
+
+        <div class="mySlides">
+          <div class="numbertext">2 / 4</div>
+            <img src="/static/img/test_image.jpg">
+        </div>
+
+        <div class="mySlides">
+          <div class="numbertext">3 / 4</div>
+            <img src="/static/img/test_image.jpg">
+        </div>
+
+        <div class="mySlides">
+          <div class="numbertext">4 / 4</div>
+            <img src="/static/img/test_image.jpg">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+
+{#        <div class="column">#}
+{#          <img class="demo" src="/static/img/test_image.jpg" onclick="currentSlide(1)" alt="Nature">#}
+{#        </div>#}
+{##}
+{#        <div class="column">#}
+{#          <img class="demo" src="/static/img/test_image.jpg" onclick="currentSlide(2)" alt="Trolltunga">#}
+{#        </div>#}
+{##}
+{#        <div class="column">#}
+{#          <img class="demo" src="/static/img/test_image.jpg" onclick="currentSlide(3)" alt="Mountains">#}
+{#        </div>#}
+{##}
+{#        <div class="column">#}
+{#          <img class="demo" src="/static/img/test_image.jpg" onclick="currentSlide(4)" alt="Lights">#}
+{#        </div>#}
+      </div>
+    </div>
+  <header>
+      <div class="header">
+          <div class="logo">
+              <h1>Новосибирский Государственный Технический Университет</h1>
+          </div>
+          <nav>
+              <ul class="main-nav">
+                  <li><a>НАУКА</a></li>
+                  <li><a>СПОРТ</a></li>
+                  <li><a>КУЛЬТУРА</a></li>
+                  <li><a>ОБЩЕСТВЕННАЯ ЖИЗНЬ</a></li>
+                  <li><a>ЗДОРОВЬЕ</a></li>
+              </ul>
+              <ul class="sub-nav">
+                  <li><a>РАСПИСАНИЯ</a></li>
+                  <li><a>3D-НГТУ</a></li>
+                  <li><a>ТРУДОУСТРОЙСТВО</a></li>
+                  <li><a>МАГАЗИН</a></li>
+              </ul>
+          </nav>
+          <ul class="social">
+              <li class="vk"><a>vk</a></li>
+              <li class="ok"><a>ok</a></li>
+              <li class="facebook"><a>fb</a></li>
+          </ul>
+      </div>
+  </header>
+  <main>
+      <div class="promo">
+        <div>
+            <div class="background"></div>
+            <div class="c1"></div>
+            <div class="c2"></div>
+            <div class="c3"></div>
+            <div class="c4"></div>
+            <div class="slogan">Есть интересные <br />  идеи но нет возможности реализовать все одному?</div>
+            <div>
+            <div class="title">
+                <div class="top-title"> Бизнес-инкубатор </div>
+                <div class="middle-title ">Гараж</div>
+                <div class="bottom-title"> прокачает твой <br /> проект</div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="content">
+          <div>
+              <div class="side-bar">
+                  <ul>
+                      <li><a href="#">Новости</a></li>
+                      <li><a href="#">Как стать резидентом</a></li>
+                      <li><a href="#">Клуб СБИ Гараж</a></li>
+                      <li><a href="#">ТехноЛаб</a></li>
+                      <li><a href="#">Галерея</a></li>
+                      <li><a href="#">Образовательные проекты</a></li>
+                  </ul>
+                  <div class="event">
+                      <a href="#">
+                          <image class="event-image" src="../static/photo/nstu.jpg">
+
+                          </image>
+                          <div class="event-title">
+                              Дни открытых дверей НГТУ
+                          </div>
+                      </a>
+                      <a href="#">
+                          <image class="event-image" src="../static/photo/nstu.jpg">
+
+                          </image>
+                          <div class="event-title">
+                              Дни открытых дверей НГТУ
+                          </div>
+                      </a>
+                  </div>
+                      <div class="more">
+                         <a href="#footer">больше мероприятий и акций</a>
+                      </div>
+              </div>
+              <div class="main-content">
+                <div class="gallery">
+                    <div class="gallery-head">
+                        <div class="gallery-title">
+                            <div class="gallery-title-text">
+                                Студвесна 2017
+                            </div>
+                            <div class="gallery-title-date">
+                                Опубликовано 21.06.2016
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="gallery-title-body">
+                            <div class="gallery-title-body-text">
+                                <h4>Приглашаем на работу водителей такси с л/а и на наше авто. Быстрое подключение к программам "Яндекс", "Uber", "Gett". Так же для наших водителей действуют специальные условия для подключения к лидирующим таксомоторным компаниям города "Лидер", "Максим", "Атлас", "Гранд</h4>
+                            </div>
+                            <br>
+                            <div class="gallery-title-body-text">
+                                <h4>Приглашаем на работу водителей такси с л/а и на наше авто. Быстрое подключение к программам "Яндекс", "Uber", "Gett".</h4>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="gallery-social">
+                            <div class="gallery-social-text">
+                                Вы также можете посмотреть фотоотчет в социальных сетях
+                            </div>
+                            <div class="gallery-social-button-group">
+                                <ul class="social">
+                                    <li class="vk"><a>vk</a></li>
+                                    <li class="ok"><a>ok</a></li>
+                                    <li class="facebook"><a>fb</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-row">
+                            <div class="gallery-column left">
+                                <ul id="rig">
+                                    <li>
+                                        <a class="rig-cell"  onclick="openModal();currentSlide(1)">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gallery-column right">
+                                <ul id="rig" style="height: 264px;">
+                                    <li>
+                                        <a class="rig-cell" href="#" style="height: 264px; width: 400px;">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="gallery-row">
+                            <div class="gallery-column left">
+                                <ul id="rig" style="height: 264px;">
+                                    <li>
+                                        <a class="rig-cell" href="#" style="height: 264px; width: 400px;">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gallery-column right">
+                                <ul id="rig">
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="gallery-row">
+                            <div class="gallery-column left">
+                                <ul id="rig">
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gallery-column right">
+                                <ul id="rig">
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rig-cell" href="#">
+                                            <img class="rig-img" src="/static/img/test_image.jpg">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+  </main>
+  <footer>
+    <div id="footer">
+        <div class="adress">Россия 630073, Новосибирск проспект К.Маркса, 20 корпус 2а, к. 206. телефон: 8 (383) 346 11 21 эл.почта: stud@nstu.ru</div>
+        <div class="info">&copy; 2005-2017, Новосибирский государственный технический университет, Студенческий пресс-центр. Свидетельство о регистрации: СМИ Эл № ФС77-45108 от 18 мая 2011 г. Выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)</div>
+    </div>
+</footer>
+</body>
+<script>
+    function openModal() {
+      document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById('myModal').style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+</script>
+</html>
