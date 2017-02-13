@@ -2,3 +2,27 @@
     font-family: intro; /* Имя шрифта */
     src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
    }
+@font-face {
+    font-family: IntroLight; /* Имя шрифта */
+    src: url('../font/Intro-Light.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: IntroRegular; /* Имя шрифта */
+    src: url('../font/Intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: IntroBold; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: OpenSans; /* Имя шрифта */
+    src: url('../font/OpenSans-Regular.ttf'); /* Путь к файлу со шрифтом */
+   }

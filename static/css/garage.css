@@ -1,19 +1,98 @@
 .promo{
-    background: url('../photo/Bgonir.png');
     background-color: black;
     background-position: -75px 70%;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: IntroLight;
 }
-.onir{
+.garage{
     display: inline-block;
     position: relative;
     top: 25px;
     left: 165px;
 
 }
-.onir div {
+
+.background{
+    background-image: url('../photo/men.png');
+    height: 319px;
+    width: 215px;
+    display: inline-block;
+    position: relative;
+    top: 61px;
+    left: -50px;
+}
+.promo, .promo >div {
+    height: 380px;
+
+}
+
+.c1, .c2, .c3, .c4
+{
+    background-color: white;
+    border-radius: 100%;
+    position: relative;
+    display: inline-block;
+}
+.promo div .c1
+{
+    bottom:210px ;
+    left: -77px;
+    width: 7px;
+    height: 7px;
+}
+.promo div .c2
+{
+    bottom:210px ;
+    left: -64px;
+    width: 14px;
+    height: 14px;
+}
+.promo div .c3
+{
+    bottom:170px ;
+    left: -65px;
+    width: 28px;
+    height: 28px;
+}
+
+.promo div .c4
+{
+    bottom:143px ;
+    left: -55px;
+    width: 104px;
+    height: 104px;
+}
+.slogan {
+    display: inline-block;
+    width: 200px;
+    color: #828282;
+    position: relative;
+    bottom: 285px;
+    left: 370px;
+}
+.title {
+    display: inline-block;
+    font-family: IntroLight;
+    text-transform: uppercase;
+    position: relative;
+    bottom: 85px;
+    color:#828282;
+}
+.title .middle-title {
+    color: #db8112;
+    font-size: 48px;
+    line-height: 48px;
+}
+.title .top-title{
+    padding: 0 0 5px 2px;
+}
+.title .bottom-title{
+    padding: 5px 0 0 2px;
+}
+
+
+.garage div {
     color: #d7d7d7;
     display: block;
 }
@@ -23,7 +102,7 @@ div.first{
     font-family: IntroLight;
 }
 div.second {
-    color: #11ba49;
+    color: #db8012;
     font-family: IntroLight;
     font-size: 48px;
     line-height: 48px;
@@ -42,62 +121,37 @@ div.third {
     top:50px;
     left: 300px;
 }
-.about span{
-    color: #11ba49;
+.about {
+    width: 400px;
 }
-.onir-info .onir-about {
+.about span{
+    color: #db8012;
+}
+.garage-info .garage-about {
     padding-top: 50px;
-    color: #11ba49;
+    color: #db8012;
     font-size: 18pt;
 }
-.abb>div{
-    display: inline-block;
-    width: 170px;
+.abb>.sub-title{
+
+    width: 270px;
 }
 .abb>div a{
-
-    color: #11ba49;
+    color: #db8012;
     padding: 10px;
-    border: 1px solid #11ba49;
+    border: 1px solid #db8012;
     border-radius: 20px;
 }
 .sub-title{
     padding-top: 30px;
-    font-family: IntroRegular;
+    font-family: IntroLight;
+    color: #db8012;
 }
 .sub-info{
     padding-top: 20px;
     font-family: OpenSans;
     font-size: 9pt;
     padding-bottom: 40px;
-}
-.icon30{
-    padding-right: 8px;
-    display: inline-block;
-    height: 11px;
-    width: 19px;
-    background-image: url('../photo/icon30.png');
-    background-repeat: no-repeat;
-}
-.icon31{
-    position: relative;
-    padding-right: 8px;
-    top: 4px;
-    display: inline-block;
-    height: 21px;
-    width: 14px;
-    background-image: url('../photo/icon31.png');
-    background-repeat: no-repeat;
-}
-.icon32{
-    position: relative;
-    padding-right: 8px;
-    top: 4px;
-    display: inline-block;
-    width: 19px;
-    height: 16px;
-    background-image: url('../photo/icon32.png');
-    background-repeat: no-repeat;
 }
 .clearfix{
     clear: both;
@@ -120,6 +174,10 @@ h2{
     font-family: OpenSans;
     color: #474747;
     width:600px;
+}
+.col{
+    display: inline-block;
+    width: 200px;
 }
 .icon{
     padding-bottom: 120px;
@@ -171,12 +229,16 @@ h2{
 .img{
     padding-bottom: 15px;
 }
-p.important:last-child {
-    font-family: IntroBold;
-    line-height: 18pt;
-    font-size: 13pt;
-    color:#e50b38;
+.col1, .col2{
+    height:100%;
+    width: 49%;
+    display: inline-block;
 }
-p.important{
-    width: 800px;
+.col2{
+    position: relative;
+    bottom: 130px;
+    left: 70px;
+}
+#bug{
+    width: 123px;
 }
