@@ -1,7 +1,8 @@
 #view_container
 {
 	position: absolute;
-	top: 50px
+	top: -1px;
+	background-color: white;
 }
 
 .fme2label
@@ -28,6 +29,7 @@
 
 .fme2bottom
 {
+	display: none;/*TODO: ВОССТАНОВИТЬ ЭТО ЕБУЧЕЕ ГАВНО*/
 	position: absolute !important;
 	bottom: 0 !important;
 	margin: 1px !important;

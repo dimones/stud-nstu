@@ -8,6 +8,9 @@ def culture():
 @app.route('/map')
 def map():
     return render_template("map.html")
+@app.route('/map_inner.html')
+def map_inner_html():
+    return render_template("map_inner.html")
 @app.route('/garage')
 def hello_world():
     return render_template("garage.html")
