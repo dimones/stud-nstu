@@ -1,6 +1,7 @@
 .promo{
     background: url('../photo/Bgonir.png');
-    background-position: center;
+    background-color: black;
+    background-position: -75px 70%;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Intro Light";
@@ -8,8 +9,8 @@
 .onir{
     display: inline-block;
     position: relative;
-
-    left: 280px;
+    top: 25px;
+    left: 165px;
 
 }
 .onir div {
@@ -17,7 +18,8 @@
     display: block;
 }
 div.first{
-    width: 190px;
+    font-size: 18px;
+    width: 240px;
     font-family: "Intro Light";
 }
 div.second {
@@ -26,7 +28,7 @@ div.second {
     font-size: 48px;
     line-height: 48px;
     display: inline-block;
-    padding-top: 40px;
+    padding-top: 60px;
 }
 div.third {
     text-transform: uppercase;
@@ -99,4 +101,73 @@ div.third {
 }
 .clearfix{
     clear: both;
+}
+
+.note{
+    padding: 20px 0;
+}
+h2{
+    color: #696969;
+    font-size: 24px;
+    font-family: "Intro Regular";
+    line-height: 30px;
+    display: block;
+    float: left;
+}
+.main-text p {
+    display: inline-block;
+    padding-top: 15px;
+    font-family: "Open Sans";
+    color: #474747;
+    width:600px;
+}
+.icon{
+    padding-bottom: 120px;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background: url("../photo/prometei.png");
+    /*background-color: #000000;*/
+    border-radius: 200px;
+    background-repeat: no-repeat;
+}
+.data{
+    padding: 10px 20px;
+    font-size: 10px;
+    float: right;
+    position:relative;
+    display: block;
+    color:#989898;
+}
+.docs{
+    padding-left: 55px;
+}
+.docs>div {
+    display: inline-block;
+    text-align: center;
+    margin: 20px;
+}
+.word .img{
+    margin: auto;
+    width: 50px;
+    height: 64px;
+    background: url("../photo/doc.png");
+    background-repeat: no-repeat;
+}
+.pdf .img{
+    margin: auto;
+    width: 50px;
+    height: 64px;
+    background: url("../photo/pdf.png");
+    background-repeat: no-repeat;
+}
+.file .img{
+    margin: auto;
+    width: 50px;
+    height: 64px;
+    background: url("../photo/file.png");
+    background-repeat: no-repeat;
+}
+.img{
+    padding-bottom: 15px;
 }

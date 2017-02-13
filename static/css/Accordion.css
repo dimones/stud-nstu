@@ -1,20 +1,28 @@
 /* Style the buttons that are used to open and close the accordion panel */
 button.accordion {
-    background-color: #eee;
+    background: none;
     color: #444;
     cursor: pointer;
-    padding: 18px;
+    padding: 18px 18px 22px 18px;
     width: 100%;
     text-align: left;
     border: none;
     outline: none;
     transition: 0.4s;
-}
+    text-transform: uppercase;
+    border-top: 1px solid #e3e3e3;
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-button.accordion.active, button.accordion:hover {
-    background-color: #ddd;
+
 }
+button.accordion:last-child {
+    border-bottom: 1px solid #e3e3e3;
+}
+button.accordion:hover {
+    color: #e90b3f;
+    background-color: none;
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
 
 /* Style the accordion panel. Note: hidden by default */
 
@@ -24,4 +32,48 @@ div.panel {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+}
+button.accordion div {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url("../photo/down.png");
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    position: relative;
+    top:2px;
+}
+button.accordion.active {
+     border-bottom: 1px solid #e3e3e3;
+}
+button.accordion::selection{
+    border-color: transparent;
+}
+button.accordion.active div {
+    background-image: url("../photo/up.png");
+
+}
+.panel p:last-child {
+    padding-bottom: 10px;
+
+}
+.panel p:first-child{
+    padding-top: 10px;
+}
+.panel p{
+
+    font-family: "Open Sans";
+    font-size: 12px;
+    padding-left: 15px;
+}
+.panel ul{
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    padding-left: 28px;
+}
+.panel ul li {
+    list-style: circle outside;
+    display: list-item;
 }
