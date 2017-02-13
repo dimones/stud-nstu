@@ -186,6 +186,23 @@
 }
 
 /*Lightbox*/
+.row > .column {
+  padding: 0 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 25%;
+    height: 25%;
+}
+
+/* The Modal (background) */
 .modal {
   display: none;
   position: fixed;
@@ -227,7 +244,9 @@
 }
 
 .mySlides {
-  display: none;
+    display: none;
+    text-align: center;
+    background-color:black;
 }
 
 /* Next & previous buttons */
