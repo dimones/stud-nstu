@@ -169,7 +169,7 @@ div.event{
 }
 .more a{
     font-family: OpenSans;
-    color: #727272;
+    color: #727272;!important;
     font-size: 10px;
     padding: 10px 15px;
 }
@@ -209,4 +209,8 @@ margin-top: 12px;
 }
 #footer .info{
     width: 720px;
+}
+
+a:visited{
+    color: white;
 }
