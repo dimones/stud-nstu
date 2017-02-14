@@ -10,7 +10,7 @@
     display: inline-block;
     *display:inline;/*for IE6 - IE7*/
     /*width:33.33%;*/
-    width:17.8vw;
+    width:18.6vw;
     vertical-align:middle;
     box-sizing:border-box;
     margin:0;
@@ -93,14 +93,14 @@
 
 @media (max-width: 9000px) {
     #rig li {
-        width: 17.8vh;
+        width: 18.6vh;
         /*width:33.33%;*/
     }
 }
 
 @media (max-width: 700px) {
     #rig li {
-        width: 17.8vh;
+        width: 18.6vh;
         /*width:33.33%;*/
     }
 }
