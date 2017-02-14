@@ -49,9 +49,7 @@ header{  width: 100%;  background: linear-gradient(to left, #d90d25, #e90b3f);  
 
 .sub-nav li a:hover, .main-nav li a:hover{
     border-color:#ffffff ;
-
     text-decoration: none;
-
 }
 
 .main-nav {
@@ -213,4 +211,13 @@ margin-top: 12px;
 
 a:visited{
     color: white;
+}
+
+.promo_cult {
+    height: 380px;
+    background: url('../photo/bgcult.jpg');
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
