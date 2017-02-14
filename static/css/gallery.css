@@ -93,13 +93,15 @@
 
 @media (max-width: 9000px) {
     #rig li {
-        width:33.33%;
+        width: 17.8vh;
+        /*width:33.33%;*/
     }
 }
 
 @media (max-width: 700px) {
     #rig li {
-        width:33.33%;
+        width: 17.8vh;
+        /*width:33.33%;*/
     }
 }
 
