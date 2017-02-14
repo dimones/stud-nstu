@@ -9,7 +9,8 @@
 #rig li {
     display: inline-block;
     *display:inline;/*for IE6 - IE7*/
-    width:33.33%;
+    /*width:33.33%;*/
+    width:17.8vw;
     vertical-align:middle;
     box-sizing:border-box;
     margin:0;
