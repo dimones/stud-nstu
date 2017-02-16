@@ -1,6 +1,24 @@
-from flask import Flask , render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
+
+
+class Page:
+    request = None
+    body = None
+    scripts = None
+    def __init__(self):
+        pass
+    def __str__(self):
+        return self.render()
+    def render(self):
+        login_block = None
+        return render_template('layout.html', header=render_template('header.html', LOGIN_PLACE=login_block.render()),
+                        body=self.body,
+                        footer=render_template('footer.html'))
+
+
+
 
 @app.route('/culture')
 def culture():
