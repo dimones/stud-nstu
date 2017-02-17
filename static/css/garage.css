@@ -45,9 +45,12 @@
     color: #DB8112;
 }
 .promo_garage .proposal__item{
-    width: 200px;
+    width: 165px;
     color: #DBDBDB;
     margin-right: 30px;
+}
+.promo_garage .proposal__item:last-child{
+    margin-right: 0;
 }
 .promo_garage .proposal__sub-title{
     font-size:12px;
@@ -69,7 +72,6 @@
     bottom: 0;
     left: -30px;
 }
-
 
 .slogan {
     display: inline-block;
@@ -249,4 +251,22 @@ h2{
 }
 #bug{
     width: 123px;
+}
+.resident{
+    display: block;
+    width: 115px;
+    height:115px;
+    border-radius: 50%;
+    border: 1px solid #3C3C3C;
+    color: #db8012;
+    float: right;
+    text-align: center;
+    padding: 36px 0;
+    margin-top: 45px;
+    font-size: 12px;
+    font-family: IntroLight;
+}
+.resident:hover{
+    text-decoration: none;
+    border-color: #db8012;
 }
