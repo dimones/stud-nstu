@@ -104,10 +104,6 @@ header nav{
     border-color: #fff;
 }
 
-.content > div{
-    width: 1100px;
-    margin: auto;
-}
 .promo {
     background-color: #1d1d1d;
     color: #E6E6E6;
@@ -192,72 +188,55 @@ header nav{
 }
 main{
     min-height: 90%;
-    padding-bottom: 180px;
 }
 
-footer {
-    height: 180px;
-    background-color: #e7e7e7;
-    width: 100%;
-    margin-top: -180px;
-}
-.content> div {
-    width: 1100px;
-    margin: auto;
-    overflow: hidden;
-}
-.content div .side-bar{
+.sidebar{
     width: 250px;
-
 }
-div.event{
-    width: 200px;
-}
-.side-bar ul{
+.sidebar-menu{
     margin-top: 15px;
     margin-bottom: 18px;
 }
-.side-bar ul li
-{
+.sidebar-menu__item {
     padding: 7px 0 7px 0;
 }
-.side-bar ul li a
-{
+.sidebar-menu__link {
     color: #474747;
     font-size: 13pt;
     font-family: IntroLight;
     line-height: 13pt;
 }
-.side-bar ul li a:hover
-{
+.sidebar-menu__link:visited{
+    color: #474747;
+}
+.sidebar-menu__link:hover {
     color: #e50b38;
     text-decoration: none;
 }
 
-.event-image
-{
+.events__img {
     width: 180px;
     height: 250px;
     border-radius: 25px;
 }
 
-.event {
+.events {
     border-top: solid 1px #e3e3e3;
     padding-top: 34px;
-
     border-bottom: solid 1px #e3e3e3;
+    width: 200px;
 }
-.event a {
+.events__item {
     display: inline-block;
     padding-left: 10px;
 }
-.event-title{
+.events__title{
     padding: 20px 0 16px 8px;
     color:#727272;
     font-family: IntroRegular;
     font-size: 12px;
 }
-.more a{
+.more-events a{
     font-family: OpenSans;
     color: #727272;!important;
     font-size: 10px;
@@ -265,45 +244,46 @@ div.event{
 }
 div.more{
     height: 40px;
-margin-top: 12px;
+    margin-top: 12px;
 }
-.side-bar,.main-content {display:block}
-.side-bar {float: left}
-.main-content{  float: left}
+.sidebar {
+    float: left
+}
+.main-content{
+    float: left
+}
 .content div .main-content{
-
     width: 845px;
 }
-#footer{
-    width: 1100px;
-    margin: auto;
-    height: 100%;
+footer {
+    height: 180px;
+    background-color: #e7e7e7;
+    width: 100%;
+    clear: both;
+    margin-top: 20px;
 }
-#footer div{
+footer .adress, footer .info{
     display: inline-block;
-    font-size: 10pt;
+    font-size: 10px;
     font-family: OpenSans;
-    color:#adadad ;
+    color: #717171;
+    line-height: 13px;
     vertical-align: middle;
-
 }
-#footer:before { /* для IE8+ */
+footer .wrapper:before { /* для IE8+ */
   content: "";
   display: inline-block;
   min-height: inherit;
   height: 100%;
   vertical-align: middle;
 }
-#footer .adress {
+footer .adress {
     width: 330px;
 }
-#footer .info{
+footer .info{
     width: 720px;
 }
 
-a:visited{
-    color: white;
-}
 
 .promo_cult {
     height: 380px;
