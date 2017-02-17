@@ -10,59 +10,67 @@
     position: relative;
     top: 25px;
     left: 165px;
-
+}
+.promo_garage{
+    color: #828282;
+}
+.promo_garage .promo__title{
+    position: relative;
+}
+.promo_garage .promo__head-title{
+    color: #DB8112;
+    font: 45px "IntroLight";
+    margin-bottom: 5px;
+    margin-top: 85px;
 }
 
-.background{
-    background-image: url('../photo/men.png');
+.promo_garage .promo__head-title small{
+    font-size: 15px;
+    color: #828282;
+    display: block;
+    margin-bottom: -2px;
+}
+.promo_garage .promo__question{
+    font-family: IntroRegular;
+    font-size: 12px;
+    line-height: 14px;
+    width: 200px;
+    margin: 30px 0 0 140px;
+}
+
+.promo_garage .promo__subtitle{
+    font-size: 15px;
+}
+.promo_garage .promo__about span, .promo_garage .proposal__title{
+    color: #DB8112;
+}
+.promo_garage .proposal__item{
+    width: 200px;
+    color: #DBDBDB;
+    margin-right: 30px;
+}
+.promo_garage .proposal__sub-title{
+    font-size:12px;
+}
+.promo_garage .proposal__link{
+    border: 1px solid #DB8112;
+    color: #DB8112;
+    font-family: "Open Sans";
+}
+.promo_garage .proposal__link:hover{
+    background-color: #DB8112;
+    color: #fff;
+}
+.promo_garage .promo__background{
+    position: absolute;
+    background-image: url('../img/promo-garage.png');
     height: 319px;
-    width: 215px;
-    display: inline-block;
-    position: relative;
-    top: 61px;
-    left: -50px;
-}
-.promo, .promo >div {
-    height: 380px;
-
+    width: 381px;
+    bottom: 0;
+    left: -30px;
 }
 
-.c1, .c2, .c3, .c4
-{
-    background-color: white;
-    border-radius: 100%;
-    position: relative;
-    display: inline-block;
-}
-.promo div .c1
-{
-    bottom:210px ;
-    left: -77px;
-    width: 7px;
-    height: 7px;
-}
-.promo div .c2
-{
-    bottom:210px ;
-    left: -64px;
-    width: 14px;
-    height: 14px;
-}
-.promo div .c3
-{
-    bottom:170px ;
-    left: -65px;
-    width: 28px;
-    height: 28px;
-}
 
-.promo div .c4
-{
-    bottom:143px ;
-    left: -55px;
-    width: 104px;
-    height: 104px;
-}
 .slogan {
     display: inline-block;
     width: 200px;

@@ -135,7 +135,6 @@ header nav{
 }
 .promo__head-title{
     font-size: 45px;
-    color: #11BA49;
     text-transform: uppercase;
     margin: 65px 0 30px;
 }
@@ -148,12 +147,8 @@ header nav{
     font-size:12px;
     margin-bottom: 45px;
 }
-.promo__about span{
-    color: #11BA49;
-}
 
 .proposal__title{
-    color: #11BA49;
     font-size: 16px;
     margin-bottom: 35px;
 }
@@ -173,9 +168,8 @@ header nav{
     margin-bottom: 15px;
     vertical-align: top;
 }
-.proposal__sub-title>div{
-    margin-right: 5px;
-    float: left;
+.promo__title, .proposal__title{
+    font-family: IntroLight;
 }
 .proposal__sub-info{
     font-size: 10px;
@@ -183,7 +177,6 @@ header nav{
 .proposal__link{
     position: absolute;
     display: block;
-    border: 1px solid #11BA49;
     border-radius: 15px;
     height: 30px;
     width: 90px;
@@ -196,7 +189,6 @@ header nav{
 }
 .proposal__link:hover{
     text-decoration: none;
-    background-color: #11BA49;
 }
 main{
     min-height: 90%;

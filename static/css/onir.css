@@ -6,98 +6,49 @@
     background-size: cover;
     font-family: IntroLight;
 }
-.onir{
-    display: inline-block;
-    position: relative;
-    top: 25px;
-    left: 165px;
-
-}
-.onir div {
-    color: #d7d7d7;
-    display: block;
-}
-div.first{
-    font-size: 18px;
-    width: 240px;
-    font-family: IntroLight;
-}
-div.second {
-    color: #11ba49;
-    font-family: IntroLight;
-    font-size: 48px;
-    line-height: 48px;
-    display: inline-block;
-    padding-top: 60px;
-}
-div.third {
-    text-transform: uppercase;
-    padding-top: 20px;
-
-}
-.onir-info{
-    display: inline-block;
-    width: 530px;
-    position: relative;
-    top:50px;
-    left: 300px;
-}
-.about span{
-    color: #11ba49;
-}
-.onir-info .onir-about {
-    padding-top: 50px;
-    color: #11ba49;
-    font-size: 18pt;
-}
-.abb>div{
-    display: inline-block;
-    width: 170px;
-}
-.abb>div a{
-
-    color: #11ba49;
-    padding: 10px;
-    border: 1px solid #11ba49;
-    border-radius: 20px;
-}
-.sub-title{
-    padding-top: 30px;
-    font-family: IntroRegular;
-}
-.sub-info{
-    padding-top: 20px;
-    font-family: OpenSans;
-    font-size: 9pt;
-    padding-bottom: 40px;
-}
-.icon30{
-    padding-right: 8px;
-    display: inline-block;
-    height: 11px;
-    width: 19px;
-    background-image: url('../photo/icon30.png');
+.proposal__sub-title>div{
+    margin-right: 5px;
+    float: left;
+    background-position-y: 50%;
     background-repeat: no-repeat;
 }
+.icon30{
+    height: 15px;
+    width: 19px;
+    background-image: url('../photo/icon30.png');
+}
 .icon31{
-    position: relative;
-    padding-right: 8px;
-    top: 4px;
-    display: inline-block;
     height: 21px;
     width: 14px;
     background-image: url('../photo/icon31.png');
-    background-repeat: no-repeat;
 }
 .icon32{
-    position: relative;
-    padding-right: 8px;
-    top: 4px;
-    display: inline-block;
     width: 19px;
     height: 16px;
     background-image: url('../photo/icon32.png');
-    background-repeat: no-repeat;
+}
+
+
+.promo_onir .promo__head-title{
+    color: #11BA49;
+}
+.promo_onir .promo__about span{
+    color: #11BA49;
+}
+.promo_onir .proposal__title{
+    color: #11BA49;
+}
+.promo_onir .proposal__link{
+    border: 1px solid #11BA49;
+    color: #11BA49;
+    font-family: "Open Sans";
+}
+.promo_onir .proposal__link:hover{
+    background-color: #11BA49;
+    color: #fff;
+}
+.promo_onir .promo__about{
+    font-family: "Open Sans";
 }
 .clearfix{
     clear: both;
