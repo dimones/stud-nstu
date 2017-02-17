@@ -2,13 +2,18 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+class Main:
+    promo=None
+    main=None
+
+
 
 class Page:
     request = None
     body = None
     scripts = None
-    def __init__(self):
-        pass
+    def __init__(self, body = None):
+        self.body = body
     def __str__(self):
         return self.render()
     def render(self):
