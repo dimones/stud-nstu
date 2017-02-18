@@ -52,8 +52,22 @@ class DB:
         return self.conn
     def getCursor(self):
         return self.cursor
-
+    def commitChanges(self):
+        try:
+            self.conn.commit()
+        except Exception as e:
+            print(e)
+    def getNextIDFromTable(self, table_name, serial_key = None):
+        try:
+            if serial_key is None:
+                self.cursor.execute("select currval(pg_get_serial_sequence('%s', 'id')) as new_id;" % table_name)
+            else:
+                self.cursor.execute("select currval(pg_get_serial_sequence('%s', '%s')) as new_id;" % (table_name,serial_key))
+            return self.cursor.fetchone()[0]
+        except Exception as e:
+            print(e)
 
 if __name__ == '__main__':
     d = DB()
-    print(d.getCursor())
+    print(d.selectFromDB("SELECT last_value FROM (SELECT pg_get_serial_sequence('sites','id'))"))
+    # print(d.getNextIDFromTable('sites',serial_key='id'))
