@@ -1,0 +1,164 @@
+.news-preview{
+    width:100%;
+    border-bottom: 1px solid #D9D9D9;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 50px;
+}
+.news-preview__title{
+    font-size: 23px;
+    line-height: 30px;
+    font-family: IntroRegular;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.news-preview__img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    float: right;
+    margin-left: 15px;
+    -webkit-background-size:cover;
+    background-size:cover;
+    background-position: 50% 50%;
+}
+
+.news-preview__p{
+    font-family:"Open Sans";
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.news-preview__data{
+    font-size: 10px;
+    font-family:"Open Sans";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    background-color: #fff;
+    color: #989898;
+    padding-right: 10px;
+}
+
+.gallery-preview{
+    height: 240px;
+    width:100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+.gallery-preview__title, .gallery-preview__imgs{
+    width:50%;
+    float: left;
+    height: 100%;
+}
+.gallery-preview__title{
+    color: #fff;
+    background: linear-gradient(to left, #d90d25, #e90b3f);
+    text-align: center;
+    font-size:26px;
+    line-height: 30px;
+}
+.centr{
+    display: inline-block;
+    width: 98%;
+    vertical-align:	middle;
+}
+.gallery-preview__title:after{
+    content:"";
+    display:inline-block;
+    vertical-align:	middle;
+    height:	100%;
+
+}
+.gallery-preview__more{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    display: block;
+    border-radius: 50%;
+    border: 1px solid #C3C3C3;
+    background-color: rgba(0,0,0,0.6);
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding: 35px 20px;
+    color: #fff;
+    font-size: 12px;
+}
+.gallery-preview__more:hover{
+    background-color: rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+.gallery-preview__imgs{
+    height:100%;
+}
+.gallery-preview__imgs div{
+    -webkit-background-size:cover;
+    background-size:cover;
+    height: 50%;
+    width:33.333%;
+    float: left;
+}
+
+.camp-preview{
+    border-radius: 20px;
+    padding: 40px;
+    width:100%;
+    background-repeat: no-repeat;
+    -webkit-background-size:cover;
+    background-size:cover;
+    margin-bottom: 50px;
+    color: #fff;
+}
+.camp-preview_erlagol{
+    background-image: url('../img/erlagol.jpg');
+}
+.camp-preview_sharap{
+    background-image: url('../img/sharap.jpg');
+}
+.camp-preview__title{
+    color: rgba(255,255,255,0.7);
+    font-size: 70px;
+    letter-spacing: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 65px 0 55px;
+    font-family:IntroLight;
+}
+.camp-preview__info, .camp-preview__description{
+    width: 50%;
+    float: left;
+    font-size: 10px;
+    font-family:"Open Sans";
+    line-height: 13px;
+}
+.camp-preview__description{
+    padding-right: 10px;
+}
+.camp-preview__info{
+    padding: 0 10px 0 30px;
+}
+.camp-preview__info p{
+    margin-bottom: 8px;
+}
+
+.camp-preview__link{
+    display: block;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 18px 0;
+    font-size: 10px;
+    text-align: center;
+    margin-top: 30px;
+    font-family:IntroLight;
+}
+.camp-preview__link:hover{
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.6);
+    color: #064564;
+    cursor: pointer;
+}
