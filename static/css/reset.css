@@ -12,14 +12,8 @@ background: #fff;
 body, code, dl, dd, form, pre {
 margin: 0;
 }
-a:link {
-color: #009;
-}
 a:link, a:visited, ins {
 text-decoration: none;
-}
-a:visited {
-color: #505;
 }
 a:hover {
 text-decoration: underline;

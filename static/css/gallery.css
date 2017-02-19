@@ -25,6 +25,7 @@
 }
 .gallery-title{
     padding: 35px;
+    position: relative;
 }
 
 .gallery-title-text{
@@ -228,4 +229,22 @@ img.hover-shadow {
 
 .hover-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+.gallery-back{
+    width: 30px;
+    height:30px;
+    background: url('../img/back-arrow.png') no-repeat 50% 50%;
+    -webkit-background-size:cover;
+    background-size:cover;
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    margin-top: -15px;
+}
+.gallery-back+.gallery-title-text{
+    margin-left: 40px;
+}
+.full-photo{
+    margin: 0 auto;
+    display: block;
 }
