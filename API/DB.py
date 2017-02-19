@@ -62,14 +62,6 @@ class DB:
                 return self.cursor.fetchall()
         except Exception as e:
             print(e)
-    def closeConnection(self):
-        """
-            Close connection to DB
-        """
-        try:
-            self.conn.close()
-        except Exception as e:
-            print(e)
 
     def getConnection(self):
         """
@@ -92,8 +84,6 @@ class DB:
         except Exception as e:
             print(e)
 
-
-
     def getNextIDFromTable(self, table_name, serial_key = None) -> int:
         """
             Get next autoincremented ID from table_name
@@ -103,9 +93,11 @@ class DB:
         """
         try:
             if serial_key is None:
-                self.cursor.execute("select currval(pg_get_serial_sequence('%s', 'id')) as new_id;" % table_name)
+                self.cursor.execute("select setval(pg_get_serial_sequence('%s','id')"
+                                    ",nextval(pg_get_serial_sequence('%s','id'))-1) as new_id;" % (table_name,table_name))
             else:
-                self.cursor.execute("select currval(pg_get_serial_sequence('%s', '%s')) as new_id;" % (table_name,serial_key))
+                self.cursor.execute("select setval(pg_get_serial_sequence('%s','%s'),"
+                                    "nextval(pg_get_serial_sequence('%s','%s'))-1) as new_id;" % (table_name,serial_key,table_name,serial_key))
             return self.cursor.fetchone()[0]
         except Exception as e:
             print(e)
@@ -113,5 +105,8 @@ class DB:
 if __name__ == '__main__':
     d = DB()
     d.getCursor()
-    print(d.selectFromDB("SELECT last_value FROM (SELECT pg_get_serial_sequence('sites','id'))"))
+    t = d.getNextIDFromTable('test_table')
+    print(isinstance(t,int))
+    pass
+    # print(d.selectFromDB("SELECT setval(pg_get_serial_sequence('sites','id'),1)"))
     # print(d.getNextIDFromTable('sites',serial_key='id'))

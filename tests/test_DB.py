@@ -10,9 +10,6 @@ class TestDB(TestCase):
     def test_selectFromDB(self):
         self.assertTrue(True)
 
-    def test_closeConnection(self):
-        self.assertTrue(True)
-
     def test_getConnection(self):
         self.assertIsNotNone(self.d.getConnection())
 
@@ -23,7 +20,8 @@ class TestDB(TestCase):
         self.assertTrue(True)
 
     def test_getNextIDFromTable(self):
-        self.assertTrue(True)
+        self.assertTrue(isinstance(self.d.getNextIDFromTable('test_table'),int) and isinstance(self.d.getNextIDFromTable('test_table','id'),int))
+
 
 if __name__ == '__main__':
     unittest.main()
