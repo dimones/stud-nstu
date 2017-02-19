@@ -14,3 +14,5 @@ after_success:
   sshpass -p 0TUDSJdJe6ZBvCXa5yUi ssh -o StrictHostKeyChecking=no root@mynstu.xyz "cd /var/www/stud-nstu && git pull origin master && service httpd restart"
 sudo:
   true
+notifications:
+  slack: russian-beavers:5fVhZfBTN0tfbCuu0eACKrjt
