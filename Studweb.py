@@ -52,5 +52,29 @@ def hello_world_1():
 def onir_about():
     return render_template("onir_about.html")
 
+@app.route('/news')
+def news():
+    return render_template("news.html")
+
+@app.route('/news/<news>')
+def piece_of_news(news):
+    return render_template("piece-of-news.html")
+
+@app.route('/gallery')
+def gallery():
+    return render_template("gallery.html")
+
+@app.route('/gallery/<album>')
+def album(album):
+    return render_template("album.html")
+
+@app.route('/gallery/<album>/<photo>')
+def photo(album, photo):
+    return render_template("photo.html")
+
+@app.route('/conferences')
+def conferences():
+    return render_template("conferences.html")
+
 if __name__ == '__main__':
     app.run(debug=True)

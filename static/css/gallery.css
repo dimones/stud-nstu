@@ -71,7 +71,12 @@
 .gallery__row-img{
     clear: both;
 }
-
+.gallery__row-img:nth-child(odd) .gallery__big-img, .gallery__row-img:nth-child(2n) .gallery__img-box{
+    float: right;
+}
+.gallery__row-img:last-child .gallery__big-img, .gallery__row-img:last-child .gallery__img-box{
+    float: left;
+}
 .gallery__big-img{
     float: left;
     width:50%;
