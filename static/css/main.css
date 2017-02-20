@@ -9,6 +9,11 @@ body {
     letter-spacing: 1px;
     height: 100%;
 }
+.clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
 
 header{
     background: linear-gradient(to left, #d90d25, #e90b3f);
@@ -61,17 +66,14 @@ header nav{
     display: inline-block;
 }
 
-.sub-nav__link:hover, .main-nav__link:hover{
-    border-color:#ffffff ;
-    text-decoration: none;
+.sub-nav__link:visited, .main-nav__link:visited{
+    color: #fff;
 }
-
 
 .sub-nav__link, .main-nav__link {
     display: block;
     padding: 8px 8px;
-    border-radius: 20px;
-    border: 2px solid transparent;
+    color: #fff;
 }
 
 .social{
@@ -202,9 +204,9 @@ main{
 }
 .sidebar-menu__link {
     color: #474747;
-    font-size: 13pt;
+    font-size: 17px;
     font-family: IntroLight;
-    line-height: 13pt;
+    line-height: 18px;
 }
 .sidebar-menu__link:visited{
     color: #474747;
@@ -212,6 +214,24 @@ main{
 .sidebar-menu__link:hover {
     color: #e50b38;
     text-decoration: none;
+}
+
+.sidebar-menu__item_share::before{
+    background-image: url('../img/menu_arrow.png');
+    height: 4px;
+    width: 7px;
+    content: '';
+    float: right;
+    margin: 7px 0 7px 7px;
+}
+.sidebar-menu__second-level{
+    margin-left: 15px;
+}
+.sidebar-menu__second-level .sidebar-menu__item{
+    padding: 9px 0 0;
+}
+.sidebar-menu__second-level .sidebar-menu__link{
+    font-size:13px;
 }
 
 .events__img {
@@ -223,7 +243,6 @@ main{
 .events {
     border-top: solid 1px #e3e3e3;
     padding-top: 34px;
-    border-bottom: solid 1px #e3e3e3;
     width: 200px;
 }
 .events__item {
@@ -236,24 +255,22 @@ main{
     font-family: IntroRegular;
     font-size: 12px;
 }
-.more-events a{
+.events__more{
+    border-top: solid 1px #e3e3e3;
+    padding: 10px;
+}
+.events__more a{
     font-family: OpenSans;
     color: #727272;!important;
     font-size: 10px;
-    padding: 10px 15px;
-}
-div.more{
-    height: 40px;
-    margin-top: 12px;
 }
 .sidebar {
     float: left
 }
 .main-content{
-    float: left
-}
-.content div .main-content{
+    float: left;
     width: 845px;
+    padding: 30px 0 30px 30px;
 }
 footer {
     height: 180px;
