@@ -1,0 +1,11 @@
+<div class="content">
+    <div class="wrapper">
+       {{ sidebar | safe }}
+        <div class="main-content">
+            {% for post in posts %}
+                {{ post | safe }}
+            {% endfor %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
