@@ -35,10 +35,6 @@ def hello_world_1():
 def onir_about():
     return render_template("onir_about.html")
 
-@app.route('/admin')
-def admin_page():
-    return render_template("admin.html")
-
 @app.route('/test')
 def test():
     return Page(promo=promo(adress="promo_garage.html"),
@@ -79,16 +75,6 @@ def test():
                           </p>
 
                           </div>
-{#                          <div class="person">#}
-{#                              <div class="img"></div>#}
-{#                              <span>Директор ИТЦ</span>#}
-{#                              <span>Филатова Светлана Геннадьевна</span>#}
-{#                          </div>#}
-{#                          <div class="person">#}
-{#                              <div class="img"></div>#}
-{#                              <span>Руководитель группы ОНИР</span>#}
-{#                              <span>Петрова Ирина Владимировна</span>#}
-{#                          </div>#}
                   </div>
                     """))).render()
 @app.route('/news')
@@ -114,6 +100,14 @@ def photo(album, photo):
 @app.route('/conferences')
 def conferences():
     return render_template("conferences.html")
+
+@app.route('/admin')
+def login():
+    return render_template("Admin/login.html")
+
+@app.route('/admin1')
+def login1():
+    return render_template("Admin/index.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
