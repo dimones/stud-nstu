@@ -3,28 +3,29 @@
  */
 
 tinymce.init({
-    selector: 'textarea.wysiwyg',
-    width: 800,
-    height: 400,
+    selector: '.wysiwyg',
     language_url: '/static/js/langs/ru.js',
+    inline: true,
     menubar: false,
     elementpath: false,
     image_advtab: true,
+    automatic_uploads: true,
+    images_upload_base_path: '/static/img/gallery/',
     plugins: [
       'advlist autolink link image imagetools lists print preview hr',
-      'searchreplace wordcount code fullscreen',
+      'wordcount code fullscreen',
       'save table contextmenu template paste textcolor'
     ],
     toolbar: [
-        'fullscreen | insertfile undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image hr | print preview fullpage | forecolor backcolor | searchreplace',
+        'insertfile undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image hr | print preview fullpage | forecolor backcolor',
         'save code'
     ],
     paste_data_images: true,
 
     file_picker_callback: function(callback, value, meta) {
       if (meta.filetype == 'image') {
-        $('#upload').trigger('click');
-        $('#upload').on('change', function() {
+        $('#upload').trigger('click')
+            .on('change', function() {
           var file = this.files[0];
           var reader = new FileReader();
           reader.onload = function(e) {
@@ -35,12 +36,5 @@ tinymce.init({
           reader.readAsDataURL(file);
         });
       }
-    },
-    templates: [{
-      title: 'Test template 1',
-      content: 'Test 1'
-    }, {
-      title: 'Test template 2',
-      content: 'Test 2'
-    }]
+    }
 });
