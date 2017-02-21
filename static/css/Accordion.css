@@ -1,5 +1,4 @@
-/* Style the buttons that are used to open and close the accordion panel */
-button.accordion {
+.accordion__button {
     background: none;
     color: #444;
     cursor: pointer;
@@ -8,32 +7,31 @@ button.accordion {
     text-align: left;
     border: none;
     outline: none;
-    transition: 0.4s;
     text-transform: uppercase;
     border-top: 1px solid #e3e3e3;
-
-
 }
-button.accordion:last-child {
+.accordion__button:last-child {
     border-bottom: 1px solid #e3e3e3;
 }
-button.accordion:hover {
+.accordion__button:hover {
     color: #e90b3f;
-    background-color: none;
 }
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 
-
-/* Style the accordion panel. Note: hidden by default */
-
-div.panel {
-    padding: 0 18px;
+.accordion__panel {
+    padding: 0 30px;
     background-color: white;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
-button.accordion div {
+.accordion__panel>*:last-child{
+    margin-bottom: 10px;
+}
+.accordion__panel>*:first-child{
+    margin-top: 10px;
+}
+.accordion__button:before {
+    content: '';
     display: inline-block;
     width: 13px;
     height: 13px;
@@ -43,37 +41,24 @@ button.accordion div {
     position: relative;
     top:2px;
 }
-button.accordion.active {
+.accordion__button.active {
      border-bottom: 1px solid #e3e3e3;
 }
-button.accordion::selection{
+.accordion__button::selection{
     border-color: transparent;
 }
-button.accordion.active div {
+.accordion__button.active div {
     background-image: url("../photo/up.png");
 
 }
-.panel p:last-child {
-    padding-bottom: 10px;
-
-}
-.panel p:first-child{
-    padding-top: 10px;
-}
-.panel p{
-
-    font-family: OpenSans;
-    font-size: 12px;
-    padding-left: 15px;
-}
-.panel ul{
+.accordion__panel ul{
 
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 12px;
     padding-left: 28px;
 }
-.panel ul li {
+.accordion__panel li {
     list-style: circle outside;
     display: list-item;
 }

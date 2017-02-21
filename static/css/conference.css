@@ -1,15 +1,37 @@
 .conference-preview{
     margin-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 25px;
     border-bottom: 1px solid #E3E3E3;
 }
 .conference-preview__img{
     float: left;
     width: 155px;
     height: auto;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 .conference-preview__head, .conference-preview__body{
-    width: 645px;
+    width: 635px;
     float: right;
+}
+.conference-preview__head{
+    margin: 15px 0 20px;
+}
+.conference-preview__title{
+    width:70%;
+    float: left;
+    font-size: 20px;
+    font-family: IntroRegular;
+    color: #696969;
+}
+.conference-preview__date{
+    width:30%;
+    float: right;
+    color: #989898;
+    font-size:10px;
+}
+.conference-preview__status{
+    color: #E50B38;
+    font-family: IntroBold;
+    font-size: 15px;
+    margin-top: 10px;
 }

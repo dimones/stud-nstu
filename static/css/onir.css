@@ -28,7 +28,6 @@
     background-image: url('../photo/icon32.png');
 }
 
-
 .promo_onir .promo__head-title{
     color: #11BA49;
 }
@@ -50,44 +49,24 @@
 .promo_onir .promo__about{
     font-family: "Open Sans";
 }
-.clearfix{
-    clear: both;
+.content__data{
+    float: right;
+    color: #989898;
+    font-size:10px;
+    width: 25%;
+    text-align: right;
 }
 
-.note{
-    padding: 20px 0;
-}
-h2{
-    color: #696969;
-    font-size: 24px;
-    font-family: IntroRegular;
-    line-height: 30px;
-}
-.main-text p {
-    display: inline-block;
-    padding-top: 15px;
-    font-family: OpenSans;
-    color: #474747;
-    width:600px;
-}
-.icon{
-    padding-bottom: 120px;
-    display: inline-block;
+.content__img{
     width: 200px;
     height: 200px;
-    background: url("../photo/prometei.png");
-    /*background-color: #000000;*/
-    border-radius: 200px;
+    -webkit-background-size:cover;
+    background-size:cover;
     background-repeat: no-repeat;
-}
-.data{
-    padding: 10px 20px;
-    font-size: 10px;
     float: right;
-    position:relative;
-    display: block;
-    color:#989898;
+    margin-left: 15px;
 }
+
 .docs{
     padding-left: 55px;
 }
@@ -120,15 +99,7 @@ h2{
 .img{
     padding-bottom: 15px;
 }
-p.important:last-child {
-    font-family: IntroBold;
-    line-height: 18pt;
-    font-size: 13pt;
-    color:#e50b38;
-}
-p.important{
-    width: 800px;
-}
+
 .person {
     display: inline-block;
 }
