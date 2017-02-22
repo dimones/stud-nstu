@@ -41,24 +41,49 @@
     position: relative;
     top:2px;
 }
+.accordion__button.active:before{
+    background-image: url("../photo/up.png");
+}
 .accordion__button.active {
      border-bottom: 1px solid #e3e3e3;
 }
-.accordion__button::selection{
-    border-color: transparent;
-}
+
 .accordion__button.active div {
     background-image: url("../photo/up.png");
-
 }
-.accordion__panel ul{
-
-    padding-top: 10px;
-    padding-bottom: 10px;
+.main-content ul, .main-content ol{
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 12px;
-    padding-left: 28px;
+    padding-left: 19px;
+    font-family:"Open Sans";
 }
-.accordion__panel li {
+.main-content ol{
+    padding-left: 35px;
+}
+.accordion__panel>ul, .accordion__panel>ol,.main-content>ul, .main-content>ol{
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-family: "Open Sans Semibold";
+}
+.main-content ul>li {
     list-style: circle outside;
     display: list-item;
+}
+.main-content ol {
+    counter-reset: nested-list 0;
+}
+
+.main-content ol > li {
+    position: relative;
+    counter-increment: nested-list;
+}
+
+.main-content ol > li:before {
+    position: absolute;
+    left: -40px;
+    width: 32px;
+    content: counters(nested-list, '.') '.';
+    text-align: right;
 }

@@ -31,9 +31,6 @@ def hello_world():
 def hello_world_1():
     return render_template("onir.html")
 
-@app.route('/onir_about')
-def onir_about():
-    return render_template("onir_about.html")
 
 @app.route('/test')
 def test():
