@@ -5,10 +5,27 @@ html{
     height: 100%;
 }
 body {
-    font-family: IntroRegular;
     letter-spacing: 1px;
     height: 100%;
 }
+a{
+    color: inherit;
+}
+p{
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 15px;
+    font-family: "Open Sans";
+    color: inherit;
+}
+h2{
+    color: #696969;
+    font-size: 24px;
+    font-family: IntroRegular;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
 .clearfix:after{
     content: "";
     display: table;
@@ -80,6 +97,7 @@ header nav{
     float: right;
     width: 185px;
     margin: 40px 0;
+    text-align: right;
 }
 
 .social__item {

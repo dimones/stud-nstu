@@ -1,7 +1,7 @@
 /**
  * Created by Aleksandr on 11.02.17.
  */
-var acc = document.getElementsByClassName("accordion");
+var acc = document.getElementsByClassName("accordion__button");
 var i;
 
 for (i = 0; i < acc.length; i++) {
