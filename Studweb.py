@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 from view import *
-
+from API import *
 app = Flask(__name__)
+app.register_blueprint(api)
 
 @app.route('/culture')
 def culture():
