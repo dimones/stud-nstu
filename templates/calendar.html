@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset=utf-8 />
+    <title>JS Bin</title>
+    <link href="../static/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/main.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/calendar.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/onir.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/fonts.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <header>
+      <div class="wrapper">
+          <div class="logo">
+              <img src="../static/img/logo.png" alt="">
+              <h1>Новосибирский Государственный Технический Университет</h1>
+          </div>
+          <nav>
+              <ul class="main-nav">
+                  <li class="main-nav__item">
+                      <a href="/" class="main-nav__link">НАУКА</a>
+                  </li>
+                  <li class="main-nav__item">
+                      <a href="/garage" class="main-nav__link">СПОРТ</a>
+                  </li>
+                  <li class="main-nav__item">
+                      <a href="/culture" class="main-nav__link">КУЛЬТУРА</a>
+                  </li>
+                  <li class="main-nav__item">
+                      <a class="main-nav__link">ОБЩЕСТВЕННАЯ ЖИЗНЬ</a>
+                  </li>
+                  <li class="main-nav__item">
+                      <a class="main-nav__link">ЗДОРОВЬЕ</a>
+                  </li>
+              </ul>
+              <ul class="sub-nav">
+                  <li class="sub-nav__item">
+                      <a href="/schedule" class="sub-nav__link">РАСПИСАНИЯ</a>
+                  </li>
+                  <li class="sub-nav__item">
+                      <a href="/map" class="sub-nav__link">3D-НГТУ</a>
+                  </li>
+                  <li class="sub-nav__item">
+                      <a href="/om" class="sub-nav__link">ТРУДОУСТРОЙСТВО</a>
+                  </li>
+                  <li class="sub-nav__item">
+                      <a class="sub-nav__link">МАГАЗИН</a>
+                  </li>
+              </ul>
+          </nav>
+          <ul class="social">
+              <li class="vk social__item"><a class="social__link">vk</a></li>
+              <li class="ok social__item"><a class="social__link">ok</a></li>
+              <li class="facebook social__item"><a class="social__link">fb</a></li>
+          </ul>
+      </div>
+  </header>
+  <main>
+      <div class="promo promo_onir">
+        <div class="wrapper">
+            <div class="promo__title">
+                <div class="promo__question">Хочешь принять участие в научной сфере студенческой жизни?</div>
+                <!--<div class="second">ОНИРС</div>-->
+                <h1 class="promo__head-title">Онирс</h1>
+                <div class="promo__subtitle">Отдел научно </br>-исследовательских работ</div>
+            </div>
+            <div class="promo__info">
+                <p class="promo__about">
+                    <span>Центр научно-технической работы студентов это</span>
+                    исполнительный орган по развитию и
+                    координации научно-технической работы студентов и
+                    созданию новых университетских традиций.
+                </p>
+                <div class="proposal">
+                    <h3 class="proposal__title">Мы предлагаем:</h3>
+                    <ul class="proposal__list">
+                        <div class="proposal__item">
+                            <div class="proposal__sub-title"><div class="icon30"></div>Конкурсы</div>
+                            <div class="proposal__sub-info">Интернет-предпринимательство</div>
+                            <a href="" class="proposal__link">Подробнее</a>
+                        </div>
+                        <div class="proposal__item">
+                            <div class="proposal__sub-title"><div class="icon31"></div>Олимпиады</div>
+                            <div class="proposal__sub-info">Управление инновациями</div>
+                            <a href="" class="proposal__link">Подробнее</a>
+                        </div>
+                        <div class="proposal__item">
+                            <div class="proposal__sub-title"><div class="icon32"></div>Конференции</div>
+                            <div class="proposal__sub-info">Управление инновациями</div>
+                            <a href="" class="proposal__link">Подробнее</a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="content">
+          <div class="wrapper">
+              <div class="sidebar">
+                  <ul class="sidebar-menu">
+                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Общая информация</a></li>
+                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Конференции</a></li>
+                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Олимпиады</a></li>
+                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Конкурсы</a></li>
+                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Другие мероприятия</a></li>
+                  </ul>
+                  <div class="sidebar-calendar">
+                      <h4 class="sidebar-calendar__title">Календарь мероприятий</h4>
+                      <div class="sidebar-calendar__month">
+                          <div class="sidebar-calendar__month-item sidebar-calendar__month-item-before">Март</div>
+                          <div class="sidebar-calendar__month-item sidebar-calendar__month-item-next">Май</div>
+                          <div class="sidebar-calendar__month-item sidebar-calendar__month-item-active">Апрель</div>
+                          <div class="line"></div>
+                      </div>
+                      <table class="calendar">
+                          <tr>
+                              <th>уч.неделя</th>
+                              <th>Пн</th>
+                              <th>Вт</th>
+                              <th>Ср</th>
+                              <th>Чт</th>
+                              <th>Пт</th>
+                              <th>Сб</th>
+                              <th>Вс</th>
+                          </tr>
+                          <tr>
+                              <td>6</td>
+                              <td class="calendar__date_not-active">30</td>
+                              <td class="calendar__date_not-active">31</td>
+                              <td>1</td>
+                              <td>2</td>
+                              <td>3</td>
+                              <td>4</td>
+                              <td>5</td>
+                          </tr>
+                          <tr>
+                              <td>7</td>
+                              <td>6</td>
+                              <td>7</td>
+                              <td>8</td>
+                              <td>9</td>
+                              <td>10</td>
+                              <td>11</td>
+                              <td>12</td>
+                          </tr>
+                          <tr>
+                              <td>8</td>
+                              <td>13</td>
+                              <td>14</td>
+                              <td><a href="" class="calendar__date_selected calendar__date">15</a></td>
+                              <td>16</td>
+                              <td>17</td>
+                              <td>18</td>
+                              <td><a href="" class="calendar__date_onir calendar__date">19</a></td>
+                          </tr>
+                          <tr>
+                              <td>9</td>
+                              <td><a href="" class="calendar__date_garage calendar__date">20</a></td>
+                              <td>21</td>
+                              <td>22</td>
+                              <td><a href="" class="calendar__date_sport calendar__date">23</a></td>
+                              <td>24</td>
+                              <td>25</td>
+                              <td>26</td>
+                          </tr>
+                          <tr>
+                              <td>10</td>
+                              <td>27</td>
+                              <td>28</td>
+                              <td>29</td>
+                              <td>30</td>
+                              <td class="calendar__date_not-active">1</td>
+                              <td class="calendar__date_not-active">2</td>
+                              <td class="calendar__date_not-active">3</td>
+                          </tr>
+                      </table>
+                      <div class="sidebar-calendar__events-list">
+                          <div class="sidebar-calendar__events-date">10 апреля (сегодня)</div>
+                          <a href="" class="sidebar-calendar__events-item clearfix">
+                              <div class="sidebar-calendar__events-time">18:00</div>
+                              <div class="sidebar-calendar__events-name">Студенческая весна в цнтре культуры</div>
+                          </a>
+                          <a href="" class="sidebar-calendar__events-item clearfix">
+                              <div class="sidebar-calendar__events-time">20:00</div>
+                              <div class="sidebar-calendar__events-name">Студенческая весна в цнтре культуры</div>
+                          </a>
+                      </div>
+                  </div>
+                  <div class="events">
+                      <a href="#" class="events__item">
+                          <img class="events__img" src="../static/photo/nstu.jpg"></img>
+                          <p class="events__title">Дни открытых дверей НГТУ</p>
+                      </a>
+                      <a href="#" class="events__item">
+                          <img class="events__img" src="../static/photo/nstu.jpg"></img>
+                          <p class="events__title">Дни открытых дверей НГТУ</p>
+                      </a>
+                      <div class="events__more">
+                         <a href="">больше мероприятий и акций</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="main-content">
+                  <h2>Календарь событий</h2>
+                  <div class="calendar-full">
+                      <div class="calendar-full__filter-rubric">
+                          <a href="" class="calendar-full__filter-item">Все</a>
+                          <a href="" class="calendar-full__filter-item">Культура</a>
+                          <a href="" class="calendar-full__filter-item">Наука</a>
+                          <a href="" class="calendar-full__filter-item">Спорт</a>
+                      </div>
+                      <div class="calendar-full__filter-year">
+                          <div class="calendar-full__filter-item">2017</div>
+                      </div>
+                      <div class="calendar-full__filter-month">
+                          <a href="" class="calendar-full__filter-item">Январь</a>
+                          <a href="" class="calendar-full__filter-item">Февраль</a>
+                          <a href="" class="calendar-full__filter-item">Март</a>
+                          <a href="" class="calendar-full__filter-item">Апрель</a>
+                          <a href="" class="calendar-full__filter-item">Май</a>
+                          <a href="" class="calendar-full__filter-item">Июнь</a>
+                          <a href="" class="calendar-full__filter-item">Июль</a>
+                          <a href="" class="calendar-full__filter-item">Август</a>
+                          <a href="" class="calendar-full__filter-item">Сентябрь</a>
+                          <a href="" class="calendar-full__filter-item">Октябрь</a>
+                          <a href="" class="calendar-full__filter-item">Ноябрь</a>
+                          <a href="" class="calendar-full__filter-item">Декабрь</a>
+                      </div>
+                      <div class="nearest-event">
+                          <div class="nearest-event__info">
+                              <div class="nearest-event__date">Ближайшее событие: <br> 10 апреля (сегодня)</div>
+                              <div class="nearest-event__name">Студенческая весна в центре культуры</div>
+                              <span class="nearest-event__time">18:00</span>
+                              <span class="nearest-event__place">ЦК</span>
+                              <button class="nearest-event__button">подробнее</button>
+                          </div>
+                          <div class="nearest-event__img" style="background-image: url('../static/photo/nearest-event.png');">
+                              <div class="nearest-event__description">This is Photoshop's version of Lorem Ipsum. Proin
+                                  gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum
+                                  auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit
+                                  amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec
+                                  tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat
+                                  auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per
+                              </div>
+                          </div>
+                      </div>
+                      <table class="calendar">
+                          <tr>
+                              <th>уч.неделя</th>
+                              <th>Пн</th>
+                              <th>Вт</th>
+                              <th>Ср</th>
+                              <th>Чт</th>
+                              <th>Пт</th>
+                              <th>Сб</th>
+                              <th>Вс</th>
+                          </tr>
+                          <tr>
+                              <td>6</td>
+                              <td class="calendar__date_not-active">30</td>
+                              <td class="calendar__date_not-active">31</td>
+                              <td>1</td>
+                              <td>2</td>
+                              <td>3</td>
+                              <td>4</td>
+                              <td>5</td>
+                          </tr>
+                          <tr>
+                              <td>7</td>
+                              <td>6</td>
+                              <td>7</td>
+                              <td>8</td>
+                              <td>9</td>
+                              <td>10</td>
+                              <td>11</td>
+                              <td>12</td>
+                          </tr>
+                          <tr>
+                              <td>8</td>
+                              <td>13</td>
+                              <td>14</td>
+                              <td><a href="" class="calendar__date_selected calendar__date">15</a></td>
+                              <td>16</td>
+                              <td>17</td>
+                              <td>18</td>
+                              <td><a href="" class="calendar__date_onir calendar__date">19</a></td>
+                          </tr>
+                          <tr>
+                              <td>9</td>
+                              <td><a href="" class="calendar__date_garage calendar__date">20</a></td>
+                              <td>21</td>
+                              <td>22</td>
+                              <td><a href="" class="calendar__date_sport calendar__date">23</a></td>
+                              <td>24</td>
+                              <td>25</td>
+                              <td>26</td>
+                          </tr>
+                          <tr>
+                              <td>10</td>
+                              <td>27</td>
+                              <td>28</td>
+                              <td>29</td>
+                              <td>30</td>
+                              <td class="calendar__date_not-active">1</td>
+                              <td class="calendar__date_not-active">2</td>
+                              <td class="calendar__date_not-active">3</td>
+                          </tr>
+                      </table>
+                      <div class="clearfix"></div>
+                      <div class="events-list">
+                          <p class="events-list__title">События:</p>
+                          <a class="events-list__item clearfix">
+                              <div class="events-list__date">10 апреля</div>
+                              <div class="events-list__time">18:00</div>
+                              <p class="events-list__name">Студенческая весна в центре культуры dwdwd wdqdqd wsqsqdq wfwfd fwfwfwfw df</p>
+                              <div class="events-list_place">ЦК</div>
+                          </a>
+                          <a class="events-list__item clearfix">
+                              <div class="events-list__date">21 апреля</div>
+                              <div class="events-list__time">15:30</div>
+                              <p class="events-list__name">Совет старост</p>
+                              <div class="events-list_place">Первый корпус</div>
+                          </a>
+                          <a class="events-list__item clearfix">
+                              <div class="events-list__date">1 мая</div>
+                              <div class="events-list__time">10:00</div>
+                              <p class="events-list__name">Выступление</p>
+                              <div class="events-list_place">ЦК</div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </main>
+  <footer>
+    <div class="wrapper">
+        <div class="adress">Россия 630073, Новосибирск проспект К.Маркса, 20 корпус 2а, к. 206. телефон: 8 (383) 346 11 21 эл.почта: stud@nstu.ru</div>
+        <div class="info">&copy; 2005-2017, Новосибирский государственный технический университет, Студенческий пресс-центр. Свидетельство о регистрации: СМИ Эл № ФС77-45108 от 18 мая 2011 г. Выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)</div>
+    </div>
+  </footer>
+  <script src="../static/js/jquery-3.1.1.min.js"></script>
+  <script>
+      (function () {
+          $('.nearest-event__button').click(function () {
+              $('.nearest-event__img').toggleClass('active');
+          });
+      })();
+  </script>
+</body>
+</html>
