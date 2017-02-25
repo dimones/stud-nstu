@@ -9,7 +9,7 @@ def users_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "ADMIN_USERS" WHERE site_id = 1"""))
 
 @api.route('/api/admin/users/add',methods=["POST"])
-def sidebar_menu_add():
+def users_add():
     try:
         DB().changeInDB("""INSERT INTO "ADMIN_USERS"(username,password,role,site_id) VALUES('%s',%s,%s,%s)"""
                         % (request.form['username'], request.form['password'], request.form['role'],
@@ -20,7 +20,7 @@ def sidebar_menu_add():
         return json.dumps({'succeed': False})
 
 @api.route('/api/admin/users/remove',methods=["POST"])
-def sidebar_menu_remove():
+def users_remove():
     try:
         DB().changeInDB("""DELETE FROM "ADMIN_USERS" WHERE id = %s""" % (request.form['id']),needCommit=True)
         return json.dumps({'succeed': True})
@@ -29,7 +29,7 @@ def sidebar_menu_remove():
         return json.dumps({'succeed': False})
 
 @api.route('/api/admin/users/change_password',methods=["POST"])
-def sidebar_menu_change_password():
+def users_change_password():
     try:
         DB().changeInDB("""UPDATE "ADMIN_USERS" SET password = '%s' WHERE id = %s"""
                         % (request.form['password'], request.form['id']),needCommit=True)
@@ -39,7 +39,7 @@ def sidebar_menu_change_password():
         return json.dumps({'succeed': False})
 
 @api.route('/api/admin/users/change_role',methods=["POST"])
-def sidebar_menu_change_role():
+def users_change_role():
     try:
         DB().changeInDB("""UPDATE "ADMIN_USERS" SET role = %s WHERE id = %s"""
                         % (request.form['role'], request.form['id']), needCommit=True)

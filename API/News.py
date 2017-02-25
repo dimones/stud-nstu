@@ -4,6 +4,7 @@ from .Auther import *
 import json,sys,uuid,datetime
 from .DB import *
 
+
 @api.route('/api/admin/news/get',methods=['GET'])
 def admin_news_get():
     return json.dumps(DB().selectFromDB("SELECT * FROM \"NEWS\" WHERE site_id = 1"))
