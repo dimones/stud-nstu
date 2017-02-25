@@ -1,0 +1,60 @@
+<div class="page-title clearfix">
+    <h2>
+        Список новостей
+        <small>
+            <ul><li>Администратор</li>
+                <li>/</li>
+                <li>ОНИР</li>
+                <li>/</li>
+                <li>Новости</li>
+              </ul>
+            </small>
+    </h2>
+    <ul class="stats hidden-xs">
+        <li class="ruby-red-bg">
+            <span class="fs1" aria-hidden="true" data-icon="&#xe042;"></span>
+            <div class="details">
+                <span class="big">Ireland</span>
+                <span class="small">Current Location</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{% for item in lists %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ item.Title }} <a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="Edit">
+                      <i class="fa fa-pencil"></i>
+                    </a></h3>
+                </div>
+                <div class="panel-body">
+                  {{ item.lid }}
+                    <div class="panel-footer">
+                        <div class="widget-body right-align-text">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info btn-default">Править</button>
+                                <button type="button" class="btn btn-primary btn-default">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="widget-body">
+    <ul class="pagination right-align-text">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+</div>
