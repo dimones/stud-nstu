@@ -10,8 +10,8 @@ class StudNSTU:
     def __init__(self):
         app = self.app
 
-        @app.route('/culture')
-        def culture():
+        @app.route('/map')
+        def map():
             return render_template("culture.html")
 
         @app.route('/map')

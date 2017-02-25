@@ -7,10 +7,11 @@ class TestStudNSTU(TestCase):
         try:
             self.s.app.test_client()
             self.assertTrue(True)
-            
+
         except Exception as e:
             print(e)
             self.fail()
+
 
 
 if __name__ == '__main__':
