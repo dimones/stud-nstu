@@ -1,9 +1,9 @@
 from unittest import TestCase
 import unittest
-from API import DB
+from API.DB import *
 
 class TestDB(TestCase):
-    d = DB.DB()
+    d = DB()
     def test_changeInDB(self):
         self.assertTrue(True)
 
