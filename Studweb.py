@@ -113,19 +113,24 @@ class StudNSTU:
         def login1():
             return render_template("Admin/index.html")
 
+        @app.route('/admin/forms')
+        def forms():
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/AddNews.html"))
+
+        @app.route('/admin/list')
+        def lists():
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/Lists.html"))
 
     def run(self):
         self.app.run(debug=True)
 
 
 
-@app.route('/Admin/forms')
-def forms():
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"), sidebar=render_template("Admin/sidebar.html"),page=render_template("Admin/AddNews.html"))
 
-@app.route('/Admin/list')
-def lists():
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"), sidebar=render_template("Admin/sidebar.html"),page=render_template("Admin/Lists.html"))
 
 if __name__ == '__main__':
     StudNSTU().run()
