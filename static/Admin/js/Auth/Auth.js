@@ -1,9 +1,19 @@
 /**
  * Created by Aleksandr on 26.02.17.
  */
+function StudNSTUOnLoad(){
+    Cookies.set('isAuthed',false);
+    if(Cookies.get('device_id') == null || Cookies.get('device_id') == undefined)
+        Cookies.set('device_id',guid());
+    else {
+        window.location.href = "/admin/forms";
+    }
+
+}
+
 function submitLogin(form){
     var device_id = Cookies.get('device_id');
-    var jqxhr = $.post("Admin/auth", {  "username" : $("#logUsername").val(),
+    var jqxhr = $.post("/api/admin/auth", {  "username" : $("#logUsername").val(),
                                                         "password" : $("#logPassword").val(),
                                                         "device_id": device_id })
       .done(function(data) {
@@ -12,19 +22,26 @@ function submitLogin(form){
         if(ret["succeed"] == true)
         {
             $("#loadText").css('display','none');
-            setIndicator('#loginAlert','alert-success','Успех','Вы успешно авторизовались!');
             Cookies.set('device_token',ret["device_token"]);
-            Cookies.set('user_info',ret.user_info);
             Cookies.set('isAuthed',true);
-            set_user_info();
+            window.location.href = "/admin/forms";
         }
         else{
-            setIndicator('#loginAlert','alert-warning','Ошибка','Неверная связка логин/пароль!');
+            console.log('#loginAlert','alert-warning','Ошибка','Неверная связка логин/пароль!');
         }
 //        alert( "second success" );
       })
       .fail(function(data) {
           console.log(data);
-            setIndicator('#loginAlert','alert-danger','Ошибка','Неполадки в соединении с сервером!');
       });
+}
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
 }
