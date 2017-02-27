@@ -11,8 +11,7 @@
         </small>
     </h2>
 </div>
-        <!-- Page title end -->
-        <!-- Row start -->
+
 <div class="row">
     <div class="col-md-6">
         <div class="widget">
@@ -26,31 +25,25 @@
                     <div class="form-group">
                     <label for="cardHoldersName" class="col-lg-4 control-label">Заголовок</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" id="cardHoldersName">
+                      <input type="text" class="form-control" id="title">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-lg-4 control-label">Card Expiry Date</label>
-                    <div class="col-lg-8 col-sm-12">
-                      <input type="date" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-4 control-label" for="inputHelptext">Textarea</label>
+                    <label class="col-lg-4 control-label"  for="inputHelptext">Лид-абзац</label>
                     <div class="col-lg-8">
-                        <textarea class="form-control" rows="7"></textarea>
+                        <textarea class="form-control" rows="7" id="lead_content"></textarea>
                     </div>
                   </div>
-
-                    <div class="control-group">
+                  <div class="control-group">
                     <div class="wysiwyg-container">
                       <textarea id="wysiwyg" class="col-sm-12 no-margin" placeholder="Enter text ..." style="height: 140px">
                       </textarea>
                     </div>
                   </div>
                   <div class="control-group info no-margin">
-                    <div class="controls">
-                      <button id="contact-submit" type="submit" class="btn btn-primary pull-right">Добавить</button>
+                    <div class="controls  pull-right">
+                      <button id="contact-submit" type="button" class="btn btn-primary" onclick="AddNews(1);">Опубликовать</button>
+                      <button id="contact-submit" type="button" class="btn btn-success" onclick="AddNews(0);">Создать</button>
                       <div class="clearfix"></div>
                     </div>
                   </div>
@@ -59,3 +52,33 @@
         </div>
     </div>
 </div>
+<script>
+function getDate() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+}
+function AddNews(value){
+    var jqxhr = $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+                                                        "lead_content" : $("#lead_content").val(),
+                                                        "content": $("#wysiwyg").val(),
+                                                        "date":getDate(),
+                                                        "is_active":value})
+      .done(function(data) {
+
+        var ret = JSON.parse(data);
+             console.log(ret);
+
+      })
+      .fail(function(data) {
+          console.log(data);
+      });
+}
+
+</script>
