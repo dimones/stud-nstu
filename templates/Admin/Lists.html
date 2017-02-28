@@ -62,6 +62,14 @@
 
 <script>
     $(".btn-default").click(function(e){
-        console.log($(e.toElement).parents(".panel-info").attr('id'));
+                $.post('/api/admin/news/remove',{
+            'id':$(e.toElement).parents(".panel-info").attr('id')
+        }).done(function (data) {
+            var ret = JSON.parse(data);
+                    $(e.toElement).parents(".panel-info").remove();
+        }).fail(function(data) {
+          console.log(data);
+      });
+
     });
 </script>

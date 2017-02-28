@@ -36,7 +36,7 @@ class StudNSTU:
 
         @app.route('/')
         def hello_world_1():
-            return render_template("onir.html")
+            return render_template("onir_tmp.html", list=json.loads(admin_news_get()))
 
         @app.route('/test')
         def test():
@@ -109,10 +109,6 @@ class StudNSTU:
         def login():
             return render_template("Admin/login.html")
 
-        @app.route('/admin1')
-        def login1():
-            return render_template("Admin/index.html")
-
         @app.route('/admin/forms/list')
         def forms_list():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
@@ -124,13 +120,13 @@ class StudNSTU:
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
                                    page=render_template("Admin/forms/forms_add.html"))
-        @app.route('/admin/forms')
+        @app.route('/admin/news/add')
         def forms():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
                                    page=render_template("Admin/AddNews.html"))
 
-        @app.route('/admin/list')
+        @app.route('/admin/news/list')
         def lists():
             tmp = admin_news_get()
             print(tmp)
