@@ -25,10 +25,13 @@ h2{
     line-height: 30px;
     margin-bottom: 20px;
 }
-button:active, button:focus {
+label{
+	cursor: pointer;
+}
+button:active, button:focus, input:active, input:focus {
   outline: none;
 }
-button::-moz-focus-inner {
+button::-moz-focus-inner, input::-moz-focus-inner {
   border: 0;
 }
 .clearfix:after{
@@ -175,10 +178,16 @@ header nav{
 }
 .proposal__item{
     float: left;
-    width: 130px;
+    width: 135px;
     margin-right: 20px;
     position: relative;
     height:  140px;
+}
+.proposal__sub-title>div{
+    margin-right: 8px;
+    float: left;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
 }
 .proposal__item:last-child{
     margin-right: 0;
@@ -324,7 +333,6 @@ footer .info{
     width: 720px;
 }
 
-
 .promo_cult {
     height: 380px;
     background: url('../photo/bgcult.jpg');
@@ -332,4 +340,167 @@ footer .info{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+form{
+	border-bottom: 1px solid #E3E3E3;
+	border-top: 1px solid #E3E3E3; 
+	padding-left:30px;
+	color: #2A2A2A;
+	font-family: IntroRegular;
+	margin: 10px 0 35px;
+}
+.form-title{
+	padding: 25px 0;
+	position: relative;
+	font-size: 16px;
+	font-family: IntroRegular;
+	text-transform: uppercase;
+}
+.form-title:before{
+	content: '';
+	position: absolute;
+	display: block;
+	background-image: url(../photo/icon-pen.png);
+	height: 21px;
+	width: 21px;
+	top: 20px;
+	left: -30px;
+}
+.form-box{
+	border-top: 1px solid #E3E3E3;
+	padding: 25px 0;
+	position: relative;
+}
+.form-box__name{
+	position: absolute;
+	top: -10px;
+	color: #C2C2C2;
+	font-size: 14px;
+	background-color: #fff;
+	padding-right: 10px;
+}
+.label-text{
+	margin: 10px;
+	font-size: 14px;
+	display: block;
+}
+.label-text p{
+	display: inline-block;
+	width: 115px;
+	font-family: IntroRegular;
+	padding-right: 15px;
+	vertical-align: middle;
+	margin-bottom: 0;
+}
+input[type="text"]{
+	height: 35px;
+	width: 645px;
+	display: inline-block;
+	border-radius: 17px;
+	border: 2px solid #D8D8D8;
+	padding: 0 20px;
+	vertical-align: middle;
+}
+input[type="text"]:focus{
+	border: 2px solid #B4B4B4;
+}
+button[type="submit"]{
+	border: none;
+	color: #fff;
+	background-color: #E50B38;
+	border-radius: 20px;
+	font-size: 14px;
+	position: relative;
+	bottom: -20px;
+	margin: 0 auto;
+	width: 175px;
+	height: 40px;
+	padding: 10px;
+	text-align: center;
+	display: block;
+	outline: 15px solid #fff;
+	cursor: pointer;
+}
+button[type="submit"]:hover{
+	background-color: #D50028;
+}
+.radio-group{
+	margin: 15px 10px;
+}
+.radio-group__variants{
+	display: inline-block;
+	width: 645px;
+	vertical-align: middle;
+}
+.radio-group__item{
+	display: inline-block;
+	margin: 5px 5px 5px 0;
+	vertical-align: middle;
+}
+.radio-group__name{
+	display: inline-block;
+	font-family: IntroRegular;
+	margin-bottom: 0;
+	vertical-align: middle;
+	width: 115px;
+	padding-right: 15px;
+}
+.radio-group__item p{
+	margin-bottom: 0;
+	font-family: IntroRegular;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.radio-group__item input, .checkbox-item input{
+	display: none;
+}
+.radio-group__circle{
+	border-radius: 50%;
+	border: 1px solid #D9D9D9;
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+input:checked +.radio-group__circle{
+	background-color: #E50B38;
+	border-color: #E50B38;
+}
+.checkbox-item{
+	margin: 10px 0 10px 130px;
+	display: block;
+}
+.checkbox-item__text{
+	vertical-align: middle;
+	display: inline-block;
+	width: 500px;
+}
+.checkbox-item__toggle{
+	border-radius: 11px;
+	height: 22px;
+	border: 1px solid #D8D8D8;
+	width: 40px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+.checkbox-item__toggle:after{
+	height: 16px;
+	width: 16px;
+	background-color: #D8D8D8;
+	margin: 2px 0 0 2px;
+	content: '';
+	display: block;
+	border-radius: 50%;
+}
+input:checked + .checkbox-item__toggle{
+	background-color: #E50B38;
+	border-color: #E50B38; 
+}
+input:checked + .checkbox-item__toggle:after{
+	margin: 2px 0 0 20px;
+	background-color: #fff;
 }

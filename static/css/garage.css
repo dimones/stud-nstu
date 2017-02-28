@@ -13,44 +13,48 @@
 }
 .promo_garage{
     color: #828282;
+    background-image: url('../img/promo-garage.png');
+    background-position: 50% 50%;
 }
 .promo_garage .promo__title{
-    position: relative;
+    color: #000;
 }
 .promo_garage .promo__head-title{
-    color: #DB8112;
     font: 45px "IntroLight";
-    margin-bottom: 5px;
-    margin-top: 85px;
+    margin-bottom: 0;
+    margin-top: 50px;
 }
 
 .promo_garage .promo__head-title small{
-    font-size: 15px;
-    color: #828282;
+    font-size: 14px;
     display: block;
     margin-bottom: -2px;
 }
+.promo_garage .promo__head-title img{
+    float: right;
+    margin: 0 35px 0 0;
+}
 .promo_garage .promo__question{
     font-family: IntroRegular;
-    font-size: 12px;
-    line-height: 14px;
-    width: 200px;
-    margin: 30px 0 0 140px;
 }
 
 .promo_garage .promo__subtitle{
     font-size: 15px;
 }
+.promo_garage .promo__about{
+    margin-top: 20px;
+}
 .promo_garage .promo__about span, .promo_garage .proposal__title{
     color: #DB8112;
 }
 .promo_garage .proposal__item{
-    width: 165px;
+    width: 175px;
     color: #DBDBDB;
     margin-right: 30px;
 }
 .promo_garage .proposal__item:last-child{
     margin-right: 0;
+    width: 160px
 }
 .promo_garage .proposal__sub-title{
     font-size:12px;
@@ -64,194 +68,7 @@
     background-color: #DB8112;
     color: #fff;
 }
-.promo_garage .promo__background{
-    position: absolute;
-    background-image: url('../img/promo-garage.png');
-    height: 319px;
-    width: 381px;
-    bottom: 0;
-    left: -30px;
-}
 
-.slogan {
-    display: inline-block;
-    width: 200px;
-    color: #828282;
-    position: relative;
-    bottom: 285px;
-    left: 370px;
-}
-.title {
-    display: inline-block;
-    font-family: IntroLight;
-    text-transform: uppercase;
-    position: relative;
-    bottom: 85px;
-    color:#828282;
-}
-.title .middle-title {
-    color: #db8112;
-    font-size: 48px;
-    line-height: 48px;
-}
-.title .top-title{
-    padding: 0 0 5px 2px;
-}
-.title .bottom-title{
-    padding: 5px 0 0 2px;
-}
-
-
-.garage div {
-    color: #d7d7d7;
-    display: block;
-}
-div.first{
-    font-size: 18px;
-    width: 240px;
-    font-family: IntroLight;
-}
-div.second {
-    color: #db8012;
-    font-family: IntroLight;
-    font-size: 48px;
-    line-height: 48px;
-    display: inline-block;
-    padding-top: 60px;
-}
-div.third {
-    text-transform: uppercase;
-    padding-top: 20px;
-
-}
-.onir-info{
-    display: inline-block;
-    width: 530px;
-    position: relative;
-    top:50px;
-    left: 300px;
-}
-.about {
-    width: 400px;
-}
-.about span{
-    color: #db8012;
-}
-.garage-info .garage-about {
-    padding-top: 50px;
-    color: #db8012;
-    font-size: 18pt;
-}
-.abb>.sub-title{
-
-    width: 270px;
-}
-.abb>div a{
-    color: #db8012;
-    padding: 10px;
-    border: 1px solid #db8012;
-    border-radius: 20px;
-}
-.sub-title{
-    padding-top: 30px;
-    font-family: IntroLight;
-    color: #db8012;
-}
-.sub-info{
-    padding-top: 20px;
-    font-family: OpenSans;
-    font-size: 9pt;
-    padding-bottom: 40px;
-}
-.clearfix{
-    clear: both;
-}
-
-.note{
-    padding: 20px 0;
-}
-h2{
-    color: #696969;
-    font-size: 24px;
-    font-family: IntroRegular;
-    line-height: 30px;
-    display: block;
-    float: left;
-}
-.main-text p {
-    display: inline-block;
-    padding-top: 15px;
-    font-family: OpenSans;
-    color: #474747;
-    width:600px;
-}
-.col{
-    display: inline-block;
-    width: 200px;
-}
-.icon{
-    padding-bottom: 120px;
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    background: url("../photo/prometei.png");
-    /*background-color: #000000;*/
-    border-radius: 200px;
-    background-repeat: no-repeat;
-}
-.data{
-    padding: 10px 20px;
-    font-size: 10px;
-    float: right;
-    position:relative;
-    display: block;
-    color:#989898;
-}
-.docs{
-    padding-left: 55px;
-}
-.docs>div {
-    display: inline-block;
-    text-align: center;
-    margin: 20px;
-}
-.word .img{
-    margin: auto;
-    width: 50px;
-    height: 64px;
-    background: url("../photo/doc.png");
-    background-repeat: no-repeat;
-}
-.pdf .img{
-    margin: auto;
-    width: 50px;
-    height: 64px;
-    background: url("../photo/pdf.png");
-    background-repeat: no-repeat;
-}
-.file .img{
-    margin: auto;
-    width: 50px;
-    height: 64px;
-    background: url("../photo/file.png");
-    background-repeat: no-repeat;
-}
-.img{
-    padding-bottom: 15px;
-}
-.col1, .col2{
-    height:100%;
-    width: 49%;
-    display: inline-block;
-}
-.col2{
-    position: relative;
-    bottom: 130px;
-    left: 70px;
-}
-#bug{
-    width: 123px;
-}
 .resident{
     display: block;
     width: 115px;
@@ -262,11 +79,23 @@ h2{
     float: right;
     text-align: center;
     padding: 36px 0;
-    margin-top: 45px;
+    margin-top: 55px;
     font-size: 12px;
     font-family: IntroLight;
 }
 .resident:hover{
     text-decoration: none;
     border-color: #db8012;
+}
+.icon1{
+    width: 21px;
+    height: 21px;
+    background-image: url('../photo/icon1.png');
+    margin-top: 9px;
+}
+.icon2{
+    width: 20px;
+    height: 19px;
+    background-image: url('../photo/icon2.png');
+    margin-top: 10px;
 }
