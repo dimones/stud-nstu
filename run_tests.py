@@ -1,7 +1,8 @@
 from tests import *
 import unittest
 TEST_MODULES = [
-    'tests.test_DB'
+    'tests.test_DB',
+    'tests.test_studNSTU'
 ]
 
 suite = unittest.TestSuite()

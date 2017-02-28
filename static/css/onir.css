@@ -6,12 +6,7 @@
     background-size: cover;
     font-family: IntroLight;
 }
-.proposal__sub-title>div{
-    margin-right: 5px;
-    float: left;
-    background-position-y: 50%;
-    background-repeat: no-repeat;
-}
+
 .icon30{
     height: 15px;
     width: 19px;

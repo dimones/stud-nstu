@@ -30,6 +30,7 @@ class DB:
         :param needCommit: Need commit of data in table
         :return:
         """
+        print(sql)
         try:
             if needIDs:
                 sql += ' RETURNING id'

@@ -1,0 +1,84 @@
+<div class="page-title clearfix">
+    <h2>Редактор
+        <small>
+            <ul>
+                <li>Home</li>
+                <li>/</li>
+                <li>Dashboard</li>
+                <li>/</li>
+                <li>Forms</li>
+            </ul>
+        </small>
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Новость
+                </div>
+            </div>
+            <div class="widget-body">
+                <form class="form-horizontal" role="form" action="">
+                    <div class="form-group">
+                    <label for="cardHoldersName" class="col-lg-4 control-label">Заголовок</label>
+                    <div class="col-lg-8">
+                      <input type="text" class="form-control" id="title">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-4 control-label"  for="inputHelptext">Лид-абзац</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" rows="7" id="lead_content"></textarea>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="wysiwyg-container">
+                      <textarea id="wysiwyg" class="col-sm-12 no-margin" placeholder="Enter text ..." style="height: 140px">
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="control-group info no-margin">
+                    <div class="controls  pull-right">
+                      <button id="contact-submit" type="button" class="btn btn-primary" onclick="AddNews(1);">Опубликовать</button>
+                      <button id="contact-submit" type="button" class="btn btn-success" onclick="AddNews(0);">Создать</button>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function getDate() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+}
+function AddNews(value){
+    var jqxhr = $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+                                                        "lead_content" : $("#lead_content").val(),
+                                                        "content": $("#wysiwyg").val(),
+                                                        "date":getDate(),
+                                                        "is_active":value})
+      .done(function(data) {
+
+        var ret = JSON.parse(data);
+             console.log(ret);
+
+      })
+      .fail(function(data) {
+          console.log(data);
+      });
+}
+
+</script>
