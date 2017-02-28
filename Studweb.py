@@ -10,8 +10,8 @@ class StudNSTU:
     def __init__(self):
         app = self.app
 
-        @app.route('/map')
-        def map():
+        @app.route('/culture')
+        def culture():
             return render_template("culture.html")
 
         @app.route('/map')
@@ -113,9 +113,24 @@ class StudNSTU:
         def login1():
             return render_template("Admin/index.html")
 
+        @app.route('/admin/forms')
+        def forms():
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/AddNews.html"))
+
+        @app.route('/admin/list')
+        def lists():
+            tmp = admin_news_get()
+            print(tmp)
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
 
     def run(self):
         self.app.run(debug=True)
+
+
 
 
 

@@ -4,6 +4,10 @@ from .Auther import *
 import json,sys,uuid,datetime
 from .DB import *
 
+@api.route('/api/admin/auth', methods=['POST'])
+def admin_auth():
+    return AdminAuther(request.form['username'],request.form['password'],request.form['device_id']).auth_user()
+
 @api.route('/api/admin/users/get', methods=["GET"])
 def users_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "ADMIN_USERS" WHERE site_id = 1"""))
