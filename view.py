@@ -20,7 +20,9 @@ class content:
     posts = []
     def __init__(self, sidebar = None, posts = None):
         self.sidebar = sidebar
-        self.posts.append(posts)
+        # print(posts)
+        self.posts = [posts]
+        # self.posts.append(posts)
     def render(self):
         return render_template('content.html', posts=self.posts)
 
