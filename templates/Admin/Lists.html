@@ -24,7 +24,7 @@
 {% for item in lists %}
     <div class="row">
         <div class="col-md-7">
-            <div class="panel panel-info">
+            <div id="{{ item.id }}" class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ item.title }} <a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="Edit">
                       <i class="fa fa-pencil"></i>
@@ -32,12 +32,12 @@
                 </div>
                 <div class="panel-body">
                   {{ item.lead_content }}
-                    <div class="panel-footer">
-                        <div class="widget-body right-align-text">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info btn-default">Править</button>
-                                <button type="button" class="btn btn-primary btn-default">Удалить</button>
-                            </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="widget-body right-align-text">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info btn-default">Править</button>
+                            <button type="button" class="btn btn-primary btn-default">Удалить</button>
                         </div>
                     </div>
                 </div>
@@ -58,3 +58,10 @@
         <li><a href="#">&raquo;</a></li>
     </ul>
 </div>
+
+
+<script>
+    $(".btn-default").click(function(e){
+        console.log($(e.toElement).parents(".panel-info").attr('id'));
+    });
+</script>
