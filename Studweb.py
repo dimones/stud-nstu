@@ -113,6 +113,17 @@ class StudNSTU:
         def login1():
             return render_template("Admin/index.html")
 
+        @app.route('/admin/forms/list')
+        def forms_list():
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/forms/forms_list.html"))
+
+        @app.route('/admin/forms/add')
+        def forms_add():
+            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                                   sidebar=render_template("Admin/sidebar.html"),
+                                   page=render_template("Admin/forms/forms_add.html"))
         @app.route('/admin/forms')
         def forms():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
