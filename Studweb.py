@@ -125,7 +125,7 @@ class StudNSTU:
             print(tmp)
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/Lists.html", lists=admin_news_get()))
+                                   page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
 
     def run(self):
         self.app.run(debug=True)

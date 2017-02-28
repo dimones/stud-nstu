@@ -7,19 +7,17 @@ from .DB import *
 
 class DateEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, datetime.datetime):
+        if isinstance(obj, datetime.date):
             return obj.strftime("%d.%m.%y")
         if isinstance(obj, map):
             return list(obj)
-        if isinstance(obj, None):
-            return '---'
         return json.JSONEncoder.default(self, obj)
 
 
 
 @api.route('/api/admin/news/get',methods=['GET'])
 def admin_news_get():
-    return DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1""")
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1"""),ensure_ascii=False,cls=DateEncoder)
 
 @api.route('/api/admin/news/add', methods=['POST'])
 def admin_news_add():
