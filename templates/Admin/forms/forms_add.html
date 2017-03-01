@@ -6,10 +6,27 @@
 <div class="row">
     <div id="formTest"></div>
 </div>
+<div class="row">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addForm()">Добавить форму</button>
+</div>
 <br>
 <br>
 <script>
     var formbuilder = new Formbuilder({ selector: '#formTest' });
+    var tempData = null;
+    formbuilder.on('save', function(payload){
+       tempData = payload;
+    });
+    function addForm() {
+        $.post("/api/admin/form/add",{"data":tempData})
+        .done(function (data) {
+            console.log(data);
+        })
+        .fail(function () {
+            console.log('fail shit');
+        });
+        console.log(formbuilder.save());
+    }
 </script>
 {#<div class="row">#}
 {#  <div class="col-md-6">#}

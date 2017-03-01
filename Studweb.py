@@ -138,8 +138,9 @@ class StudNSTU:
         self.app.run(debug=True)
 
 
+s = StudNSTU()
 
-
+app = s.app
 
 if __name__ == '__main__':
-    StudNSTU().run()
+    s.run()

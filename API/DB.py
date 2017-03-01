@@ -1,5 +1,6 @@
 import psycopg2
 import psycopg2.extras
+from psycopg2.extras import register_json
 class DB:
     conn = None
     cursor = None
@@ -11,6 +12,7 @@ class DB:
             self.conn = psycopg2.connect(database="studnstu",user="yam",password="jmXQF97J",host="217.71.129.181",port=5432,
                                       cursor_factory=psycopg2.extras.DictCursor)
             self.cursor = self.conn.cursor()
+            register_json(oid=3802, array_oid=3807)
         except Exception as e:
             print(e)
     def __del__(self):

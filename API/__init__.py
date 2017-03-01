@@ -6,3 +6,4 @@ from .Sites import *
 from .News import *
 from .Sidebars import *
 from .Users import *
+from .Forms import *
