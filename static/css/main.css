@@ -109,7 +109,6 @@ header nav{
 }
 
 .social__item {
-    display: inline-block;
     height: 50px;
     width: 50px;
     margin: 0 4px;
@@ -124,6 +123,10 @@ header nav{
     width: 100%;
     text-align: center;
     padding: 16px 0;
+}
+.social .social__item{
+    display: inline-block;
+
 }
 .social__link:hover{
     text-decoration: none;
@@ -293,7 +296,7 @@ main{
 }
 .events__more a{
     font-family: OpenSans;
-    color: #727272;!important;
+    color: #727272;
     font-size: 10px;
 }
 .sidebar {

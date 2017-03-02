@@ -1,5 +1,5 @@
-.promo{
-    background: url('../photo/Bgonir.png');
+.promo_onir{
+    background-image: url('../photo/Bgonir.png');
     background-color: black;
     background-position: -75px 70%;
     background-repeat: no-repeat;

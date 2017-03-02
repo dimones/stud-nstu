@@ -25,6 +25,7 @@
 }
 .gallery-title{
     padding: 35px 0;
+    position: relative;
 }
 
 .gallery-title-text{
