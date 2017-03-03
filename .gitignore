@@ -1,8 +1,6 @@
+*/.DS_Store
+
 .idea/
-
-.idea/workspace.xml
-
-.idea/misc.xml
 
 .idea/workspace.xml
 
@@ -10,6 +8,4 @@
 
 .idea/stud-nstu.iml
 
-.idea/workspace.xml
-
-.idea/workspace.xml
+.idea/modules.xml

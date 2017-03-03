@@ -1,0 +1,14 @@
+/* #fme2 - cтиль главного контейнера */
+/* Кастомизируется под окружение */
+/* Текущее окружение - mynsty.xyz/map2 */
+#fme2 {
+    position: absolute;
+    height: calc(92%);
+    width: calc(100%);
+}
+
+/*@media only screen and (max-width: 992px) {*/
+    /*#fme2 {*/
+        /*width: 100%;*/
+    /*}*/
+/*}*/
