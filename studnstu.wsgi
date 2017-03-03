@@ -20,4 +20,4 @@ formatter = logging.Formatter('%(levelname)-8s %(message)s')
 handler.setFormatter(formatter)
 
 logger.addHandler(handler)
-from Studweb import api as application
+from Studweb import app as application

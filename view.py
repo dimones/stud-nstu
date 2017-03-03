@@ -1,5 +1,4 @@
 from flask import render_template
-
 class header:
     def render(self):
         return render_template('header.html')
@@ -9,7 +8,7 @@ class footer:
         return render_template('footer.html')
 
 class promo:
-    adress = None;
+    adress = None
     def __init__(self, adress):
         self.adress = adress
     def render(self):
