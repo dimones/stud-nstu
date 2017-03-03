@@ -5,7 +5,6 @@
 tinymce.init({
     selector: '.wysiwyg',
     language_url: '/static/tinymce/js/tinymce/langs/ru.js',
-    menubar: false,
     elementpath: false,
     image_advtab: true,
     automatic_uploads: true,
@@ -25,5 +24,17 @@ tinymce.init({
     paste_data_images: true,
     external_filemanager_path:"../../filemanager/",
     filemanager_title:"Responsive Filemanager" ,
-    external_plugins: { "filemanager" : "../../filemanager/plugin.min.js"}
+    external_plugins: { "filemanager" : "../../filemanager/plugin.min.js"},
+    invalid_elements : 'script',
+    content_css : 'static/css/Accordion.css',
+    style_formats: [
+        {title: 'accordion-panel', inline: 'div', classes:'accordion__panel'},
+        {title: 'accordion-button', inline: 'button', classes:'accordion__button'},
+        {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+        {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+        {title: 'Example 1', inline: 'span', classes: 'example1'},
+        {title: 'Example 2', inline: 'span', classes: 'example2'},
+        {title: 'Table styles'},
+        {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+      ]
 });
