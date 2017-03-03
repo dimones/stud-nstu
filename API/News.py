@@ -17,7 +17,7 @@ class DateEncoder(json.JSONEncoder):
 
 @api.route('/api/admin/news/get',methods=['GET'])
 def admin_news_get():
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1"""),ensure_ascii=False,cls=DateEncoder)
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1 ORDER BY date desc"""),ensure_ascii=False,cls=DateEncoder)
 
 @api.route('/api/admin/news/add', methods=['POST'])
 def admin_news_add():
