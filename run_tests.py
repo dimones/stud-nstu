@@ -4,7 +4,6 @@ TEST_MODULES = [
     'tests.test_DB',
     'tests.test_studNSTU'
 ]
-
 suite = unittest.TestSuite()
 
 for t in TEST_MODULES:

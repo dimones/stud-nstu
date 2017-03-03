@@ -1,9 +1,14 @@
 from flask import *
 from . import api
 from .Auther import *
-import json,sys,uuid,datetime
+import json,sys,uuid,datetime,os
 from .DB import *
+from email.mime.text import MIMEText
+from werkzeug.utils import secure_filename
+from os import listdir
+from os.path import isfile, join
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 class DateEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -53,3 +58,32 @@ def admin_news_remove():
     except Exception as e:
         print(e)
         return json.dumps({"succeed": False})
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@api.route('/api/admin/news/image/upload/<_id>', methods=['GET', 'POST'])
+def upload_file_2(_id):
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            next_id = -1
+            connection = get_conn()
+
+            if _id != -1:
+                mypath = api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/'
+                if os.path.exists(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) ) != True:
+                    os.mkdir(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id))
+                file.save(os.path.join(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/',
+                                       str(uuid.uuid4().hex) + '.' +filename.rsplit('.', 1)[1]))
