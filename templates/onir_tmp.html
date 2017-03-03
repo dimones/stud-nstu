@@ -121,7 +121,7 @@
                           <div class="news-preview__body clearfix">
                               <div class="news-preview__img" style="background-image: url('../static/img/piese-of-news.jpg');" alt=""></div>
                               <p class="news-preview__p"> {{ item.lead_content }} </p>
-                              <p class="news-preview__p"> {{ item.content }} </p>
+                              <p class="news-preview__p"> {{ item.content | safe }} </p>
                           </div>
                           <div class="news-preview__data"> Опубликовано {{ item.date }} </div>
                       </div>

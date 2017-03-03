@@ -1,11 +1,11 @@
 from unittest import TestCase
-from Studweb import *
+from Studweb import app as application
 import unittest
 class TestStudNSTU(TestCase):
-    s = StudNSTU()
+    global application
     def test_run(self):
         try:
-            self.s.app.test_client()
+            application.test_client()
             self.assertTrue(True)
 
         except Exception as e:

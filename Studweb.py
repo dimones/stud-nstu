@@ -2,14 +2,14 @@ from flask import Flask, render_template
 from view import *
 from API import *
 
-
+app = Flask(__name__)
 class StudNSTU:
-    app = Flask(__name__)
-    app.register_blueprint(api)
+    app = None
+    # app = Flask(__name__)
 
-    def __init__(self):
-        app = self.app
-
+    def __init__(self,app):
+        self.app = app
+        app.register_blueprint(api)
         @app.route('/culture')
         def culture():
             return render_template("culture.html")
@@ -138,9 +138,8 @@ class StudNSTU:
         self.app.run(debug=True)
 
 
-s = StudNSTU()
+s = StudNSTU(app)
 
-app = s.app
 
 if __name__ == '__main__':
     s.run()
