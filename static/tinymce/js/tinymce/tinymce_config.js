@@ -14,7 +14,7 @@ tinymce.init({
     plugins: [
       'advlist autolink link image imagetools lists print preview hr',
       'wordcount code fullscreen filemanager',
-      'save table contextmenu template paste textcolor responsivefilemanager'
+      'save table contextmenu template paste textcolor responsivefilemanager visualblocks'
     ],
     toolbar: [
         'insertfile undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | ' +
@@ -26,15 +26,42 @@ tinymce.init({
     filemanager_title:"Responsive Filemanager" ,
     external_plugins: { "filemanager" : "../../filemanager/plugin.min.js"},
     invalid_elements : 'script',
-    content_css : 'static/css/Accordion.css',
+    content_css : 'static/css/allstyles.css',
+  end_container_on_empty_block: true,
+  visualblocks_default_state: true,
     style_formats: [
-        {title: 'accordion-panel', inline: 'div', classes:'accordion__panel'},
-        {title: 'accordion-button', inline: 'button', classes:'accordion__button'},
-        {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-        {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-        {title: 'Example 1', inline: 'span', classes: 'example1'},
-        {title: 'Example 2', inline: 'span', classes: 'example2'},
-        {title: 'Table styles'},
-        {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-      ]
+        {
+            title: 'accordion-panel',
+            block: 'div',
+            classes:'accordion__panel',
+            wrapper: true,
+            merge_siblings: true,
+            exact: true
+        },
+        {
+            title: 'accordion-button',
+            block: 'div',
+            classes:'accordion__button',
+            wrapper: false
+        },
+        {
+            title: 'paragraf',
+            block: 'p'
+        }
+      ],
+     setup: function(editor) {
+        var className = /accordion__button/i;
+        editor.on('click', function(e){
+            if(e.toElement.className.search(className) !== -1){
+                e.toElement.classList.toggle("active");
+                var panel = e.toElement.nextElementSibling;
+                if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            }
+        });
+
+      }
 });
