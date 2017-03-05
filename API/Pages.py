@@ -39,7 +39,7 @@ def pages_remove():
         return json.dumps({'succeed': False})
 
 @api.route('/api/admin/pages/files/upload/<_id>', methods=['GET', 'POST'])
-def upload_file(_id):
+def pages_upload_file(_id):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
