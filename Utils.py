@@ -26,6 +26,11 @@ def need_admin(func):
                     return func(*args, **kwargs)
                 else:
                     return redirect(url_for('login'))
+            elif part_site is 'pages':
+                if role in [1,2,3,4]:
+                    return func(*args, **kwargs)
+                else:
+                    return redirect(url_for('login'))
             return func(*args, **kwargs)
         else:
             return redirect(url_for('login'))
