@@ -39,6 +39,10 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     display: table;
     clear: both;
 }
+.attention{
+    color: '#D90D25';
+    font-style: 'IntroRegular';
+}
 
 header{
     background: linear-gradient(to left, #d90d25, #e90b3f);
