@@ -48,6 +48,18 @@
                     </div>
                   </div>
                 </form>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form id="upload-file" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <label for="file">Выберите файл для загрузки</label>
+                                <input name="file" type="file">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" id="imagesProduct">
             </div>
         </div>
     </div>
@@ -55,9 +67,9 @@
 <script>
 function getDate() {
     var d = new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
@@ -66,6 +78,7 @@ function getDate() {
 }
 function AddNews(value){
     $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+<<<<<<< HEAD
                                      "lead_content" : $("#lead_content").val(),
                                      "content": $("#wysiwyg").val(),
                                      "date":getDate(),
@@ -78,6 +91,39 @@ function AddNews(value){
       .fail(function(data) {
           toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!');
       });
+=======
+                                    "lead_content" : $("#lead_content").val(),
+                                    "content": $("#wysiwyg").val(),
+                                    "date":getDate(),
+                                    "is_active":value,author_id:1})
+    .done(function(data) {
+        data = JSON.parse(data);
+        console.log(data);
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/api/admin/news/image/upload/' + data.news_id,
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+               data = JSON.parse(data);
+               if(data.succeed == true)
+               {
+                   if(value == 0)
+                       alert('Успешно добавлена новость');
+                   else
+                       alert('Успешно опубликована новость');
+                   window.top.location.href='/admin/news/list';
+               }
+            }
+        });
+    })
+    .fail(function(data) {
+      console.log(data);
+    });
+>>>>>>> origin/master
 }
-
 </script>

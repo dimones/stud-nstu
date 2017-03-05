@@ -6,7 +6,7 @@ function StudNSTUOnLoad(){
     if(Cookies.get('device_id') == null || Cookies.get('device_id') == undefined)
         Cookies.set('device_id',guid());
     else {
-        window.location.href = "/admin/forms";
+        // window.location.href = "/admin/news/list";
     }
 
 }
