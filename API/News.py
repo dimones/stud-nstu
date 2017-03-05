@@ -28,12 +28,12 @@ def admin_news_get():
 def admin_news_add():
     print(request.form['date'])
     try:
-        DB().changeInDB("""INSERT INTO "NEWS"(title,lead_content,content,date,is_active,site_id) VALUES
+        news_id = DB().changeInDB("""INSERT INTO "NEWS"(title,lead_content,content,date,is_active,site_id) VALUES
                         ('%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,1)""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['is_active']),needCommit=True)
+                         request.form['date'],request.form['is_active']),needCommit=True,needIDs=True)
         print(1)
-        return json.dumps({"succeed": True})
+        return json.dumps({"succeed": True, 'news_id' : True})
     except Exception as e:
         print(e)
         return json.dumps({"succeed":False})
@@ -79,11 +79,18 @@ def upload_file_2(_id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             next_id = -1
-            connection = get_conn()
+            db = DB()
 
             if _id != -1:
-                mypath = api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/'
-                if os.path.exists(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) ) != True:
-                    os.mkdir(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id))
-                file.save(os.path.join(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/',
-                                       str(uuid.uuid4().hex) + '.' +filename.rsplit('.', 1)[1]))
+                mypath = api.config['UPLOAD_FOLDER'] + '/static/img/news'
+                if mypath != True:
+                    os.mkdir(mypath)
+                _filename = str(uuid.uuid4().hex) + '.' + filename.rsplit('.', 1)[1]
+                try:
+                    file.save(os.path.join(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/',
+                                           _filename))
+                    DB.changeInDB("""UPDATE "NEWS" SET image_name = '%s'""" %  (_filename), needCommit=True)
+                    return json.dumps({'succeed': True})
+                except Exception as e:
+                    print(e)
+                    return json.dumps({"succeed":False})
