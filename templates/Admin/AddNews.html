@@ -65,19 +65,18 @@ function getDate() {
     return [day, month, year].join('.');
 }
 function AddNews(value){
-    var jqxhr = $.post("/api/admin/news/add", {  "title" : $("#title").val(),
-                                                        "lead_content" : $("#lead_content").val(),
-                                                        "content": $("#wysiwyg").val(),
-                                                        "date":getDate(),
-                                                        "is_active":value})
+    $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+                                     "lead_content" : $("#lead_content").val(),
+                                     "content": $("#wysiwyg").val(),
+                                     "date":getDate(),
+                                     "is_active":value})
       .done(function(data) {
 
-        var ret = JSON.parse(data);
-             console.log(ret);
-
+            var ret = JSON.parse(data);
+            toastr.success("Запись успешно добавлена");
       })
       .fail(function(data) {
-          console.log(data);
+          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!');
       });
 }
 

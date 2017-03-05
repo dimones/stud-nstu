@@ -66,11 +66,9 @@
             'id':$(e.toElement).parents(".panel-info").attr('id')
         }).done(function (data) {
             var ret = JSON.parse(data);
-            $(e.toElement).parents(".panel-info").remove();
-            toastr.success("Запись успешно удалена");
-
+                    $(e.toElement).parents(".panel-info").remove();
         }).fail(function(data) {
-          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
+          console.log(data);
       });
 
     });

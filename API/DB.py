@@ -47,9 +47,9 @@ class DB:
                     self.conn.commit()
         except Exception as e:
             print(e)
+            return e
     def selectFromDB(self,sql,needDict = True, needOne=False):
         """
-
         :param sql: SQL select string
         :param needDict: Do you need have a dict result?
         :param needOne: Need one of tuple result?

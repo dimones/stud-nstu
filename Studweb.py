@@ -105,34 +105,6 @@ class StudNSTU:
         def conferences():
             return render_template("conferences.html")
 
-        @app.route('/admin')
-        def login():
-            return render_template("Admin/login.html")
-
-        @app.route('/admin/forms/list')
-        def forms_list():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/forms/forms_list.html"))
-
-        @app.route('/admin/forms/add')
-        def forms_add():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/forms/forms_add.html"))
-        @app.route('/admin/news/add')
-        def forms():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/AddNews.html"))
-
-        @app.route('/admin/news/list')
-        def lists():
-            tmp = admin_news_get()
-            print(tmp)
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
 
     def run(self):
         self.app.run(debug=True)
