@@ -68,3 +68,7 @@ def pages_upload_file(_id):
             except Exception as e:
                 print(e)
                 return json.dumps({"succeed":False})
+
+@api.route('/api/admin/pages/files/get/<int:_id>')
+def pages_files_get(_id):
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "DOCUMENTS" WHERE page_id = %s""" % _id,needDict=True),ensure_ascii=False)
