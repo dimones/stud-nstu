@@ -1,7 +1,7 @@
 from flask import *
 from . import api
 from .Auther import *
-import json,sys,uuid,datetime,magic,os
+import json,sys,uuid,datetime,os
 from .DB import *
 from werkzeug.utils import secure_filename
 @api.route('/api/admin/pages/get',methods=['GET'])
@@ -41,6 +41,7 @@ def pages_remove():
 @api.route('/api/admin/pages/files/upload/<_id>', methods=['GET', 'POST'])
 def pages_upload_file(_id):
     if request.method == 'POST':
+        import magic
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
