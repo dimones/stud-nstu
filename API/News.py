@@ -28,12 +28,12 @@ def admin_news_get():
 def admin_news_add():
     print(request.form['date'])
     try:
-        news_id = DB().changeInDB("""INSERT INTO "NEWS"(title,lead_content,content,date,is_active,site_id) VALUES
-                        ('%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,1)""" %
+        news_id = DB().changeInDB("""INSERT INTO "NEWS"(title,lead_content,content,date,is_active,site_id,author_id) VALUES
+                        ('%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,1,%s)""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['is_active']),needCommit=True,needIDs=True)
-        print(1)
-        return json.dumps({"succeed": True, 'news_id' : True})
+                         request.form['date'],request.form['is_active'],request.form['author_id']),needCommit=True,needIDs=True)
+        print(news_id)
+        return json.dumps({"succeed": True, 'news_id' : news_id})
     except Exception as e:
         print(e)
         return json.dumps({"succeed":False})
@@ -42,9 +42,9 @@ def admin_news_add():
 def admin_news_change():
     try:
         DB().changeInDB("""UPDATE "NEWS" SET title = '%s', lead_content = '%s', content = '%s',
-                            date = TO_DATE('%s',"DD.MM.YYYY"),is_active = %s,site_id = 1 WHERE id = %s""" %
+                            date = TO_DATE('%s',"DD.MM.YYYY"),is_active = %s,site_id = 1,author_id = %s WHERE id = %s""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['is_active'],request.form['id']),needCommit=True)
+                         request.form['date'],request.form['is_active'],request.form['id'],request.form['author_id']),needCommit=True)
         return json.dumps({"succeed": True })
     except Exception as e:
         print(e)
@@ -64,7 +64,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @api.route('/api/admin/news/image/upload/<_id>', methods=['GET', 'POST'])
-def upload_file_2(_id):
+def upload_file(_id):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -82,14 +82,13 @@ def upload_file_2(_id):
             db = DB()
 
             if _id != -1:
-                mypath = api.config['UPLOAD_FOLDER'] + '/static/img/news'
-                if mypath != True:
+                mypath = api.root_path[:-4] + '/static/img/news'
+                if os.path.exists(mypath) != True:
                     os.mkdir(mypath)
                 _filename = str(uuid.uuid4().hex) + '.' + filename.rsplit('.', 1)[1]
                 try:
-                    file.save(os.path.join(api.config['UPLOAD_FOLDER'] + '/static/img/products/tmp/' + str(_id) + '/',
-                                           _filename))
-                    DB.changeInDB("""UPDATE "NEWS" SET image_name = '%s'""" %  (_filename), needCommit=True)
+                    file.save(os.path.join(mypath, _filename))
+                    db.changeInDB(("""UPDATE "NEWS" SET image_name = '%s'""" %  (_filename)), needCommit=True)
                     return json.dumps({'succeed': True})
                 except Exception as e:
                     print(e)
