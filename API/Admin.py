@@ -40,3 +40,10 @@ def Profile():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/Profile.html"))
+
+@api.route('/admin/users/list')
+@need_admin
+def Profile():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/UserLists.html"))
