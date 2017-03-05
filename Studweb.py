@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,wrappers
 from view import *
 from API import *
+from Utils import *
 
 app = Flask(__name__)
 class StudNSTU:
@@ -110,23 +111,27 @@ class StudNSTU:
             return render_template("Admin/login.html")
 
         @app.route('/admin/forms/list')
+        @need_admin
         def forms_list():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
                                    page=render_template("Admin/forms/forms_list.html"))
 
         @app.route('/admin/forms/add')
+        @need_admin
         def forms_add():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
                                    page=render_template("Admin/forms/forms_add.html"))
         @app.route('/admin/news/add')
+        @need_admin
         def forms():
             return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                    sidebar=render_template("Admin/sidebar.html"),
                                    page=render_template("Admin/AddNews.html"))
 
         @app.route('/admin/news/list')
+        @need_admin
         def lists():
             tmp = admin_news_get()
             print(tmp)

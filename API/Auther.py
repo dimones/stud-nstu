@@ -28,6 +28,18 @@ class AdminHelper(AuthHelper):
         except Exception as e:
             print(str(e))
             return 'error happened'
+
+    def getRole(self):
+        try:
+            res = DB().selectFromDB("SELECT role FROM ADMIN_USERS WHERE id = (SELECT user_id FROM ADMIN_TOKENS tok WHERE tok.device_id = '%s' "
+                    "AND tok.device_token = '%s' LIMIT 0,1)" % (self.device_id, self.device_token), needOne=True)
+            if len(res) > 0:
+                return res[0]
+            else:
+                return -1
+        except Exception as e:
+            print(str(e))
+            return 'error happened'
 class AdminAuther(Auther):
     db = DB()
     def tokenExist(self, device_token):
