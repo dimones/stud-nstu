@@ -58,8 +58,6 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="row" id="imagesProduct">
             </div>
         </div>
     </div>
@@ -78,24 +76,10 @@ function getDate() {
 }
 function AddNews(value){
     $.post("/api/admin/news/add", {  "title" : $("#title").val(),
-<<<<<<< HEAD
-                                     "lead_content" : $("#lead_content").val(),
-                                     "content": $("#wysiwyg").val(),
-                                     "date":getDate(),
-                                     "is_active":value})
-      .done(function(data) {
-
-            var ret = JSON.parse(data);
-            toastr.success("Запись успешно добавлена");
-      })
-      .fail(function(data) {
-          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!');
-      });
-=======
                                     "lead_content" : $("#lead_content").val(),
                                     "content": $("#wysiwyg").val(),
                                     "date":getDate(),
-                                    "is_active":value,author_id:1})
+                                    "is_active":value,"author_id":1})
     .done(function(data) {
         data = JSON.parse(data);
         console.log(data);
@@ -113,17 +97,17 @@ function AddNews(value){
                if(data.succeed == true)
                {
                    if(value == 0)
-                       alert('Успешно добавлена новость');
-                   else
-                       alert('Успешно опубликована новость');
-                   window.top.location.href='/admin/news/list';
+                       toastr.success('Успешно добавлена новость');
+                   else {
+                       toastr.success('Успешно опубликована новость');
+                       window.top.location.href = '/admin/news/list';
+                   }
                }
             }
         });
     })
     .fail(function(data) {
-      console.log(data);
+      toastr.error('Произогла ошибка попробуйте позже');
     });
->>>>>>> origin/master
 }
 </script>

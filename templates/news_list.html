@@ -1,0 +1,28 @@
+{% for item in list %}
+    <div class="news-preview">
+        <a class="news-preview__title" href="/news/{{ item.id}}">{{ item.title }}</a>
+        <div class="news-preview__body clearfix">
+            <div class="news-preview__img" style="background-image: url('../static/img/news/{{ item.image_name }}');" alt=""></div>
+            <p class="news-preview__p"> {{ item.lead_content }} </p>
+            <p class="news-preview__p"> {{ item.content | safe }} </p>
+        </div>
+        <div class="news-preview__data"> Опубликовано {{ item.date }} </div>
+    </div>
+{% endfor %}
+
+<script>
+var acc = document.getElementsByClassName("accordion__button");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+  	  panel.style.maxHeight = null;
+    } else {
+  	  panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+}
+</script>

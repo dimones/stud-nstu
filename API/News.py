@@ -88,7 +88,8 @@ def upload_file(_id):
                 _filename = str(uuid.uuid4().hex) + '.' + filename.rsplit('.', 1)[1]
                 try:
                     file.save(os.path.join(mypath, _filename))
-                    db.changeInDB(("""UPDATE "NEWS" SET image_name = '%s'""" %  (_filename)), needCommit=True)
+                    print(_filename)
+                    db.changeInDB(("""UPDATE "NEWS" SET image_name = '%s' WHERE id=%s""" %  (_filename,_id)), needCommit=True)
                     return json.dumps({'succeed': True})
                 except Exception as e:
                     print(e)
