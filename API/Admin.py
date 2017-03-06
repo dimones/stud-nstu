@@ -62,3 +62,12 @@ def sidebar_menus_add():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/sidebars/add.html", list=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE dropdown_id=-1")))
+
+@api.route('/admin/pages/add')
+@need_admin
+def page_add():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/page/add.html"))
+
+

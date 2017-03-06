@@ -1,0 +1,87 @@
+<div class="page-title clearfix">
+    <h2>Редактор
+        <small>
+            <ul>
+                <li>Home</li>
+                <li>/</li>
+                <li>Dashboard</li>
+                <li>/</li>
+                <li>Forms</li>
+            </ul>
+        </small>
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Новость
+                </div>
+            </div>
+            <div class="widget-body">
+               <div class="main-content">
+                  <form method="post">
+                      <textarea class="wysiwyg"></textarea>
+                      <input name="image" type="file" id="upload" style="display:none" onchange="">
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function getDate() {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+}
+function AddNews(value){
+    $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+                                    "lead_content" : $("#lead_content").val(),
+                                    "content": $("#wysiwyg").val(),
+                                    "date":getDate(),
+                                    "is_active":value,"author_id":1})
+    .done(function(data) {
+        data = JSON.parse(data);
+        console.log(data);
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/api/admin/news/image/upload/' + data.news_id,
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+               data = JSON.parse(data);
+               if(data.succeed == true)
+               {
+                   if(value == 0)
+                       toastr.success('Успешно добавлена новость');
+                   else {
+                       toastr.success('Успешно опубликована новость');
+                       window.top.location.href = '/admin/news/list';
+                   }
+               }
+            }
+        });
+    })
+    .fail(function(data) {
+      toastr.error('Произогла ошибка попробуйте позже');
+    });
+}
+
+
+</script>
+<script src="../../../static/js/jquery-3.1.1.min.js"></script>
+<script src="../../../static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="../../../static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>

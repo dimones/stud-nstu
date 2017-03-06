@@ -24,7 +24,7 @@ function submitLogin(form){
             $("#loadText").css('display','none');
             Cookies.set('device_token',ret["device_token"]);
             Cookies.set('isAuthed',true);
-            window.location.href = "/admin/forms";
+            window.location.href = "/admin/news/list";
         }
         else{
             console.log('#loginAlert','alert-warning','Ошибка','Неверная связка логин/пароль!');

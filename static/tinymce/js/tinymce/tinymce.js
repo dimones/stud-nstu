@@ -38501,7 +38501,7 @@ define("tinymce/Editor", [
 				self.render();
 			}
 
-			// Page is not loaded yet, wait for it
+			// page is not loaded yet, wait for it
 			if (!Event.domLoaded) {
 				DOM.bind(window, 'ready', readyHandler);
 				return;
