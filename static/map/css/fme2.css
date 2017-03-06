@@ -1,0 +1,271 @@
+.fme2 > * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*COMMON*/
+.fme2-label {
+	/*text-shadow: -1px 1px 1px rgb(0,0,0);*/
+	/*margin-left: 25px;*/
+	font-weight: 400 !important;
+	font-size: 16px !important;
+	font-family: 'Roboto', sans-serif !important;
+	color: #000000 !important;
+	/*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white !important;*/
+}
+
+.fme2-icon {
+	height: 24px;
+}
+
+button, a, span {
+	z-index: 10;
+}
+
+.fme2-bottom {
+	position: absolute;
+	margin: 2px;
+	bottom: 0;
+}
+
+/*VIEW*/
+#fme2_container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#render_container {
+	left: 0;
+	top: 0;
+}
+
+.fme2-navi_sets
+{
+	background: #EEEEEE !important;
+	color: black !important;
+	font-size: 13px !important;
+	font-weight: normal !important;
+}
+
+.fme2-navi-from-to {
+	position: relative;
+	left: 5px;
+	top: 10px;
+	padding: 5px;
+}
+
+.fme2.group-vertical {
+	flex-direction: column;
+	justify-content: flex-end;
+	margin-right: 2px;
+	margin-left: 2px;
+	line-height: 28px;
+}
+
+.fme2.group-horizontal {
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	line-height: 28px;
+}
+
+.fme2.group-vertical.btn-icon {
+	line-height: 34px;
+}
+
+.display-flex {
+	display: flex;
+}
+
+/*BUTTONS*/
+.fme2-button {
+	text-align: center;
+	padding: 0 10px;
+	background: #f8f8f8;
+	color: black;
+	border-radius: 2px 2px 2px 2px;
+	font-size: 14px;
+	font-family: "Roboto", sans-serif;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.fme2-button:hover {
+	color: white;
+	background: #009688;
+}
+
+.fme2-button.active {
+	color: white;
+	background: #f1443d;
+}
+
+.fme2-button.btn-icon {
+	width: 40px;
+	height: 34px;
+	padding: 5px 0;
+}
+
+.fme2-button.btn-selecter {
+	width: 40px;
+	height: 28px;
+	/*font-weight: 500;*/
+}
+
+.fme2-button.btn-stand {
+	min-width: 65px;
+	height: 28px;
+	line-height: 28px;
+}
+
+.fme2-button.dd-item {
+	min-width: 65px;
+	height: 28px;
+	box-shadow: none;
+}
+
+.fme2-button.btn-levels {
+	padding-top: 3px;
+	height: 34px;
+}
+
+.fme2-button.btn-modal {
+	margin-top: 5px;
+	height: 34px;
+	line-height: 34px;
+	background: #009688;
+}
+
+.fme2-button.btn-modal:hover {
+	background: #f1443d;
+}
+
+.fme2.group-vertical > .fme2-button:first-child {
+	border-radius: 2px 2px 0 0;
+}
+
+.fme2.group-vertical > .fme2-button:last-child {
+	border-radius: 0 0 2px 2px;
+}
+
+.fme2.group-horizontal > .fme2-button:first-child {
+	border-radius: 2px 0 0 2px;
+}
+
+.fme2.group-horizontal > .fme2-button:last-child {
+	border-radius: 0 2px 2px 0;
+}
+
+.fme2.group-horizontal > .fme2-button {
+	border-radius: 0;
+}
+
+.fme2.group-vertical > .fme2-button{
+	border-radius: 0;
+}
+
+/*SCHEDULE*/
+.fme2.dd-menu {
+	position: absolute;
+	top: 100%;
+	/*left: 0;*/
+	z-index: 1000;
+	display: none;
+	float: left;
+	box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.fme2.dd-menu.is-open {
+	display: block;
+}
+
+.fme2.group-vertical.dd-menu {
+	margin: 0;
+}
+
+.fme2-grp-dd {
+	float: left;
+	margin-right: 2px;
+}
+
+.fme2-grp-dd:first-child {
+	margin-left: 2px;
+}
+
+.fme2-grp-dd:last-child {
+	margin-right: 0;
+}
+
+/*SEARCH*/
+
+input[type=text].fme2-input {
+	float: left;
+	background: #f8f8f8;
+	height: 28px;
+	width: 100px;
+	text-align: center;
+	box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0, rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0 1px 5px 0;
+	padding: 7px 0;
+	font-size: 16px;
+	line-height: 1.42857143;
+	border: 0;
+	border-radius: 0;
+}
+
+/*EDITOR*/
+.fme2editor-top_right {
+	position: absolute !important;
+	top: 0 !important;
+	right: 0 !important;
+	z-index: 10 !important;
+	color: black !important;
+}
+
+.fme2editor-icon {
+	height: 24px !important;
+}
+
+.fme2editor-sep-vert {
+	margin-top: 10px !important;
+}
+
+/*MODAL*/
+
+.fme2-modal {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.3);
+	z-index: 100;
+}
+
+.fme2-modal > .fme2-modal-dialog {
+	position: relative;
+	min-width: 440px;
+	min-height: 200px;
+	margin: auto;
+	z-index: 101;
+}
+
+.fme2-modal-dialog > .fme2-modal-content {
+	position: absolute;
+	box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+	border-radius: 2px;
+	border: none;
+	width: 100%;
+	/*height: 100%;*/
+	background: #f8f8f8;
+	z-index: 102;
+	padding: 20px;
+}
+
+.fme2-modal-content > hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	/*border: 1px;*/
+	border-top: 2px solid #eeeeee;
+}

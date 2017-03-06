@@ -15,10 +15,13 @@ def users_get():
 @api.route('/api/admin/users/add',methods=["POST"])
 def users_add():
     try:
-        DB().changeInDB("""INSERT INTO "ADMIN_USERS"(username,password,role,site_id) VALUES('%s','%s',%s,%s)"""
+        result=DB().changeInDB("""INSERT INTO "ADMIN_USERS"(username,password,role,site_id, name, surname) VALUES('%s','%s',%s,%s,'%s','%s')"""
                         % (request.form['username'], request.form['password'], request.form['role'],
-                           1),needCommit=True)
-        return json.dumps({'succeed': True})
+                           request.form['site_id'], request.form['name'], request.form['surname']), needCommit=True)
+        if result == None:
+            return json.dumps({'succeed': True})
+        else:
+            return json.dumps({'succeed': False})
     except Exception as e:
         print(e)
         return json.dumps({'succeed': False})

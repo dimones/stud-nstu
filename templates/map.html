@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset=utf-8 />
-    <title>JS Bin</title>
+    <title>3D-НГТУ</title>
     <link href="../static/css/allstyles.css" rel="stylesheet" type="text/css">
-
+    <script src="../static/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
   <header>
@@ -53,8 +53,10 @@
           </ul>
       </div>
   </header>
-  <main style="background-color: #caf6f6;">
-    <iframe src="map_inner.html" width="100%" height="100%;" style="min-height: 70vh; overflow: hidden; border: 0;" scrolling="no"></iframe>
+  <main id="3d-nstu-map">
+      <script>
+          $( "#3d-nstu-map" ).load( "./map_content.html" );
+      </script>
   </main>
   <footer>
     <div class="wrapper">

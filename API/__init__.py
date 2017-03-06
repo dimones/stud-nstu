@@ -7,3 +7,4 @@ from .News import *
 from .Sidebars import *
 from .Users import *
 from .Forms import *
+from .Pages import *

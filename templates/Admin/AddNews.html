@@ -48,6 +48,16 @@
                     </div>
                   </div>
                 </form>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form id="upload-file" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <label for="file">Выберите файл для загрузки</label>
+                                <input name="file" type="file">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,9 +65,9 @@
 <script>
 function getDate() {
     var d = new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
@@ -65,20 +75,39 @@ function getDate() {
     return [day, month, year].join('.');
 }
 function AddNews(value){
-    var jqxhr = $.post("/api/admin/news/add", {  "title" : $("#title").val(),
-                                                        "lead_content" : $("#lead_content").val(),
-                                                        "content": $("#wysiwyg").val(),
-                                                        "date":getDate(),
-                                                        "is_active":value})
-      .done(function(data) {
-
-        var ret = JSON.parse(data);
-             console.log(ret);
-
-      })
-      .fail(function(data) {
-          console.log(data);
-      });
+    $.post("/api/admin/news/add", {  "title" : $("#title").val(),
+                                    "lead_content" : $("#lead_content").val(),
+                                    "content": $("#wysiwyg").val(),
+                                    "date":getDate(),
+                                    "is_active":value,"author_id":1})
+    .done(function(data) {
+        data = JSON.parse(data);
+        console.log(data);
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/api/admin/news/image/upload/' + data.news_id,
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+               data = JSON.parse(data);
+               if(data.succeed == true)
+               {
+                   if(value == 0)
+                       toastr.success('Успешно добавлена новость');
+                   else {
+                       toastr.success('Успешно опубликована новость');
+                       window.top.location.href = '/admin/news/list';
+                   }
+               }
+            }
+        });
+    })
+    .fail(function(data) {
+      toastr.error('Произогла ошибка попробуйте позже');
+    });
 }
-
 </script>

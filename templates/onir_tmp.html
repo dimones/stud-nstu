@@ -115,17 +115,7 @@
                   </div>
               </div>
               <div class="main-content">
-                  {% for item in list %}
-                      <div class="news-preview">
-                          <a class="news-preview__title">{{ item.title }}</a>
-                          <div class="news-preview__body clearfix">
-                              <div class="news-preview__img" style="background-image: url('../static/img/piese-of-news.jpg');" alt=""></div>
-                              <p class="news-preview__p"> {{ item.lead_content }} </p>
-                              <p class="news-preview__p"> {{ item.content | safe }} </p>
-                          </div>
-                          <div class="news-preview__data"> Опубликовано {{ item.date }} </div>
-                      </div>
-                  {% endfor %}
+                  {{ page | safe}}
               </div>
           </div>
       </div>
@@ -137,21 +127,5 @@
     </div>
   </footer>
 
-<script>
-var acc = document.getElementsByClassName("accordion__button");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].onclick = function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-  	  panel.style.maxHeight = null;
-    } else {
-  	  panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  }
-}
-</script>
 </body>
 </html>

@@ -1,8 +1,6 @@
+*/.DS_Store
+
 .idea/
-
-.idea/workspace.xml
-
-.idea/misc.xml
 
 .idea/workspace.xml
 
@@ -10,6 +8,24 @@
 
 .idea/stud-nstu.iml
 
-.idea/workspace.xml
+.idea/modules.xml
 
-.idea/workspace.xml
+__pycache__/view.cpython-35.pyc
+
+API/__pycache__/News.cpython-35.pyc
+
+__pycache__/view.cpython-35.pyc
+
+*.pyc
+
+*.pyc
+
+*.pyc
+
+API/__pycache__/__init__.cpython-35.pyc
+
+*.pyc
+
+*.pyc
+
+*.pyc

@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,wrappers
 from view import *
 from API import *
+from Utils import *
 
 app = Flask(__name__)
 class StudNSTU:
@@ -36,58 +37,24 @@ class StudNSTU:
 
         @app.route('/')
         def hello_world_1():
-            return render_template("onir_tmp.html", list=json.loads(admin_news_get()))
+            return render_template("onir_tmp.html", page=render_template("news_list.html", list=json.loads(admin_news_get())))
 
         @app.route('/test')
         def test():
             return Page(promo=promo(adress="promo_garage.html"),
                         content=content(
                             # sidebar=sidebar()
-                            posts=("""
-                                        <div class="note">
-                                          <div class="main-text">
-                                              <h2>
-                                                 Общая информация
-                                              </h2>
-                                              <p class="important">
-                                                  25 апреля 1995 года в Новосибирском государственном техническом университете был создан Центр научно-технической работы студентов (Центр НТРС НГТУ),
-                                                  который руководствуется в своей деятельности Уставом НГТУ, решениями и рекомендациями Экспертного Совета по НИРС, являясь его исполнительным органом по
-                                                  развитию и координации научно-технической работы студентов и созданию новых университетских традиций.
-
-                                              </p>
-                                              <p class="important">
-                                                  Организатором Центра НТРС и его руководителем до ноября 2003 года была доктор технических наук, профессор Кувшинова Мария Александровна.
-                                              </p>
-                                              <p class="important">
-                                                  Здесь разработано информационное и программное обеспечение мониторинга НИРС в НГТУ. В банке данных имеются сведения о студентах,
-                                                  участвующих в научно-исследовательской работе и результатах их деятельности, сведения о студентах-держателях грантов,
-                                                  о преподавателях - научных руководителях, а также информация обо всех текущих и плановых мероприятиях университета, города, России,
-                                                  об участии студентов в конференциях, выставках, олимпиадах, конкурсах и т.д.
-                                              </p>
-                                              <p class="important">
-                                                  Центр НТРС поддерживает связь с аналогичными структурами города и России.
-                                              </p>
-
-                                              <p class="important">
-                                                  Центр НТРС является инициатором выпуска сборника тезисов по результатам Дней Науки НГТУ (1996 г.),
-                                                  проведения в университете студенческого конкурса "Прометей" (1997 г.), стендовой научной студенческой конференции (1997 г.), всероссийской научной
-                                                  конференции молодых ученых "Наука. Технологии. Инновации" (2001 г.),
-                                              </p>
-                                              <p class="important">
-                                                  В 2017 году ЦНТРС был переименован в отдел научно-исследовательской работы студентов- ОНИРС, и введён в состав Инновационно-технологического центра.
-                                              </p>
-
-                                              </div>
-                                      </div>
-                                        """))).render()
+                            posts=("""<div>dfs</div>"""))).render()
 
         @app.route('/news')
         def news():
             return render_template("news.html")
 
-        @app.route('/news/<news>')
+        @app.route('/news/<int:news>')
         def piece_of_news(news):
-            return render_template("piece-of-news.html")
+            DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)
+
+            return render_template("onir_tmp.html", page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0]))
 
         @app.route('/gallery')
         def gallery():
@@ -104,35 +71,6 @@ class StudNSTU:
         @app.route('/conferences')
         def conferences():
             return render_template("conferences.html")
-
-        @app.route('/admin')
-        def login():
-            return render_template("Admin/login.html")
-
-        @app.route('/admin/forms/list')
-        def forms_list():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/forms/forms_list.html"))
-
-        @app.route('/admin/forms/add')
-        def forms_add():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/forms/forms_add.html"))
-        @app.route('/admin/news/add')
-        def forms():
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/AddNews.html"))
-
-        @app.route('/admin/news/list')
-        def lists():
-            tmp = admin_news_get()
-            print(tmp)
-            return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                                   sidebar=render_template("Admin/sidebar.html"),
-                                   page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
 
     def run(self):
         self.app.run(debug=True)

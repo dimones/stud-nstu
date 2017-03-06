@@ -1,0 +1,111 @@
+<div class="page-title clearfix">
+    <h2>
+        Slick Dashboard
+        <small>
+            <ul>
+                <li>Админ</li>
+                <li>/</li>
+                <li>Пользователи</li>
+                <li>/</li>
+                <li>Добавить</li>
+              </ul>
+        </small>
+    </h2>
+</div>
+<!-- Page title end -->
+<!-- Row start -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget no-margin">
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-9">
+                      <form class="form-horizontal">
+                        <h3 class="heading-a">Добавить пользователя</h3>
+                        <div class="form-group">
+                          <label for="userName" class="col-sm-2 control-label">Логин</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" placeholder="username">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="userName" class="col-sm-2 control-label" >Пароль</label>
+                          <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" placeholder="*********" id="password" >
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">ФИО</label>
+                          <div class="col-sm-5">
+                            <input type="text" class="form-control" placeholder="Имя" id="name">
+                          </div>
+                          <div class="col-sm-5">
+                            <input type="text" class="form-control" placeholder="Фамилия" id="surname">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="birthDate" class="col-sm-2 control-label">Раздел</label>
+                          <div class="col-sm-10">
+                            <div class="btn-group">
+                                <select class="form-control" id="site">
+                                    <option value="1">ОНИРС</option>
+                                    <option value="2">Гараж</option>
+                                    <option value="3">Наука</option>
+                                    <option value="4">Культура</option>
+                                    <option value="5">Спорт</option>
+                                    <option value="6">Общественная жизнь </option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="birthDate" class="col-sm-2 control-label">Права</label>
+                          <div class="col-sm-10">
+                            <div class="btn-group">
+                                <select class="form-control" id="role">
+                                    <option value="3">Контент-менеджер</option>
+                                    <option value="2">Администратор раздела</option>
+                                    <option value="1">Администратор портала</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form_submit clearfix" style="">
+                          <div class="row">
+                            <div class="col-sm-10 col-sm-offset-2">
+                              <button class="btn btn-primary">Сохранить</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row messege">
+
+</div>
+<!-- Row end -->
+<script>
+    $(".btn-primary").click(function(){
+        $.post('/api/admin/users/add',{ "username": $("#username").val(),
+                                    "password": $("#password").val(),
+                                    "role": $("#role").val(),
+                                    "site_id":$("#site").val(),
+                                    "name":$("#name").val(),
+                                    "surname": $("#surname").val()
+                                   })
+            .done(function (data) {
+                var res=JSON.parse(data);
+                if (res["succeed"]==false)
+                    toastr.error('Возможно такой логин уже занят, попробуйте позже', 'Ошибка!')
+                else toastr.success("Запись успешно добавлена");
+            })
+            .fail(function (data) {
+                toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+
+            });
+    });
+</script>
