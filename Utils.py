@@ -6,7 +6,7 @@ def need_admin(func):
     def decorated_function(*args, **kwargs):
         print(request.cookies)
         if 'device_token' not in request.cookies or 'device_id' not in request.cookies:
-            return redirect(url_for('login'))
+            return redirect(url_for('api.login'))
         a_h = AdminHelper(request.cookies['device_token'], request.cookies['device_id'])
         if a_h.isValid():
             role = a_h.getRole()
@@ -15,22 +15,27 @@ def need_admin(func):
                 if role in [1,2,3,4]:
                     return func(*args, **kwargs)
                 else:
-                    return redirect(url_for('login'))
+                    return redirect(url_for('api.login'))
             elif part_site is 'forms':
                 if role in [1,2,3,4]:
                     return func(*args, **kwargs)
                 else:
-                    return redirect(url_for('login'))
+                    return redirect(url_for('api.login'))
             elif part_site is 'users':
                 if role in [1,2,3]:
                     return func(*args, **kwargs)
                 else:
-                    return redirect(url_for('login'))
+                    return redirect(url_for('api.login'))
             elif part_site is 'pages':
                 if role in [1,2,3,4]:
                     return func(*args, **kwargs)
                 else:
-                    return redirect(url_for('login'))
+                    return redirect(url_for('api.login'))
+            elif part_site is 'sidebar_menus':
+                if role in [1,2,3]:
+                    return func(*args, **kwargs)
+                else:
+                    return redirect(url_for('api.login'))
             return func(*args, **kwargs)
         else:
             return redirect(url_for('login'))
