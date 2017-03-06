@@ -1,0 +1,49 @@
+<div class="widget">
+  <div class="widget-header">
+    <div class="title">
+      <span class="fs1" aria-hidden="true" data-icon="&#xe04d;"></span> Horizontal form
+    </div>
+  </div>
+  <div class="widget-body">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+          <input type="Text" class="form-control" placeholder="Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+          <input type="email" class="form-control" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+      </div>
+        <div class="form-group">
+            <label for="birthDate" class="col-sm-2 control-label">Раздел</label>
+            <div class="col-sm-10">
+                <div class="btn-group">
+                    <select class="form-control" id="site">
+                        <option value="=1">-</option>
+                    {% for item in list %}
+                        <option value="6"> </option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-success">Sign in</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

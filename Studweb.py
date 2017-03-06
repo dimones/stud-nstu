@@ -36,7 +36,15 @@ class StudNSTU:
             return render_template("garage.html")
 
         @app.route('/')
-        def hello_world_1():
+        def hello_world1():
+            return render_template('science.html')
+
+        @app.route('/science')
+        def science():
+            return render_template('science.html')
+
+        @app.route('/onirs')
+        def onirs():
             return render_template("onir_tmp.html", page=render_template("news_list.html", list=json.loads(admin_news_get())))
 
         @app.route('/test')
@@ -52,8 +60,6 @@ class StudNSTU:
 
         @app.route('/news/<int:news>')
         def piece_of_news(news):
-            DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)
-
             return render_template("onir_tmp.html", page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0]))
 
         @app.route('/gallery')

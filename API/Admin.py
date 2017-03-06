@@ -2,6 +2,7 @@ from flask import *
 from . import api
 from .Auther import *
 from .News import *
+from .Users import *
 from Utils import *
 @api.route('/admin')
 def login():
@@ -43,7 +44,21 @@ def Profile():
 
 @api.route('/admin/users/list')
 @need_admin
-def profileList():
+def users_list():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/UserLists.html"))
+                           page=render_template("Admin/userLists.html", list=json.loads(users_get())))
+
+@api.route('/admin/sidebar_menus/list')
+@need_admin
+def sidebar_menus_list():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/sidebars/list.html"))
+
+@api.route('/admin/sidebar_menus/add')
+@need_admin
+def sidebar_menus_add():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/sidebars/add.html", list=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE dropdown_id=-1")))
