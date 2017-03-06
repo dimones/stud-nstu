@@ -1,0 +1,140 @@
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: IntroLight; /* Имя шрифта */
+    src: url('../font/Intro-Light.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: IntroRegular; /* Имя шрифта */
+    src: url('../font/Intro-Bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: IntroBold; /* Имя шрифта */
+    src: url('../font/Intro-Bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: intro; /* Имя шрифта */
+    src: url('../font/intro-bold.ttf'); /* Путь к файлу со шрифтом */
+   }
+@font-face {
+    font-family: OpenSans; /* Имя шрифта */
+    src: url('../font/OpenSans-Regular.ttf'); /* Путь к файлу со шрифтом */
+   }
+*{
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+}
+body {
+    letter-spacing: 1px;
+    height: 100%;
+}
+a{
+    color: inherit;
+}
+p{
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 15px;
+    font-family: "Open Sans";
+    color: inherit;
+}
+.accordion__button {
+    background: none;
+    color: #444;
+    cursor: pointer;
+    padding: 18px 18px 22px 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    border-top: 1px solid #e3e3e3;
+    outline: none;
+}
+
+.accordion__button:last-child {
+    border-bottom: 1px solid #e3e3e3;
+}
+.accordion__button:hover {
+    color: #e90b3f;
+}
+
+.accordion__panel {
+    padding: 0 30px;
+    background-color: white;
+}
+.accordion__panel>*:last-child{
+    margin-bottom: 10px;
+}
+.accordion__panel>*:first-child{
+    margin-top: 10px;
+}
+.accordion__button:before {
+    content: '';
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url("../photo/down.png");
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    position: relative;
+    top:2px;
+}
+.accordion__button.active:before{
+    background-image: url("../photo/up.png");
+}
+.accordion__button.active {
+     border-bottom: 1px solid #e3e3e3;
+}
+
+.accordion__button.active div {
+    background-image: url("../photo/up.png");
+}
+.main-content ul, .main-content ol{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    padding-left: 19px;
+    font-family:"Open Sans";
+}
+.main-content ol{
+    padding-left: 35px;
+}
+.accordion__panel>ul, .accordion__panel>ol,.main-content>ul, .main-content>ol{
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    font-family: "Open Sans Semibold";
+}
+.main-content ul>li {
+    list-style: circle outside;
+    display: list-item;
+}
+.main-content ol {
+    counter-reset: nested-list 0;
+}
+
+.main-content ol > li {
+    position: relative;
+    counter-increment: nested-list;
+}
+
+.main-content ol > li:before {
+    position: absolute;
+    left: -40px;
+    width: 32px;
+    content: counters(nested-list, '.') '.';
+    text-align: right;
+}
+.attention{
+    color: '#D90D25';
+    font-style: 'IntroRegular';
+}
