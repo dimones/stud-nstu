@@ -54,6 +54,7 @@ class StudNSTU:
                             # sidebar=sidebar()
                             posts=("""<div>dfs</div>"""))).render()
 
+
         @app.route('/news')
         def news():
             return render_template("news.html")
