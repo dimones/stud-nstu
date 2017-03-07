@@ -1,0 +1,41 @@
+.form-group{
+	
+}
+.sidebar-menu{
+    margin-top: 15px;
+    margin-bottom: 18px;
+}
+.sidebar-menu__item {
+    padding: 7px 0 7px 0;
+}
+.sidebar-menu__link {
+    color: #474747;
+    font-size: 17px;
+    font-family: IntroLight;
+    line-height: 18px;
+}
+.sidebar-menu__link:visited{
+    color: #474747;
+}
+.sidebar-menu__link:hover {
+    color: #e50b38;
+    text-decoration: none;
+}
+
+.sidebar-menu__item_share::before{
+    background-image: url('../img/menu_arrow.png');
+    height: 4px;
+    width: 7px;
+    content: '';
+    float: right;
+    margin: 7px 0 7px 7px;
+}
+.sidebar-menu__second-level{
+    margin-left: 15px;
+}
+.sidebar-menu__second-level .sidebar-menu__item{
+    padding: 9px 0 0;
+}
+.sidebar-menu__second-level .sidebar-menu__link{
+    font-size:13px;
+}

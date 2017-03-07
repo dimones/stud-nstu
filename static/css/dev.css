@@ -1,0 +1,31 @@
+.dev{
+	width: 300px;
+	text-align: center;
+	font-family: IntroRegular;
+	margin: 40px auto;
+	padding: 20px;
+}
+.dev__img{
+	width: 100%;
+}
+.dev__title{
+	font-size: 18px;
+	color: #757575;
+	margin: 55px 0;
+}
+.dev__back{
+	border: 1px solid #E2E2E2;
+	border-radius: 20px;
+	height: 40px;
+	width: 150px;
+	color: #A2A2A2;
+	font-size: 14px;
+	display: block;
+	margin: 0 auto;
+	padding: 10px;
+}
+.dev__back:hover{
+	text-decoration: none;
+	background-color: #009846;
+	color: #fff;
+}

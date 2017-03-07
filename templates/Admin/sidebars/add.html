@@ -7,35 +7,50 @@
   <div class="widget-body">
     <form class="form-horizontal" role="form">
       <div class="form-group">
-        <label class="col-lg-2 control-label">Name</label>
+        <label class="col-lg-2 control-label" for="new-item__name">Название раздела:</label>
         <div class="col-lg-10">
-          <input type="Text" class="form-control" placeholder="Name">
+          <input type="Text" class="form-control" placeholder="Новый пункт" id="new-item__name">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Email</label>
+        <label class="col-lg-2 control-label" for="new-item__link">Ссылка на раздел:</label>
         <div class="col-lg-10">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="Text" class="form-control" placeholder="/" id="new-item__link">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Password</label>
+        <label class="col-lg-2 control-label">Родительский раздел:</label>
         <div class="col-lg-10">
-          <input type="password" class="form-control" placeholder="Password">
+          <select class="form-control" id="site">
+			<option value="0">Нет родительского раздела</option>
+			<option value="1">Олимпиады</option>
+			<option value="2">Конференции</option>
+		  </select>
         </div>
       </div>
         <div class="form-group">
-            <label for="birthDate" class="col-sm-2 control-label">Раздел</label>
+            <label for="birthDate" class="col-sm-2 control-label" for="new-item__number">Порядковый номер</label>
             <div class="col-sm-10">
                 <div class="btn-group">
-                    <select class="form-control" id="site">
-                        <option value="=1">-</option>
-                    {% for item in list %}
-                        <option value="6"> </option>
-                    {% endfor %}
+                    <select class="form-control" id="new-item__number">
+                    	<option value="6">6</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
                     </select>
                 </div>
             </div>
+        </div>
+        <div class="row">
+        <div class="sidebar-menu-preview col-sm-10 col-sm-offset-2">
+        	<ul class="sidebar-menu">
+			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Общая информация</a></li>
+			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Новости</a></li>
+			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Олимпиады</a></li>
+			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Конкурсы</a></li>
+			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Другие мероприятия</a></li>
+			  <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
+		  </ul>
+        </div>
         </div>
         <div class="form-group">
           <div class="col-lg-offset-2 col-lg-10">
@@ -45,5 +60,33 @@
     </form>
   </div>
 </div>
-
+<script>
+	(function(){
+		var $newItem__link = $('#new-item__link'),
+			$newItem__name = $('#new-item__name'),
+			$newItem__number = $('#new-item__number');
+		var newItem = new function(){
+			this.body = $('#new-item');
+			this.link = $('#new-item a');
+			this.parent = this.body.parent();
+		};
+		console.log(newItem.body);
+		
+		$newItem__name.change(function(){
+			newItem.link.text($newItem__name.val());
+		});
+		$newItem__link.change(function(){
+			newItem.link.attr('href', $newItem__link.val());
+		});
+		$newItem__number.change(function(e){
+			newItem.body.detach();
+			var n = +e.target.value - 1;
+			if(n === newItem.parent.children().length)
+				newItem.body.appendTo(newItem.parent);
+			else
+				newItem.body.insertBefore($(newItem.parent.children()[n]));
+		});
+	})();
+	
+</script>
 
