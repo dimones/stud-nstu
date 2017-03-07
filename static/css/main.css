@@ -169,6 +169,9 @@ header nav{
     text-transform: uppercase;
     margin: 65px 0 30px;
 }
+.promo__head-title a:hover{
+    text-decoration: none;
+}
 .promo__subtitle{
     font-size: 14px;
     text-transform: uppercase;
