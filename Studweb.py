@@ -78,6 +78,9 @@ class StudNSTU:
         @app.route('/conferences')
         def conferences():
             return render_template("conferences.html")
+        @app.route('/dev')
+        def dev():
+            return render_template("dev.html")
 
     def run(self):
         self.app.run(debug=True)
