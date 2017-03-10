@@ -19,12 +19,15 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Родительский раздел:</label>
+        <label class="col-lg-2 control-label" for="new-item__parent">Родительский раздел:</label>
         <div class="col-lg-10">
-          <select class="form-control" id="site">
+          <select class="form-control" id="new-item__parent">
 			<option value="0">Нет родительского раздела</option>
-			<option value="1">Олимпиады</option>
-			<option value="2">Конференции</option>
+			<option value="1">Общая информация</option>
+			<option value="2">Новости</option>
+			<option value="3">Олимпиады</option>
+			<option value="4">Конкурсы</option>
+			<option value="5">Другие мероприятия</option>
 		  </select>
         </div>
       </div>
@@ -36,6 +39,9 @@
                     	<option value="6">6</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
+                   		<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +52,13 @@
 			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Общая информация</a></li>
 			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Новости</a></li>
 			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Олимпиады</a></li>
-			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Конкурсы</a></li>
+			  <li class="sidebar-menu__item sidebar-menu__item_share">
+			  	<a href="#" class="sidebar-menu__link">Конкурсы</a>
+				  <ul class="sidebar-menu__second-level">
+					  <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">Интернет-предпринимательство</a></li>
+					  <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">Управление иновациями</a></li>
+				  </ul>
+			  </li>
 			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Другие мероприятия</a></li>
 			  <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
 		  </ul>
@@ -64,13 +76,14 @@
 	(function(){
 		var $newItem__link = $('#new-item__link'),
 			$newItem__name = $('#new-item__name'),
-			$newItem__number = $('#new-item__number');
+			$newItem__number = $('#new-item__number'),
+			$newItem__parent = $('#new-item__parent');
 		var newItem = new function(){
 			this.body = $('#new-item');
 			this.link = $('#new-item a');
 			this.parent = this.body.parent();
 		};
-		console.log(newItem.body);
+		var second_level = null;
 		
 		$newItem__name.change(function(){
 			newItem.link.text($newItem__name.val());
@@ -86,6 +99,42 @@
 			else
 				newItem.body.insertBefore($(newItem.parent.children()[n]));
 		});
+		$newItem__parent.change(function(){
+			var n = +$newItem__parent.val();
+			newItem.body.detach();
+			if(n === 0){
+				oldList($('.sidebar-menu'));
+				second_level = null;
+			} else {
+				n--;
+				if( second_level !== null){
+					second_level = $($('.sidebar-menu').children()[n]);
+				} else {
+					second_level = $(newItem.parent.children()[n]);
+				}
+				
+				if(!second_level.hasClass('sidebar-menu__item_share')){
+					second_level.addClass('sidebar-menu__item_share');
+					second_level.append('<ul class="sidebar-menu__second-level"></ul>');
+					newItem.parent = second_level.children('.sidebar-menu__second-level');
+					newItem.parent.append(newItem.body);
+					$newItem__number.empty();
+					$newItem__number.append('<option value="1">1</option>');
+				} else {
+					oldList(second_level.children('.sidebar-menu__second-level'));
+				}
+			}
+		});
+		
+		function oldList(parentList){
+			newItem.parent = parentList;
+			newItem.parent.append(newItem.body);
+			$newItem__number.empty();
+			for(var i = 1; i <= newItem.parent.children('li').length; i++){
+				$newItem__number.append('<option value="'+ i +'">' + i + '</option>');
+			}
+			$newItem__number.val(newItem.parent.children('li').length);
+		}
 	})();
 	
 </script>
