@@ -11,8 +11,8 @@ def pages_get():
 @api.route('/api/admin/pages/add',methods=['POST'])
 def pages_add():
     try:
-        DB().changeInDB("""INSERT INTO "PAGES"(page_content,author_id,type,date) VALUES('%s',%s,'%s',TO_DATE('%s','DD.MM.YYYY'))""" %
-                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date']),needCommit=True)
+        DB().changeInDB("""INSERT INTO "PAGES"(page_content,author_id,type,date,date_begin) VALUES('%s',%s,'%s',TO_DATE('%s','DD.MM.YYYY'),TO_DATE('%s','DD.MM.YYYY'))""" %
+                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['date_begin']),needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
         print(e)
@@ -21,8 +21,8 @@ def pages_add():
 @api.route('/api/admin/pages/change',methods=['POST'])
 def pages_change():
     try:
-        DB().changeInDB("""UPDATE "PAGES" SET page_content = '%s', author_id = %s, type = '%s',date = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
-                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['id']),
+        DB().changeInDB("""UPDATE "PAGES" SET page_content = '%s', author_id = %s, type = '%s',date = TO_DATE('%s','DD.MM.YYYY'), date_begin = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
+                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['date_begin'],request.form['id']),
                         needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
