@@ -26,13 +26,13 @@ def forms_add():
 def forms():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/AddNews.html"))
+                           page=render_template("Admin/AddNews.html"),)
 
 @api.route('/admin/news/list')
 # @need_admin
 def lists():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
+                           sidebar=render_template("Admin/sidebar.html",news_list="activ"),
                            page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
 
 @api.route('/admin/users/profile')
@@ -59,8 +59,8 @@ def sidebar_menus_list():
 @api.route('/admin/sidebar_menus/add')
 # @need_admin
 def sidebar_menus_add():
-    items=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id=0", needDict=True)
-    sub_items = DB().selectFromDB("SELECT dropdown_id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id!=0", needDict=True)
+    items=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id=0 ORDER BY sidebar_menus.order", needDict=True)
+    sub_items = DB().selectFromDB("SELECT dropdown_id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id!=0 ORDER BY sidebar_menus.order", needDict=True)
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/sidebars/add.html", list=items,

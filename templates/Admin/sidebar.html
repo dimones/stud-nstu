@@ -1,29 +1,27 @@
 <div class="sidebar">
     <ul class="slick-menu">
-        <li class="active">
-            <a href="/admin/news/list">
+        <li class="drop-menu {{ news }}">
+            <a href="">
                 <div class="current-page"></div>
                 <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
-                <strong>Список Новостей</strong>
+                <small>2</small>
+                <strong>Новости</strong>
             </a>
+            <ul>
+                <li><a href="/admin/news/list"><span class="fs1" aria-hidden="true" data-icon="&#xe02d;"></span>Список</a></li>
+                <li><a href="/admin/news/add"><span class="fs1" aria-hidden="true" data-icon="&#xe02d;"></span>Добавить</a></li>
+            </ul>
         </li>
-        <li>
-            <a href="/admin/news/add">
-              <span class="fs1" aria-hidden="true" data-icon="&#xe00d;"></span>
-              <strong>Добавить Новость</strong>
+        <li class="drop-menu {{ pages }}">
+            <a href="">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
+                <small>2</small>
+                <strong>Материалы</strong>
             </a>
-        </li>
-        <li>
-            <a href="/admin/pages/add">
-              <span class="fs1" aria-hidden="true" data-icon="&#xe088;"></span>
-              <strong>Добавить материал</strong>
-            </a>
-        </li>
-        <li>
-            <a href="login.html">
-              <span class="fs1" aria-hidden="true" data-icon="&#xe088;"></span>
-              <strong>Список материалов</strong>
-            </a>
+            <ul>
+                <li><a href="/admin/pages/list"><span class="fs1" aria-hidden="true" data-icon="&#xe02d;"></span>Список</a></li>
+                <li><a href="/admin/pages/add"><span class="fs1" aria-hidden="true" data-icon="&#xe0c9;"></span>Добавить</a></li>
+            </ul>
         </li>
         <li>
             <a href="login.html">
