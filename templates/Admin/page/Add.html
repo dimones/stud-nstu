@@ -17,18 +17,41 @@
         <div class="widget">
             <div class="widget-header">
                 <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Новость
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Материал
                 </div>
             </div>
             <div class="widget-body">
-               <div class="main-content">
-                  <form method="post">
-                      <textarea class="wysiwyg"></textarea>
-                      <input name="image" type="file" id="upload" style="display:none" onchange="">
-                  </form>
-              </div>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="new-item__link">Заголовок</label>
+                        <div class="col-lg-10">
+                          <input type="Text" class="form-control" placeholder="заголовок" id="new-item__link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="new-item__parent">Выберите категорию</label>
+                        <div class="col-lg-10">
+                          <select class="form-control" id="new-item__parent">
+                            <option value="1">Общая информация</option>
+                            <option value="2">Новости</option>
+                            <option value="3">Олимпиады</option>
+                            <option value="4">Конкурсы</option>
+                            <option value="5">Другие мероприятия</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <form method="post">
+                          <textarea class="wysiwyg"></textarea>
+                          <input name="image" type="file" id="upload" style="display:none" onchange="">
+                      </form>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
+
     </div>
 </div>
 <script>

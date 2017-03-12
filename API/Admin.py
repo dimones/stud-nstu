@@ -59,9 +59,13 @@ def sidebar_menus_list():
 @api.route('/admin/sidebar_menus/add')
 # @need_admin
 def sidebar_menus_add():
+    items=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id=0", needDict=True)
+    sub_items = DB().selectFromDB("SELECT dropdown_id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id!=0", needDict=True)
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/sidebars/add.html", list=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE dropdown_id=-1")))
+                           page=render_template("Admin/sidebars/add.html", list=items,
+                                                sub_list=sub_items,
+                                                count=len(items)+2))
 
 @api.route('/admin/pages/add')
 # @need_admin

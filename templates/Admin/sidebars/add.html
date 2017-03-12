@@ -22,12 +22,10 @@
         <label class="col-lg-2 control-label" for="new-item__parent">Родительский раздел:</label>
         <div class="col-lg-10">
           <select class="form-control" id="new-item__parent">
-			<option value="0">Нет родительского раздела</option>
-			<option value="1">Общая информация</option>
-			<option value="2">Новости</option>
-			<option value="3">Олимпиады</option>
-			<option value="4">Конкурсы</option>
-			<option value="5">Другие мероприятия</option>
+              <option value="0">Нет родительского раздела</option>
+              {% for item in list %}
+			    <option value="{{ item.id }}">{{ item.name }}</option>
+              {% endfor %}
 		  </select>
         </div>
       </div>
@@ -36,31 +34,28 @@
             <div class="col-sm-10">
                 <div class="btn-group">
                     <select class="form-control" id="new-item__number">
-                    	<option value="6">6</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-                   		<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
+                      {% for item in range(1,count) %}
+                        <option value="{{ item }}">{{ item }}</option>
+                      {% endfor %}
                     </select>
                 </div>
             </div>
         </div>
         <div class="row">
         <div class="sidebar-menu-preview col-sm-10 col-sm-offset-2">
-        	<ul class="sidebar-menu">
-			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Общая информация</a></li>
-			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Новости</a></li>
-			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Олимпиады</a></li>
-			  <li class="sidebar-menu__item sidebar-menu__item_share">
-			  	<a href="#" class="sidebar-menu__link">Конкурсы</a>
-				  <ul class="sidebar-menu__second-level">
-					  <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">Интернет-предпринимательство</a></li>
-					  <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">Управление иновациями</a></li>
-				  </ul>
-			  </li>
-			  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Другие мероприятия</a></li>
-			  <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
+            <ul class="sidebar-menu">
+              <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
+              {% for item in list %}
+                  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">{{ item.name }}</a>
+                    <ul class="sidebar-menu__second-level">
+                        {% for itm in sub_list %}
+                            {% if item.id == itm.dropdown_id %}
+                                <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">{{ itm.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                  </li>
+              {% endfor %}
 		  </ul>
         </div>
         </div>
