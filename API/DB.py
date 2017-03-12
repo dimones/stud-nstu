@@ -1,6 +1,15 @@
-import psycopg2
+import psycopg2,json,datetime
 import psycopg2.extras
 from psycopg2.extras import register_json
+
+class DateEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.date):
+            return obj.strftime("%d.%m.%y")
+        if isinstance(obj, map):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
+
 class DB:
     conn = None
     cursor = None
