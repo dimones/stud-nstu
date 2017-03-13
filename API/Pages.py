@@ -200,9 +200,9 @@ def upload(_site,_id):
 
         if files:
             print(files.filename)
-            # filename = secure_filename(files.filename)
+            filename = secure_filename(files.filename)
             # filename = gen_file_name(filename)
-            filename = files.filename
+            # filename = files.filename
             mime_type = files.content_type
             print(mime_type)
             # if not allowed_file(files.filename):
