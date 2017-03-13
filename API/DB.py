@@ -103,6 +103,7 @@ class DB:
         :param serial_key: name of autoincrement key in table
         :return: int id
         """
+        print(table_name)
         try:
             if serial_key is None:
                 self.cursor.execute("select setval(pg_get_serial_sequence('%s','id')"
@@ -117,7 +118,8 @@ class DB:
 if __name__ == '__main__':
     d = DB()
     d.getCursor()
-    t = d.getNextIDFromTable('test_table')
+    t = d.getNextIDFromTable('PAGES')
+    print(t)
     print(isinstance(t,int))
     pass
     # print(d.selectFromDB("SELECT setval(pg_get_serial_sequence('sites','id'),1)"))
