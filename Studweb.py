@@ -37,7 +37,7 @@ class StudNSTU:
 
         @app.route('/')
         def hello_world1():
-            return render_template('science.html')
+            return render_template('index.html')
 
         @app.route('/science')
         def science():

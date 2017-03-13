@@ -230,9 +230,6 @@ header nav{
 .proposal__link:hover{
     text-decoration: none;
 }
-main{
-    min-height: 90%;
-}
 
 .sidebar{
     width: 250px;
@@ -319,7 +316,6 @@ footer {
     background-color: #e7e7e7;
     width: 100%;
     clear: both;
-    margin-top: 20px;
 }
 footer .adress, footer .info{
     display: inline-block;
