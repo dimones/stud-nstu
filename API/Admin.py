@@ -72,7 +72,7 @@ def sidebar_menus_add():
 def page_add():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/add.html",tem_scr="""<!-- The template to display files available for upload -->
+                           page=render_template("Admin/page/Add.html",tem_scr="""<!-- The template to display files available for upload -->
             <script id="template-upload" type="text/x-tmpl">
             {% for (var i=0, file; file=o.files[i]; i++) { %}
                 <tr class="template-upload fade">
