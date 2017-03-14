@@ -51,6 +51,9 @@ class StudNSTU:
         def news():
             return render_template("news.html")
 
+        @app.route('/wysiwyg')
+        def wysiwyg():
+            return render_template("wysiwyg.html")
         @app.route('/news/<int:news>')
         def piece_of_news(news):
             return render_template("onir_tmp.html", page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0]))
