@@ -23,15 +23,16 @@ def sidebar_menu_get_dict(site_id):
                 sub_nav.append(sub_item)
 
         item["submenu"] = sub_nav
-    print(main_items)
     return main_items
 
 @api.route('/api/admin/sites/sidebars/menu/add',methods=["POST"])
 def sidebar_menu_add():
     try:
-        DB().changeInDB("""INSERT INTO "sidebar_menus"(name,site_id,page_id,order,dropdown_id) VALUES('%s',%s,%s,%s,%s)"""
-                        % (request.form['name'], request.form['site_id'], request.form['page_id'],
+        print (request.form)
+        DB().changeInDB("""INSERT INTO "sidebar_menus" (name, site_id, item_order, dropdown_id) VALUES('%s',%s,%s,%s)"""
+                        % (request.form['name'], request.form['site_id'],
                            request.form['order'],request.form['dropdown_id']),needCommit=True)
+        print("succeed")
         return json.dumps({'succeed': True})
     except Exception as e:
         print(e)
@@ -58,3 +59,6 @@ def sidebar_menu_remove():
         print(e)
         return json.dumps({'succeed': False})
 
+@api.route('/api/admin/sites/sidebars/menu/recount',methods=["POST"])
+def sidebar_menu_recount():
+    pass

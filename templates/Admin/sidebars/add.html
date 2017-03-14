@@ -62,7 +62,7 @@
         </div>
         <div class="form-group">
           <div class="col-lg-offset-2 col-lg-10">
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="button" class="btn btn-success">Добавить</button>
         </div>
       </div>
     </form>
@@ -132,6 +132,20 @@
 			$newItem__number.val(newItem.parent.children('li').length);
 		}
 	})();
-	
+	$(".btn-success").click(function (e) {
+	     $.post('/api/admin/sites/sidebars/menu/add',{'name': $("#new-item__name").val(),
+                                                     'site_id':1,
+                                                     'order':$("#new-item__number").val(),
+                                                     'dropdown_id':$("#new-item__parent").val()
+
+        }).done(function (data) {
+            var ret = JSON.parse(data);
+            $(e.toElement).parents(".panel-info").remove();
+            toastr.success("Запись успешно добавлена");
+
+        }).fail(function(data) {
+          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
+      });
+    })
 </script>
 

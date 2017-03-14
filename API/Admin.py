@@ -27,14 +27,14 @@ def forms_add():
 def forms():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/AddNews.html"),)
+                           page=render_template("Admin/news/add.html"), )
 
 @api.route('/admin/news/list')
 # @need_admin
 def lists():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html",news_list="activ"),
-                           page=render_template("Admin/Lists.html", lists=json.loads(admin_news_get())))
+                           page=render_template("Admin/news/lists.html", lists=json.loads(admin_news_get())))
 
 @api.route('/admin/users/profile')
 # @need_admin
@@ -55,7 +55,7 @@ def users_list():
 def sidebar_menus_list():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/sidebars/list.html"))
+                           page=render_template("Admin/sidebars/list.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """)))
 
 @api.route('/admin/sidebar_menus/add')
 # @need_admin

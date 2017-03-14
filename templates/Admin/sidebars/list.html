@@ -1,12 +1,12 @@
 <div class="page-title clearfix">
     <h2>
-        Список новостей
+        Категории подраздела
         <small>
             <ul><li>Администратор</li>
                 <li>/</li>
                 <li>ОНИР</li>
                 <li>/</li>
-                <li>Пользователи</li>
+                <li>Навигация по разделу</li>
               </ul>
             </small>
     </h2>
@@ -20,80 +20,51 @@
         </li>
     </ul>
 </div>
-
 <div class="widget-body">
     <div id="dt_example" class="example_alt_pagination">
     <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
-    <thead>
-      <tr>
-        <th style="width:25%">Имя</th>
-        <th style="width:35%">Фамилия</th>
-        <th style="width:15%" class="hidden-phone">Логин</th>
-        <th style="width:15%" class="hidden-phone">Доступ</th>
-        <th style="width:10%" class="hidden-phone">Действия</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="gradeX">
-        <td>John</td>
-        <td>Tacoma, WA(Washington)</td>
-        <td class="hidden-phone">0099009900</td>
-        <td class="hidden-phone">$22590</td>
-        <td class="hidden-phone">
-          <a href="#" class="actions-icons">
-            <img src="img/edit-icon.png" alt="edit" class="icons">
-          </a>
-          <a href="#" class="delete-row" data-original-title="Delete">
-            <img src="img/trash-icon.png" alt="trash">
-          </a>
-        </td>
-      </tr>
-      <tr class="gradeA">
-        <td>Ruchita</td>
-        <td>Fresno, CA 93711-1005</td>
-        <td class="hidden-phone">0006008800</td>
-        <td class="hidden-phone">$98450</td>
-        <td class="hidden-phone">
-          <a href="#" class="actions-icons">
-            <img src="img/edit-icon.png" alt="edit" class="icons">
-          </a>
-          <a href="#" class="delete-row" data-original-title="Delete">
-            <img src="img/trash-icon.png" alt="trash">
-          </a>
-        </td>
-      </tr>
-      <tr class="gradeU">
-        <td>Barote babu</td>
-        <td>Baripoda, 35-Africa</td>
-        <td class="hidden-phone">2059990099</td>
-        <td class="hidden-phone">$99876</td>
-        <td class="hidden-phone">
-          <a href="#" class="actions-icons">
-            <img src="img/edit-icon.png" alt="edit" class="icons">
-          </a>
-          <a href="#" class="delete-row" data-original-title="Delete">
-            <img src="img/trash-icon.png" alt="trash">
-          </a>
-        </td>
-      </tr>
-    </tbody>
+        <thead>
+          <tr>
+            <th style="width:25%">id</th>
+            <th style="width:35%">Название</th>
+            <th style="width:15%" class="hidden-phone">Раздел</th>
+            <th style="width:10%" class="hidden-phone">Подраздел</th>
+            <th style="width:10%" class="hidden-phone">Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+{% for item in list %}
+          <tr class="gradeA">
+            <td> {{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td class="hidden-phone">ОНИРС</td>
+            <td class="hidden-phone">{% if item.dropdown_id != 0 %}+{% else %} -{% endif %}</td>
+            <td class="hidden-phone">
+              <a href="#" class="actions-icons"  data-original-title="Править">
+                <img src="../../static/Admin/img/edit-icon.png" alt="edit" class="icons">
+              </a>
+              <a href="#" class="delete-row" data-original-title="Удалить">
+                <img src="../../static/Admin/img/trash-icon.png" alt="trash">
+              </a>
+            </td>
+          </tr>
+{% endfor %}
+        </tbody>
     </table>
-    <div class="clearfix"></div>
-    </div>
     </div>
 </div>
 
-
 <script>
-    $(".btn-default").click(function(e){
+    $(".btn-primary").click(function(e){
                 $.post('/api/admin/news/remove',{
             'id':$(e.toElement).parents(".panel-info").attr('id')
         }).done(function (data) {
             var ret = JSON.parse(data);
-                    $(e.toElement).parents(".panel-info").remove();
-        }).fail(function(data) {
-          console.log(data);
-      });
+            $(e.toElement).parents(".panel-info").remove();
+            toastr.success("Запись успешно удалена");
 
+        }).fail(function(data) {
+          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
+      });
     });
 </script>
