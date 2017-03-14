@@ -1,5 +1,7 @@
 <div class="full-news">
+    {% if item.image_name =="None" %}
   <img class="full-news__img" src="../static/img/news/{{ item.image_name }}">
+    {% endif %}
   <div class="full-news__title clearfix">
       <div class="full-news__title-text">{{ item.title }}</div>
       <div class="full-news__title-data">Опубликовано {{ item.date }}</div>

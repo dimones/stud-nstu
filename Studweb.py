@@ -14,27 +14,32 @@ class StudNSTU:
 
         @app.route('/')
         def hello_world1():
-            return render_template('index.html')
+            return render_template('layout.html', header=render_template("header.html"), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
 
         @app.route('/science')
         def science():
-            return render_template('science.html')
+            return render_template('layout.html', header=render_template("header.html"),
+                        content=render_template("science.html"), footer=render_template("footer.html"))
 
         @app.route('/culture')
         def culture():
-            return render_template("culture.html")
+            return render_template('layout.html', header=render_template("header.html"),
+                               content=render_template("culture.html"), footer=render_template("footer.html"))
 
         @app.route('/schedule')
         def schedule():
-            return render_template("schedule.html")
+            return render_template('layout.html', header=render_template("header.html"),
+                               content=render_template("schedule.html"), footer=render_template("footer.html"))
 
         @app.route('/map')
         def map():
-            return render_template("map.html")
+            return render_template('layout.html', header=render_template("header.html"),
+                                       content=render_template("map.html"), footer=render_template("footer.html"))
 
         @app.route('/om')
         def om():
-            return render_template("om.html")
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("om.html"), footer=render_template("footer.html"))
 
         @app.route('/test')
         def test():
@@ -45,18 +50,23 @@ class StudNSTU:
 
         @app.route('/dev')
         def dev():
-            return render_template("dev.html")
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("dev.html"), footer=render_template("footer.html"))
 
         @app.route('/news')
         def news():
             return render_template("news.html")
 
-        @app.route('/wysiwyg')
-        def wysiwyg():
-            return render_template("wysiwyg.html")
+        @app.route('/onirs')
+        def onirs():
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("onir_tmp.html", page=render_template("news_list.html", list=json.loads(admin_news_get()))), footer=render_template("footer.html"))
         @app.route('/news/<int:news>')
         def piece_of_news(news):
-            return render_template("onir_tmp.html", page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0]))
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("onir_tmp.html",
+                                                           page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0])),
+                                   footer=render_template("footer.html"))
 
 
     def run(self):
