@@ -10,6 +10,22 @@ def sidebar_menu_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = %s """
                                         % request.args.get('site_id')))
 
+
+def sidebar_menu_get_dict(site_id):
+    main_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id=0 AND site_id = %s """
+                                        % site_id)
+    sub_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id!=0 AND site_id = %s """
+                                        % site_id)
+    for item in main_items:
+        sub_nav=[]
+        for sub_item in sub_items:
+            if item["id"] == sub_item["dropdown_id"]:
+                sub_nav.append(sub_item)
+
+        item["submenu"] = sub_nav
+    print(main_items)
+    return main_items
+
 @api.route('/api/admin/sites/sidebars/menu/add',methods=["POST"])
 def sidebar_menu_add():
     try:
@@ -41,3 +57,4 @@ def sidebar_menu_remove():
     except Exception as e:
         print(e)
         return json.dumps({'succeed': False})
+

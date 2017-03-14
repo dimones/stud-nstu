@@ -45,17 +45,18 @@
         <div class="sidebar-menu-preview col-sm-10 col-sm-offset-2">
             <ul class="sidebar-menu">
               <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
-              {% for item in list %}
-                  <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">{{ item.name }}</a>
-                    <ul class="sidebar-menu__second-level">
-                        {% for itm in sub_list %}
-                            {% if item.id == itm.dropdown_id %}
-                                <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">{{ itm.name }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                  </li>
-              {% endfor %}
+                {% for item in list %}
+                    <li class="sidebar-menu__item {%   if item.submenu | length > 0%} sidebar-menu__item_share {% endif %}"><a href="#" class="sidebar-menu__link">{{ item.name }}</a>
+
+                        {%   if item.submenu | length > 0 %}
+                            <ul class="sidebar-menu__second-level">
+                            {% for sub in item.submenu %}
+                                <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">{{ sub.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
 		  </ul>
         </div>
         </div>

@@ -3,6 +3,7 @@ from . import api
 from .Auther import *
 from .News import *
 from .Users import *
+from .Sidebars import *
 from Utils import *
 @api.route('/admin')
 def login():
@@ -40,7 +41,7 @@ def lists():
 def Profile():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/Profile.html"))
+                           page=render_template("Admin/profile.html"))
 
 @api.route('/admin/users/list')
 # @need_admin
@@ -59,12 +60,11 @@ def sidebar_menus_list():
 @api.route('/admin/sidebar_menus/add')
 # @need_admin
 def sidebar_menus_add():
-    items=DB().selectFromDB("SELECT id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id=0 ORDER BY sidebar_menus.order", needDict=True)
-    sub_items = DB().selectFromDB("SELECT dropdown_id, name  FROM sidebar_menus WHERE site_id=1 AND dropdown_id!=0 ORDER BY sidebar_menus.order", needDict=True)
+    items = sidebar_menu_get_dict(1)
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/sidebars/add.html", list=items,
-                                                sub_list=sub_items,
+                           page=render_template("Admin/sidebars/add.html",
+                                                list=items,
                                                 count=len(items)+2))
 
 @api.route('/admin/pages/add')
@@ -72,7 +72,7 @@ def sidebar_menus_add():
 def page_add():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/Add.html",tem_scr="""<!-- The template to display files available for upload -->
+                           page=render_template("Admin/page/add.html", tem_scr="""<!-- The template to display files available for upload -->
             <script id="template-upload" type="text/x-tmpl">
             {% for (var i=0, file; file=o.files[i]; i++) { %}
                 <tr class="template-upload fade">
