@@ -41,6 +41,11 @@ class StudNSTU:
             return render_template('layout.html', header=render_template("header.html"),
                                    content=render_template("om.html"), footer=render_template("footer.html"))
 
+        @app.route('/3d-nstu')
+        def _3dnstu():
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("panoramas.html"), footer=render_template("footer.html"))
+
         @app.route('/test')
         def test():
             return Page(promo=promo(adress="promo_garage.html"),
