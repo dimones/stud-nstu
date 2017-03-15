@@ -1,0 +1,13 @@
+{% for page in pages %}
+<h2>{{ page.title }}</h2>
+{{ page.page_content |safe }}
+
+{#<div class="docs">#}
+{#    {% for file in files %}#}
+{#  <a href="" class="docs__item">#}
+{#      <img src="../static/photo/file.png" alt="" class="docs__img">#}
+{#      <span class="dics__name">Участники (от 29.02.2016)</span>#}
+{#      <span class="docs__info">(word, 39кб)</span>#}
+{#  </a>#}
+{#</div>#}
+{% endfor %}

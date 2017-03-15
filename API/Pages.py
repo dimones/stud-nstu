@@ -8,11 +8,22 @@ from werkzeug.utils import secure_filename
 def pages_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "pages" """,needDict=True),ensure_ascii=False,cls=DateEncoder)
 
+# @api.route('/api/admin/pages/add',methods=['POST'])
+# def pages_add():
+#     try:
+#         DB().changeInDB("""INSERT INTO "pages"(page_content,author_id,type,date,date_begin) VALUES('%s',%s,'%s',TO_DATE('%s','DD.MM.YYYY'),TO_DATE('%s','DD.MM.YYYY'))""" %
+#                         (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['date_begin']),needCommit=True)
+#         return json.dumps({'succeed': True})
+#     except Exception as e:
+#         print(e)
+#         return json.dumps({'succeed': False})
+
 @api.route('/api/admin/pages/add',methods=['POST'])
 def pages_add():
     try:
-        DB().changeInDB("""INSERT INTO "pages"(page_content,author_id,type,date,date_begin) VALUES('%s',%s,'%s',TO_DATE('%s','DD.MM.YYYY'),TO_DATE('%s','DD.MM.YYYY'))""" %
-                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['date_begin']),needCommit=True)
+        print(request.form)
+        DB().changeInDB("""INSERT INTO "pages"(page_content,title, sidebar_id) VALUES('%s','%s', %s)""" %
+                        (request.form['page_content'],request.form['title'],request.form['sitebar_id']),needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
         print(e)

@@ -29,30 +29,61 @@
                 </div>
             </div>
             <div class="widget-body">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" method="post">
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="new-item__link">Заголовок</label>
-                        <div class="col-lg-10">
-                          <input type="Text" class="form-control" placeholder="заголовок" id="new-item__link">
-                        </div>
+                        <label class="col-lg-3 control-label" for="new-item__title">Заголовок</label>
+                        <div class="col-lg-9">
+                          <input type="Text" class="form-control" placeholder="Заголовок" id="new-item__title">
+                            </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="new-item__parent">Выберите категорию</label>
-                        <div class="col-lg-10">
+                        <label class="col-lg-3 control-label" for="new-item__parent">Выберите категорию</label>
+                        <div class="col-lg-9">
                           <select class="form-control" id="new-item__parent">
-                            <option value="1">Общая информация</option>
-                            <option value="2">Новости</option>
-                            <option value="3">Олимпиады</option>
-                            <option value="4">Конкурсы</option>
-                            <option value="5">Другие мероприятия</option>
+                            {% for item in list %}
+			                    <option value="{{ item.id }}">{{ item.name }}</option>
+                            {% endfor %}
                           </select>
                         </div>
                     </div>
                     <div class="form-group">
-                      <form method="post" class="form-horizontal">
-                          <textarea class="wysiwyg"></textarea>
-                          <input name="image" type="file" id="upload" style="display:none" onchange="">
-                      </form>
+                        <label class="col-lg-3 control-label" for="enableSocialPosts">Установить событие</label>
+                        <div class="col-lg-9">
+                            <div class="onoffswitch">
+                              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="enableSocialPosts" checked>
+                              <label class="onoffswitch-label" for="enableSocialPosts">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                              </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >Дата события</label>
+                        <div class="col-lg-9">
+                            <div class="datepicker-here" data-timepicker="true"></div>
+                        </div>
+                        <script>
+
+                            $('.datepicker-here').datepicker({
+                                    onSelect: function(date) {
+                                            console.log(date);
+
+                                }
+                            });
+                            var datepicker = $('#my-elem').datepicker().data('datepicker');
+                            console.log(datepicker.selectDate());
+                        </script>
+                    </div>
+                    <div class="form-group"><div class="col-lg-12">
+                            <textarea class="wysiwyg" id="content"></textarea>
+                            <input name="image" type="file" id="upload" style="display:none" onchange="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-lg-offset-10">
+                            <button name="button" type="button" id="add" class="btn btn-success" onchange="">Добавить</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -108,18 +139,35 @@
             </div>
         </div>
     </div>
-        <!-- The blueimp Gallery widget -->
-        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-            <div class="slides"></div>
-            <h3 class="title"></h3>
-            <a class="prev">‹</a>
-            <a class="next">›</a>
-            <a class="close">×</a>
-            <a class="play-pause"></a>
-            <ol class="indicator"></ol>
-        </div>
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
     </div>
 </div>
+<script>
+    $("#add").click(function (e) {
+	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
+                                                     'title':$("#new-item__title").val(),
+                                              'sitebar_id': $("#new-item__parent").val(),
+
+        }).done(function (data) {
+            var ret = JSON.parse(data);
+            $(e.toElement).parents(".panel-info").remove();
+            toastr.success("Запись успешно добавлена");
+
+        }).fail(function(data) {
+          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
+      });
+    })
+</script>
+
+
 {% raw %}
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
@@ -153,6 +201,7 @@
     </tr>
 {% } %}
 </script>
+
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -201,8 +250,8 @@
 {% block scripts %}
 
 <script src="/static/js/jquery-3.1.1.min.js"></script>
-    <script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
+<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

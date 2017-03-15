@@ -60,12 +60,29 @@ class StudNSTU:
         @app.route('/onirs')
         def onirs():
             return render_template('layout.html', header=render_template("header.html"),
-                                   content=render_template("onir_tmp.html", page=render_template("news_list.html", list=json.loads(admin_news_get()))), footer=render_template("footer.html"))
+                                   content=render_template("onir_tmp.html",
+                                                           sidebar=sidebar_menu_get_dict(1),
+                                                           page=render_template("news_list.html",
+                                                                                list=json.loads(admin_news_get()))),
+                                   footer=render_template("footer.html"))
+
+        @app.route('/onirs/<int:page>')
+        def onirs_page(page):
+            print(DB().selectFromDB("""SELECT id, title, page_content FROM "pages" WHERE sidebar_id=%s """% page, needDict=True))
+            return render_template('layout.html', header=render_template("header.html"),
+                                   content=render_template("onir_tmp.html",
+                                                           sidebar=sidebar_menu_get_dict(1),
+                                                           page=render_template("conf_template.html",
+                                                                                pages=DB().selectFromDB("""SELECT id, title, page_content FROM "pages" WHERE sidebar_id=%s """% page, needDict=True),
+                                                                                files=pages_files_get(page))),
+                                   footer=render_template("footer.html"))
         @app.route('/news/<int:news>')
         def piece_of_news(news):
             return render_template('layout.html', header=render_template("header.html"),
                                    content=render_template("onir_tmp.html",
-                                                           page=render_template("news.html", item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0])),
+                                                           sidebar=sidebar_menu_get_dict(1),
+                                                           page=render_template("news.html",
+                                                                                item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0])),
                                    footer=render_template("footer.html"))
 
 

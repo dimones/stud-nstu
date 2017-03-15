@@ -40,11 +40,17 @@
           <div class="wrapper">
               <div class="sidebar">
                   <ul class="sidebar-menu">
-                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Общая информация</a></li>
-                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Новости</a></li>
-                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Олимпиады</a></li>
-                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Конкурсы</a></li>
-                      <li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">Другие мероприятия</a></li>
+                      {% for item in sidebar %}
+                        <li class="sidebar-menu__item {%   if item.submenu | length > 0%} sidebar-menu__item_share {% endif %}"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ item.name }}</a>
+                        {% if item.submenu | length > 0 %}
+                            <ul class="sidebar-menu__second-level">
+                            {% for sub in item.submenu %}
+                                <li class="sidebar-menu__item"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ sub.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                        </li>
+                      {% endfor %}
                   </ul>
                   <div class="events">
                       <a href="#" class="events__item">

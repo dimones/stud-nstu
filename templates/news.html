@@ -1,5 +1,5 @@
 <div class="full-news">
-    {% if item.image_name =="None" %}
+    {% if item.image_name !=None %}
   <img class="full-news__img" src="../static/img/news/{{ item.image_name }}">
     {% endif %}
   <div class="full-news__title clearfix">

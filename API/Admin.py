@@ -72,7 +72,7 @@ def sidebar_menus_add():
 def page_add():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/add.html"))
+                           page=render_template("Admin/page/add.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """)))
 
 
 # tem_scr="""<!-- The template to display files available for upload -->
