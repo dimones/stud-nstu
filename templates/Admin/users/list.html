@@ -26,6 +26,7 @@
         <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
             <thead>
                 <tr>
+                    <th style="width:25%">id</th>
                     <th style="width:25%">Имя</th>
                     <th style="width:35%">Фамилия</th>
                     <th style="width:15%" class="hidden-phone">Логин</th>
@@ -33,8 +34,11 @@
                 </tr>
             </thead>
             <tbody>
+                {{ list }}
 {% for item in list %}
+
 <tr class="gradeX">
+    <td>{{ item.id }}</td>
     <td>{{ item.name }}</td>
     <td>{{ item.surname }}</td>
     <td class="hidden-phone">{{ item.username }}</td>

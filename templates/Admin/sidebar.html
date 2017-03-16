@@ -2,7 +2,9 @@
     <ul class="slick-menu">
         <li class="drop-menu {{ news }}">
             <a href="">
-                <div class="current-page"></div>
+                {% if news == "Activ" %}
+                    <div class="current-page"></div>
+                {% endif %}
                 <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
                 <small>2</small>
                 <strong>Новости</strong>
@@ -14,6 +16,9 @@
         </li>
         <li class="drop-menu {{ pages }}">
             <a href="">
+                {% if pages == "Activ" %}
+                    <div class="current-page"></div>
+                {% endif %}
                 <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
                 <small>2</small>
                 <strong>Материалы</strong>
@@ -23,8 +28,11 @@
                 <li><a href="/admin/pages/add"><span class="fs1" aria-hidden="true" data-icon="&#xe0c9;"></span>Добавить</a></li>
             </ul>
         </li>
-         <li class="drop-menu {{ sidebar }}">
+        <li class="drop-menu {{ sidebar }}">
             <a href="">
+                {% if sidebar == "Activ" %}
+                    <div class="current-page"></div>
+                {% endif %}
                 <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
                 <small>2</small>
                 <strong>Категории раздела</strong>
@@ -32,6 +40,20 @@
             <ul>
                 <li><a href="/admin/sidebar_menus/list"><span class="fs1" aria-hidden="true" data-icon="&#xe02d;"></span>Список</a></li>
                 <li><a href="/admin/sidebar_menus/add"><span class="fs1" aria-hidden="true" data-icon="&#xe0c9;"></span>Добавить</a></li>
+            </ul>
+        </li>
+        <li class="drop-menu {{ users }}">
+            <a href="">
+                {% if users == "Activ" %}
+                    <div class="current-page"></div>
+                {% endif %}
+                <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span>
+                <small>2</small>
+                <strong>Пользователи</strong>
+            </a>
+            <ul>
+                <li><a href="/admin/users/list"><span class="fs1" aria-hidden="true" data-icon="&#xe02d;"></span>Список</a></li>
+                <li><a href="/admin/users/add"><span class="fs1" aria-hidden="true" data-icon="&#xe0c9;"></span>Добавить</a></li>
             </ul>
         </li>
         <li>

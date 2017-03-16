@@ -15,6 +15,8 @@ def users_get():
 @api.route('/api/admin/users/add',methods=["POST"])
 def users_add():
     try:
+
+        print(request.form)
         result=DB().changeInDB("""INSERT INTO "ADMIN_USERS"(username,password,role,site_id, name, surname) VALUES('%s','%s',%s,%s,'%s','%s')"""
                         % (request.form['username'], request.form['password'], request.form['role'],
                            request.form['site_id'], request.form['name'], request.form['surname']), needCommit=True)
