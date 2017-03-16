@@ -45,7 +45,7 @@
                         {% if item.submenu | length > 0 %}
                             <ul class="sidebar-menu__second-level">
                             {% for sub in item.submenu %}
-                                <li class="sidebar-menu__item"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ sub.name }}</a></li>
+                                <li class="sidebar-menu__item"><a href="/onirs/{{ sub.id }}" class="sidebar-menu__link">{{ sub.name }}</a></li>
                             {% endfor %}
                             </ul>
                         {% endif %}
