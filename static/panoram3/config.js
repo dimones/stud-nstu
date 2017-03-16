@@ -1,10 +1,11 @@
 var PannellumConfig = {
     default: {
-        firstScene: '7-1-enter',
         author: 'Russian Beavers',
         sceneFadeDuration: 333,
         autoLoad: true,
-        type: 'equirectangular'
+        type: 'equirectangular',
+        keyboardZoom: false,
+        hotSpotDebug: true
     },
 
     scenes: {
@@ -255,7 +256,7 @@ var PannellumConfig = {
                     yaw:   60.70,
                     type: 'scene',
                     text: 'Большой коридор 2го этажа',
-                    sceneId: '7-2-big',
+                    sceneId: '7-2-hall-2',
                     cssClass: 'x-go'
                 },
                 {
@@ -334,17 +335,17 @@ var PannellumConfig = {
                     pitch:  1.63,
                     yaw:  95.73,
                     type: 'scene',
-                    text: 'Холл 1го этажа',
-                    sceneId: '7-1-hall',
+                    text: 'Холл 2го этажа',
+                    sceneId: '7-2-hall',
                     cssClass: 'x-down'
                 }
             ]
         }
         ,
         '7-2-hall-2': {
-            title: 'Малый холл 1го этажа',
-            pitch: -3.35,
-            yaw: -173.86,
+            title: 'Малый холл 2го этажа',
+            pitch: 1.99,
+            yaw: 90.14,
             hotSpots: [
                 {
                     pitch: 1.99,

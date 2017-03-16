@@ -29,7 +29,25 @@ html, body {
 .x-stud{
     width: 57px;
     height: 40px;
+    border-radius: 5px;
     background: transparent url('/static/panoram3/buttons/stud.png');
+}
+
+.hover {
+    background-color: #00b0ff;
+}
+
+.hover:after {
+    content: 'Нажмите X';
+    height: 24px;
+    width: 100px;
+    line-height: 24px;
+    background-color: #00b0ff;
+    border-radius: 5px;
+    position: absolute;
+    top: 42px;
+    left: -35px;
+    text-align: center;
 }
 
 .x-up:hover {
@@ -41,6 +59,10 @@ html, body {
 }
 
 .x-go:hover {
+    background-color: #00b0ff;
+}
+
+.x-stud:hover {
     background-color: #00b0ff;
 }
 
@@ -91,4 +113,13 @@ html, body {
     left: 10px;
     top: 10px;
     position: absolute;
+}
+
+#autorotate {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #00b0ff;
+    border-radius: 5px;
+    padding: 5px;
 }
