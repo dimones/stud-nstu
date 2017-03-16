@@ -65,6 +65,9 @@ header{
     width: 260px;
     padding: 35px 0;
 }
+.logo>a:hover{
+    text-decoration:none;
+}
 .logo h1{
     font-size: 11px;
     width: 135px;
