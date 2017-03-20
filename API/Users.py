@@ -6,6 +6,7 @@ from .DB import *
 
 @api.route('/api/admin/auth', methods=['POST'])
 def admin_auth():
+    print(request.form)
     return AdminAuther(request.form['username'],request.form['password'],request.form['device_id']).auth_user()
 
 @api.route('/api/admin/users/get', methods=["GET"])

@@ -64,11 +64,14 @@
                             <div class="datepicker-here" data-timepicker="true"></div>
                         </div>
                         <script>
-
+                            $('#enableSocialPosts').change(function () {
+                                if ($('#enableSocialPosts').is(":checked")==true)
+                                    $('.datepicker-here').parents('.form-group').show(500)
+                                else
+                                    $('.datepicker-here').parents('.form-group').hide(500);
+                            });
                             $('.datepicker-here').datepicker({
                                     onSelect: function(date) {
-                                            console.log(date);
-
                                 }
                             });
                             var datepicker = $('#my-elem').datepicker().data('datepicker');

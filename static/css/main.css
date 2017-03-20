@@ -68,7 +68,7 @@ header{
     float: left;
     height: 100%;
     width: 260px;
-    padding: 35px 0;
+    padding: 25px 0;
 }
 .logo>a:hover{
     text-decoration:none;
@@ -81,7 +81,7 @@ header{
     line-height: 15px;
 }
 .logo img{
-    height: 53px;
+    height: 75px;
     width: 90px;
     vertical-align: middle;
     margin-right: 25px;
