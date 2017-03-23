@@ -34,7 +34,6 @@
                 </tr>
             </thead>
             <tbody>
-                {{ list }}
 {% for item in list %}
 
 <tr class="gradeX">
@@ -43,13 +42,13 @@
     <td>{{ item.surname }}</td>
     <td class="hidden-phone">{{ item.username }}</td>
     <td class="hidden-phone">
-        <a href="#" class="actions-icons">
-            <img src="img/edit-icon.png" alt="edit" class="icons">
-        </a>
-        <a href="#" class="delete-row" data-original-title="Delete">
-            <img src="img/trash-icon.png" alt="trash">
-        </a>
-</td>
+      <a href="#" class="actions-icons"  data-original-title="Править">
+        <img src="../../static/Admin/img/edit-icon.png" alt="edit" class="icons">
+      </a>
+      <a href="#" class="delete-row" data-original-title="Удалить">
+        <img src="../../static/Admin/img/trash-icon.png" alt="trash">
+      </a>
+    </td>
 {% endfor %}
     </tbody>
     </table>

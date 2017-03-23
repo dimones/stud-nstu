@@ -78,7 +78,7 @@ class StudNSTU:
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
                                                            page=render_template("conf_template.html",
-                                                                                pages=DB().selectFromDB("""SELECT id, title, page_content FROM "pages" WHERE sidebar_id=%s """% page, needDict=True),
+                                                                                pages=DB().selectFromDB("""SELECT id, title, page_content, date FROM "pages" WHERE sidebar_id=%s """% page, needDict=True),
                                                                                 files=pages_files_get(page))),
                                    footer=render_template("footer.html"))
         @app.route('/news/<int:news>')

@@ -1,6 +1,7 @@
 {% for page in pages %}
-<h2>{{ page.title }}</h2>
-{{ page.page_content |safe }}
+    <span class="content__data">Обновлено {{ page.date }}</span>
+    <h2>{{ page.title }}</h2>
+    {{ page.page_content |safe }}
 
 {#<div class="docs">#}
 {#    {% for file in files %}#}

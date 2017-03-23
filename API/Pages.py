@@ -21,9 +21,9 @@ def pages_get():
 @api.route('/api/admin/pages/add',methods=['POST'])
 def pages_add():
     try:
-        print(request.form)
-        DB().changeInDB("""INSERT INTO "pages"(page_content,title, sidebar_id) VALUES('%s','%s', %s)""" %
-                        (request.form['page_content'],request.form['title'],request.form['sitebar_id']),needCommit=True)
+        userInfo = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+        DB().changeInDB("""INSERT INTO "pages"(author_id,page_content,title, sidebar_id, date) VALUES(%s,'%s','%s', %s,TO_DATE('%s','DD.MM.YYYY'))""" %
+                         (userInfo[0]['id'],request.form['page_content'],request.form['title'],request.form['sitebar_id'],request.form['date']),needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
         print(e)

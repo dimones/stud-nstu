@@ -1,0 +1,55 @@
+<div class="page-title clearfix">
+    <h2>
+        Категории подраздела
+        <small>
+            <ul><li>Администратор</li>
+                <li>/</li>
+                <li>ОНИР</li>
+                <li>/</li>
+                <li>Навигация по разделу</li>
+              </ul>
+            </small>
+    </h2>
+</div>
+<div class="widget-body">
+   {% for item in list %}
+    <div class="row">
+        <div class="col-md-7">
+            <div id="{{ item.id }}" class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ item.title }} <a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="Edit">
+                      <i class="fa fa-pencil"></i>
+                    </a></h3>
+{{ item.name }}  {{ item.surname }}
+                </div>
+                <div class="panel-body">
+                  {{ item.lead_content }}
+                </div>
+                <div class="panel-footer">
+                    Дата публикации {{ item.date }}
+{#                    <div class="right-align-text">#}
+                            <div class="btn-group right-align-text">
+                                <button type="button" class="btn btn-info btn-default">Править</button>
+    {#                            <button type="button" class="btn btn-primary btn-default">Удалить</button>#}
+                            </div>
+{#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+<script>
+    $(".btn-primary").click(function(e){
+                $.post('/api/admin/news/remove',{
+            'id':$(e.toElement).parents(".panel-info").attr('id')
+        }).done(function (data) {
+            var ret = JSON.parse(data);
+            $(e.toElement).parents(".panel-info").remove();
+            toastr.success("Запись успешно удалена");
+
+        }).fail(function(data) {
+          toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
+      });
+    });
+</script>

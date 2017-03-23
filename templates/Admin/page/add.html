@@ -154,22 +154,34 @@
     </div>
 </div>
 <script>
+function getDate() {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+}
+
     $("#add").click(function (e) {
 	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
                                                      'title':$("#new-item__title").val(),
                                               'sitebar_id': $("#new-item__parent").val(),
+                                              'date': getDate()
 
         }).done(function (data) {
             var ret = JSON.parse(data);
-            $(e.toElement).parents(".panel-info").remove();
             toastr.success("Запись успешно добавлена");
 
         }).fail(function(data) {
           toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
       });
     })
-</script>
 
+</script>
 
 {% raw %}
 <!-- The template to display files available for upload -->

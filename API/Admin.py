@@ -74,8 +74,16 @@ def page_add():
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/add.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """)))
 
+@api.route('/admin/pages/list')
+@need_admin
+def page_list():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/page/list.html", list=DB().selectFromDB(
+                               """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id""")))
 
-# tem_scr="""<!-- The template to display files available for upload -->
+
+        # tem_scr="""<!-- The template to display files available for upload -->
 #             <script id="template-upload" type="text/x-tmpl">
 #             {% for (var i=0, file; file=o.files[i]; i++) { %}
 #                 <tr class="template-upload fade">
