@@ -32,7 +32,7 @@ class AdminHelper(AuthHelper):
     def getRole(self):
         try:
             res = DB().selectFromDB("SELECT role FROM ADMIN_USERS WHERE id = (SELECT user_id FROM ADMIN_TOKENS tok WHERE tok.device_id = '%s' "
-                    "AND tok.device_token = '%s' LIMIT 0,1)" % (self.device_id, self.device_token), needOne=True)
+                    "AND tok.device_token = '%s' LIMIT 1)" % (self.device_id, self.device_token), needOne=True)
             if len(res) > 0:
                 return res[0]
             else:

@@ -1,14 +1,6 @@
 <div class="page-title clearfix">
     <h2>Редактор
-        <small>
-            <ul>
-                <li>Home</li>
-                <li>/</li>
-                <li>Dashboard</li>
-                <li>/</li>
-                <li>Forms</li>
-            </ul>
-        </small>
+
     </h2>
 </div>
 
@@ -17,7 +9,13 @@
         <div class="widget">
             <div class="widget-header">
                 <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Новость
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span>
+                    {% if action=="create" %}
+                    Добавить
+                    {% elif action=="edit" %}
+                    Редактировать
+                    {% endif %}
+                    Новость
                 </div>
             </div>
             <div class="widget-body">
@@ -34,20 +32,26 @@
                         <textarea class="form-control" rows="7" id="lead_content"></textarea>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <div class="wysiwyg-container">
-                      <textarea id="wysiwyg" class="col-sm-12 no-margin" placeholder="Enter text ..." style="height: 140px">
-                      </textarea>
+
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                        <textarea class="wysiwyg" id="content"></textarea>
+                        <input name="image" type="file" id="upload" style="display:none" onchange="">
                     </div>
                   </div>
                   <div class="control-group info no-margin">
                     <div class="controls  pull-right">
-                      <button id="contact-submit" type="button" class="btn btn-primary" onclick="AddNews(1);">Опубликовать</button>
-                      <button id="contact-submit" type="button" class="btn btn-success" onclick="AddNews(0);">Создать</button>
+                        {% if action=='create' %}
+                          <button id="contact-submit" type="button" class="btn btn-primary" onclick="addNews(1);">Опубликовать</button>
+                          <button id="contact-submit" type="button" class="btn btn-success" onclick="addNews(0);">Создать</button>
+                        {% elif action=='edit' %}
+                          <button id="contact-submit" type="button" class="btn btn-success" onclick="edit();">Сохранить</button>
+                        {% endif %}
                       <div class="clearfix"></div>
                     </div>
                   </div>
                 </form>
+              {% if action=='create' %}
                 <div class="row">
                     <div class="col-lg-6">
                         <form id="upload-file" method="post" enctype="multipart/form-data">
@@ -58,10 +62,15 @@
                         </form>
                     </div>
                 </div>
+              {% endif %}
             </div>
         </div>
     </div>
 </div>
+
+<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
 <script>
 function getDate() {
     var d = new Date(),
@@ -74,40 +83,56 @@ function getDate() {
 
     return [day, month, year].join('.');
 }
-function AddNews(value){
-    $.post("/api/admin/news/add", {  "title" : $("#title").val(),
-                                    "lead_content" : $("#lead_content").val(),
-                                    "content": $("#wysiwyg").val(),
-                                    "date":getDate(),
-                                    "is_active":value,"author_id":1})
-    .done(function(data) {
-        data = JSON.parse(data);
-        console.log(data);
-        var form_data = new FormData($('#upload-file')[0]);
-        $.ajax({
-            type: 'POST',
-            url: '/api/admin/news/image/upload/' + data.news_id,
-            data: form_data,
-            contentType: false,
-            cache: false,
-            processData: false,
-            async: false,
-            success: function(data) {
-               data = JSON.parse(data);
-               if(data.succeed == true)
-               {
-                   if(value == 0)
-                       toastr.success('Успешно добавлена новость');
-                   else {
-                       toastr.success('Успешно опубликована новость');
-                       window.top.location.href = '/admin/news/list';
-                   }
-               }
-            }
-        });
+{% if action =='create' %}
+function addNews(value) {
+    $.post("/api/admin/news/add", {
+        "title": $("#title").val(),
+        "lead_content": $("#lead_content").val(),
+        "content": tinyMCE.get('content').getContent(),
+        "date": getDate(),
+        "is_active": value, "author_id": 1
     })
-    .fail(function(data) {
-      toastr.error('Произогла ошибка попробуйте позже');
-    });
+            .done(function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                var form_data = new FormData($('#upload-file')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/admin/news/image/upload/' + data.news_id,
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    async: false,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.succeed == true) {
+                            if (value == 0)
+                                toastr.success('Успешно добавлена новость');
+                            else {
+                                toastr.success('Успешно опубликована новость');
+                                window.top.location.href = '/admin/news/list';
+                            }
+                        }
+                    }
+                });
+            })
+            .fail(function (data) {
+                toastr.error('Произогла ошибка попробуйте позже');
+            });
 }
+{% elif action=='edit' %}
+    $(document).ready(function () {
+        $("#title").val("{{ object.title }}");
+        $("#lead_content").val("{{ object.lead_content }}");
+        tinyMCE.get('content').setContent("{{ object.content }}");
+    })
+
+
+{#    function edit() {#}
+{#        $.post('/api/admin/news/change', {#}
+{##}
+{#        })#}
+{#    }#}
+{% endif %}
 </script>

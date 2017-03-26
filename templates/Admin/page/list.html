@@ -20,19 +20,26 @@
                     <h3 class="panel-title">{{ item.title }} <a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="Edit">
                       <i class="fa fa-pencil"></i>
                     </a></h3>
-{{ item.name }}  {{ item.surname }}
                 </div>
                 <div class="panel-body">
-                  {{ item.lead_content }}
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-9">
+                       {{ item.lead_content }}
+                    </div>
+
                 </div>
-                <div class="panel-footer">
-                    Дата публикации {{ item.date }}
-{#                    <div class="right-align-text">#}
-                            <div class="btn-group right-align-text">
+                <div class="panel-footer clearfix">
+                        <div class="pull-left">
+                        {{ item.name }}  {{ item.surname }}
+
+
+                            Дата публикации {{ item.date }}
+                        </div>
+
+                            <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-info btn-default">Править</button>
-    {#                            <button type="button" class="btn btn-primary btn-default">Удалить</button>#}
                             </div>
-{#                    </div>#}
                 </div>
             </div>
         </div>

@@ -10,15 +10,6 @@
               </ul>
             </small>
     </h2>
-    <ul class="stats hidden-xs">
-        <li class="ruby-red-bg">
-            <span class="fs1" aria-hidden="true" data-icon="&#xe042;"></span>
-            <div class="details">
-                <span class="big">Ireland</span>
-                <span class="small">Current Location</span>
-            </div>
-        </li>
-    </ul>
 </div>
 
 {% for item in lists %}
@@ -36,8 +27,12 @@
                 <div class="panel-footer">
                     <div class="widget-body right-align-text">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info btn-default">Править</button>
-                            <button type="button" class="btn btn-primary btn-default">Удалить</button>
+                           <a href="/admin/news/change/{{ item.id }}" class="btn btn-info btn-default">Править</a>
+                           {% if item.is_active == 1 %}
+                                <button type="button" class="btn btn-primary btn-default">Снять с публикации</button>
+                           {% else %}
+                                <button type="button" class="btn btn-warning btn-default">Опубликовать</button>
+                           {% endif %}
                         </div>
                     </div>
                 </div>
@@ -46,18 +41,18 @@
     </div>
 {% endfor %}
 
-<div class="widget-body">
-    <ul class="pagination right-align-text">
-        <li class="disabled"><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
-</div>
+{#<div class="widget-body">#}
+{#    <ul class="pagination right-align-text">#}
+{#        <li class="disabled"><a href="#">&laquo;</a></li>#}
+{#        <li class="active"><a href="#">1</a></li>#}
+{#        <li><a href="#">2</a></li>#}
+{#        <li><a href="#">3</a></li>#}
+{#        <li><a href="#">4</a></li>#}
+{#        <li><a href="#">5</a></li>#}
+{#        <li><a href="#">6</a></li>#}
+{#        <li><a href="#">&raquo;</a></li>#}
+{#    </ul>#}
+{#</div>#}
 
 
 <script>

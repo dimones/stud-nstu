@@ -22,12 +22,31 @@ def forms_add():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/forms/forms_add.html"))
+
 @api.route('/admin/news/add')
 @need_admin
 def forms():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/news/add.html"), )
+                           page=render_template("Admin/news/add.html", action="create"))
+
+@api.route('/admin/news/edit/<int:_id>', methods=['GET'])
+@need_admin
+def change_news(_id):
+    print(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id))
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id,needOne=True))[0]))
+
+@api.route('/admin/edit/<int:_id>', methods=['GET'])
+@need_admin
+def change_news1(_id):
+    print(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id))
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id,needOne=True))[0]))
+
+
 
 @api.route('/admin/news/list')
 @need_admin
