@@ -122,17 +122,16 @@ function addNews(value) {
             });
 }
 {% elif action=='edit' %}
-    $(document).ready(function () {
-        $("#title").val("{{ object.title }}");
-        $("#lead_content").val("{{ object.lead_content }}");
-        tinyMCE.get('content').setContent("{{ object.content }}");
-    })
+    window.onload = function(e) {
 
+        tinymce.activeEditor.setContent('{{ object.content | safe }}');
+    }
 
-{#    function edit() {#}
+    function edit() {
+
 {#        $.post('/api/admin/news/change', {#}
 {##}
 {#        })#}
-{#    }#}
+    }
 {% endif %}
 </script>

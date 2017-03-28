@@ -38,14 +38,6 @@ def change_news(_id):
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id,needOne=True))[0]))
 
-@api.route('/admin/edit/<int:_id>', methods=['GET'])
-@need_admin
-def change_news1(_id):
-    print(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id))
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id,needOne=True))[0]))
-
 
 
 @api.route('/admin/news/list')
