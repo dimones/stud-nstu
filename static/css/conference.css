@@ -11,7 +11,7 @@
 }
 .conference-preview__head, .conference-preview__body{
     width: 635px;
-    float: right;
+    float: left;
 }
 .conference-preview__head{
     margin: 15px 0 20px;
@@ -28,6 +28,7 @@
     float: right;
     color: #989898;
     font-size:10px;
+    text-aligh: right;
 }
 .conference-preview__status{
     color: #E50B38;
