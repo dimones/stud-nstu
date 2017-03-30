@@ -122,16 +122,26 @@ function addNews(value) {
             });
 }
 {% elif action=='edit' %}
-    window.onload = function(e) {
 
-        tinymce.activeEditor.setContent('{{ object.content | safe }}');
+    window.onload = function(e) {
+        var None = null;
+        var cnt ={{object |safe}};
+        console.log({{ user | safe }})
+        $("#title").val('{{ object.title }}');
+        $("#lead_content").val('{{ object.lead_content }}');
+        tinymce.activeEditor.setContent(cnt.content);
+
     }
 
     function edit() {
-
-{#        $.post('/api/admin/news/change', {#}
-{##}
-{#        })#}
+        $.post('/api/admin/news/change', {
+            "title": $("#title").val(),
+            "lead_content": $("#lead_content").val(),
+            "content": tinymce.activeEditor.getContent(),
+            "date": getDate(),
+            "id": {{ object.id }},
+            "auther_id": {{ user.id }}
+        })
     }
 {% endif %}
 </script>

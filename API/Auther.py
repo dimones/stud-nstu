@@ -79,6 +79,7 @@ class AdminAuther(Auther):
             device_token = self.getNewToken()
             self.db.changeInDB("INSERT INTO \"ADMIN_TOKENS\"(device_id,device_token,user_id) VALUES('%s','%s', %s)" % (
                     self.device_id, device_token, user_id),needCommit=True)
+
             return json.dumps({"succeed": True, 'device_token': device_token})
         except Exception as e:
             print('AdminAuther auth: %s' % str(e))

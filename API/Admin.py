@@ -7,6 +7,7 @@ from .Sidebars import *
 from Utils import *
 @api.route('/admin')
 def login():
+
     return render_template("Admin/login.html")
 
 @api.route('/admin/forms/list')
@@ -33,10 +34,11 @@ def forms():
 @api.route('/admin/news/edit/<int:_id>', methods=['GET'])
 @need_admin
 def change_news(_id):
-    print(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id))
+    print(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""% _id,needOne=True))[0]))
+                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT id, title, content, lead_content FROM "NEWS" WHERE id=%s""" % _id, needOne=True))[0],
+                                                user=(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())[0]))
 
 
 

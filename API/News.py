@@ -42,9 +42,9 @@ def admin_news_add():
 def admin_news_change():
     try:
         DB().changeInDB("""UPDATE "NEWS" SET title = '%s', lead_content = '%s', content = '%s',
-                            date = TO_DATE('%s',"DD.MM.YYYY"),is_active = %s,site_id = 1,author_id = %s WHERE id = %s""" %
+                            date = TO_DATE('%s',"DD.MM.YYYY"),site_id = 1,WHERE id = %s""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['is_active'],request.form['id'],request.form['author_id']),needCommit=True)
+                         request.form['date'],request.form['id']),needCommit=True)
         return json.dumps({"succeed": True })
     except Exception as e:
         print(e)
