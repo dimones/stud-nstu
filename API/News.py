@@ -24,15 +24,17 @@ class DateEncoder(json.JSONEncoder):
 def admin_news_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1 ORDER BY date desc"""),ensure_ascii=False,cls=DateEncoder)
 
+@api.route('/api/admin/news/get/<int:_id>',methods=['GET'])
+def admin_news_get_by_id(_id):
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""%_id),ensure_ascii=False,cls=DateEncoder)
+
 @api.route('/api/admin/news/add', methods=['POST'])
 def admin_news_add():
-    print(request.form['date'])
     try:
         news_id = DB().changeInDB("""INSERT INTO "NEWS"(title,lead_content,content,date,is_active,site_id,author_id) VALUES
                         ('%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,1,%s)""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
                          request.form['date'],request.form['is_active'],request.form['author_id']),needCommit=True,needIDs=True)
-        print(news_id)
         return json.dumps({"succeed": True, 'news_id' : news_id})
     except Exception as e:
         print(e)
@@ -42,7 +44,7 @@ def admin_news_add():
 def admin_news_change():
     try:
         DB().changeInDB("""UPDATE "NEWS" SET title = '%s', lead_content = '%s', content = '%s',
-                            date = TO_DATE('%s',"DD.MM.YYYY"),site_id = 1,WHERE id = %s""" %
+                            date = TO_DATE('%s','DD.MM.YYYY'),site_id = 1 WHERE id = %s""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
                          request.form['date'],request.form['id']),needCommit=True)
         return json.dumps({"succeed": True })

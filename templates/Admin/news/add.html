@@ -35,7 +35,7 @@
 
                   <div class="form-group">
                     <div class="col-lg-12">
-                        <textarea class="wysiwyg" id="content"></textarea>
+                        <textarea class="wysiwyg" id="content" rows="20"></textarea>
                         <input name="image" type="file" id="upload" style="display:none" onchange="">
                     </div>
                   </div>
@@ -122,25 +122,24 @@ function addNews(value) {
             });
 }
 {% elif action=='edit' %}
-
     window.onload = function(e) {
-        var None = null;
-        var cnt ={{object |safe}};
-        console.log({{ user | safe }})
-        $("#title").val('{{ object.title }}');
-        $("#lead_content").val('{{ object.lead_content }}');
-        tinymce.activeEditor.setContent(cnt.content);
-
+        var obj ={{object | safe}};
+        $("#title").val(obj.title);
+        $("#lead_content").val(obj.lead_content);
+        tinymce.activeEditor.setContent(obj.content);
     }
-
     function edit() {
         $.post('/api/admin/news/change', {
             "title": $("#title").val(),
             "lead_content": $("#lead_content").val(),
             "content": tinymce.activeEditor.getContent(),
             "date": getDate(),
-            "id": {{ object.id }},
-            "auther_id": {{ user.id }}
+            "id": {{ id }}
+        }).done(function (e) {
+            var result=JSON.parse(e);
+            if (result.succeed==true)
+                toastr.success('Новость изменена');
+            else toastr.error('Произошла ошибка повторите попытку позже')
         })
     }
 {% endif %}

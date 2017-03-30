@@ -27,19 +27,15 @@
                     <div class="col-md-9">
                        {{ item.lead_content }}
                     </div>
-
                 </div>
                 <div class="panel-footer clearfix">
-                        <div class="pull-left">
-                        {{ item.name }}  {{ item.surname }}
-
-
-                            Дата публикации {{ item.date }}
-                        </div>
-
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-info btn-default">Править</button>
-                            </div>
+                    <div class="pull-left">
+                        <div>{{ item.name }}  {{ item.surname }}</div>
+                        <div>Дата публикации {{ item.date }}</div>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <a href="/admin/pages/edit/{{ item.id }}" class="btn btn-info btn-default">Править</a>
+                    </div>
                 </div>
             </div>
         </div>

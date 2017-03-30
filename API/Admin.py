@@ -34,13 +34,13 @@ def forms():
 @api.route('/admin/news/edit/<int:_id>', methods=['GET'])
 @need_admin
 def change_news(_id):
-    print(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/news/add.html", action="edit", object=(DB().selectFromDB("""SELECT id, title, content, lead_content FROM "NEWS" WHERE id=%s""" % _id, needOne=True))[0],
-                                                user=(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())[0]))
-
-
+                           page=render_template("Admin/news/add.html", action="edit",
+                                                object=json.dumps((DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""%_id))[0],ensure_ascii=False,cls=DateEncoder),
+                                                id=_id,
+                                                user=(AdminHelper(request.cookies['device_token'],
+                                                                  request.cookies['device_id']).getUserInfo())[0]))
 
 @api.route('/admin/news/list')
 @need_admin
@@ -94,6 +94,20 @@ def page_list():
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/list.html", list=DB().selectFromDB(
                                """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id""")))
+
+@api.route('/admin/pages/edit/<int:_id>', methods=['GET'])
+@need_admin
+def change_pages(_id):
+    print(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/page/add.html", action="edit",
+                                                object=json.dumps((DB().selectFromDB(
+                                                    """SELECT * FROM "pages" WHERE id=%s""" % _id))[0],
+                                                                  ensure_ascii=False, cls=DateEncoder),
+                                                id=_id,
+                                                user=(AdminHelper(request.cookies['device_token'],
+                                                                  request.cookies['device_id']).getUserInfo())[0]))
 
 
         # tem_scr="""<!-- The template to display files available for upload -->
