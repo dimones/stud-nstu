@@ -32,8 +32,8 @@ def pages_add():
 @api.route('/api/admin/pages/change',methods=['POST'])
 def pages_change():
     try:
-        DB().changeInDB("""UPDATE "pages" SET page_content = '%s', author_id = %s, type = '%s',date = TO_DATE('%s','DD.MM.YYYY'), date_begin = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
-                        (request.form['page_content'],request.form['author_id'],request.form['type'],request.form['date'],request.form['date_begin'],request.form['id']),
+        DB().changeInDB("""UPDATE "pages" SET title='%s',lead_content='%s', page_content = '%s', author_id = %s,date = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
+                        (request.form['title'],request.form['lead_content'],request.form['page_content'],request.form['author_id'],request.form['date'],request.form['id']),
                         needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:

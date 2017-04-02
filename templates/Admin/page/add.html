@@ -189,9 +189,9 @@ function getDate() {
       });
     })
 {% elif action=='edit' %}
-    var obj;
+
     window.onload = function() {
-        obj ={{object |tojson}};
+        var obj ={{object |tojson}};
         $("#new-item__title").val(obj.title);
         $("#lead_content").val(obj.lead_content);
         tinymce.activeEditor.setContent(obj.page_content);
@@ -200,9 +200,10 @@ function getDate() {
         $.post('/api/admin/page/change', {
             "title": $("#title").val(),
             "lead_content": $("#lead_content").val(),
-            "content": tinymce.activeEditor.getContent(),
+            "page_content": tinymce.activeEditor.getContent(),
             "date": getDate(),
-            "id": {{ id }}
+            "id": {{ id }},
+            "author_id": {{ user.id }}
         }).done(function (e) {
             var result=JSON.parse(e);
             if (result.succeed==true)
