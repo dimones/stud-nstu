@@ -8,15 +8,7 @@
 <link rel="stylesheet" href="/static/css/uploader/jquery.fileupload-ui.css">
 <div class="page-title clearfix">
     <h2>Редактор
-        <small>
-            <ul>
-                <li>Admin</li>
-                <li>/</li>
-                <li>Материалы</li>
-                <li>/</li>
-                <li>Добавить</li>
-            </ul>
-        </small>
+
     </h2>
 </div>
 
@@ -25,7 +17,13 @@
         <div class="widget">
             <div class="widget-header">
                 <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Добавить Материал
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span>
+                    {% if action=="create" %}
+                    Добавить
+                    {% elif action=="edit" %}
+                    Редактировать
+                    {% endif %}
+                    Материал
                 </div>
             </div>
             <div class="widget-body">
@@ -34,14 +32,18 @@
                         <label class="col-lg-3 control-label" for="new-item__title">Заголовок</label>
                         <div class="col-lg-9">
                           <input type="Text" class="form-control" placeholder="Заголовок" id="new-item__title">
-                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label" for="new-item__parent">Выберите категорию</label>
                         <div class="col-lg-9">
                           <select class="form-control" id="new-item__parent">
                             {% for item in list %}
-			                    <option value="{{ item.id }}">{{ item.name }}</option>
+			                    <option value="{{ item.id }}" {% if item.id==object.sidebar_id %}
+                                    selected
+			                    {% endif %}>
+                                    {{ item.name }}
+                                </option>
                             {% endfor %}
                           </select>
                         </div>
@@ -81,7 +83,7 @@
                                 }
                             });
                             var datepicker = $('#my-elem').datepicker().data('datepicker');
-                            console.log(datepicker.selectDate());
+{#                            console.log(datepicker.selectDate());#}
                         </script>
                     </div>
                     <div class="form-group"><div class="col-lg-12">
@@ -187,14 +189,15 @@ function getDate() {
       });
     })
 {% elif action=='edit' %}
-    window.onload = function(e) {
-        var obj ={{object | safe}};
+    var obj;
+    window.onload = function() {
+        obj ={{object |tojson}};
         $("#new-item__title").val(obj.title);
         $("#lead_content").val(obj.lead_content);
-        tinymce.activeEditor.setContent(obj.content);
+        tinymce.activeEditor.setContent(obj.page_content);
     }
     function edit() {
-        $.post('/api/admin/news/change', {
+        $.post('/api/admin/page/change', {
             "title": $("#title").val(),
             "lead_content": $("#lead_content").val(),
             "content": tinymce.activeEditor.getContent(),
@@ -203,7 +206,7 @@ function getDate() {
         }).done(function (e) {
             var result=JSON.parse(e);
             if (result.succeed==true)
-                toastr.success('Новость изменена');
+                toastr.success('Материал изменен');
             else toastr.error('Произошла ошибка повторите попытку позже')
         })
     }

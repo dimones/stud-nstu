@@ -102,9 +102,11 @@ def change_pages(_id):
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/add.html", action="edit",
-                                                object=json.dumps((DB().selectFromDB(
-                                                    """SELECT * FROM "pages" WHERE id=%s""" % _id))[0],
-                                                                  ensure_ascii=False, cls=DateEncoder),
+                                                list=DB().selectFromDB(
+                                                    """SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
+                                                object=((DB().selectFromDB(
+                                                    """SELECT * FROM "pages" WHERE id=%s""" % _id))[0]
+                                                                 ),
                                                 id=_id,
                                                 user=(AdminHelper(request.cookies['device_token'],
                                                                   request.cookies['device_id']).getUserInfo())[0]))
