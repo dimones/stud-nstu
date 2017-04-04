@@ -50,7 +50,7 @@ class side_cal(side_item):
 class Page:
     promo = None
     content = None
-    def __init__(self, promo = None, content = None):
+    def __init__(self, site):
         self.promo = promo
         self.content = content
     def __str__(self):

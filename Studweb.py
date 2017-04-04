@@ -90,6 +90,10 @@ class StudNSTU:
                                                                                 item=DB().selectFromDB('SELECT * FROM "NEWS" WHERE id = %s' % (news), needDict=True)[0])),
                                    footer=render_template("footer.html"))
 
+        @app.route('/<int:site>')
+        def getSite(site):
+            return Page(site).render()
+
 
     def run(self):
         self.app.run(debug=True)
