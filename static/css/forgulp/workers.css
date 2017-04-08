@@ -1,0 +1,44 @@
+
+.workers {
+	padding: 90px;
+	font-family: IntroRegular;
+}
+
+.workers__title {
+	font-size: 20px;
+	color: #696969;
+	width: 200px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.workers__block-title {
+	color: #339355;
+	font-size: 16px;
+	margin: 60px auto 75px;
+	position: relative;
+	padding: 5px 0;
+	text-align: center;
+	width: 200px;
+}
+.workers__item{
+	height: 65px;
+	width: 245px;
+	float: left;
+}
+.workers__img{
+	height: 65px;
+	width: 65px;
+	display: inline-block;
+	border-radius: 50%;
+	background-color: #CFCFCF;
+	margin-right: 30px
+	
+}
+.workers__name{
+	color: #A9A9A9;
+	display: inline-block;
+	height: 65px;
+	vertical-align: middle;
+	font-size: 15px;
+}

@@ -1,0 +1,61 @@
+.icon21{
+    height: 15px;
+    width: 19px;
+    background-image: url('../photo/icon21.png');
+}
+.icon22{
+    height: 21px;
+    width: 14px;
+    background-image: url('../photo/icon22.png');
+}
+.icon23{
+    width: 19px;
+    height: 16px;
+    background-image: url('../photo/icon23.png');
+}
+.promo_life{
+	background-image: url('../img/some2.jpg');
+	background-position: 50% 50%;
+	height: 380px;
+}
+.promo_culture{
+	background-image: url('../img/some.jpg');
+	height: 450px;
+	padding-top: 75px;
+}
+.promo_life .proposal__link{
+	color: #fff;
+	border: 1px solid #B56C87;
+}
+.promo_life .proposal__link:hover{
+	color: #7E053B;
+	border-color:  #fff;
+	background-color: #fff;
+}
+.promo_culture .proposal__link{
+	color: #fff;
+	border: 1px solid #ED9F17;
+}
+.promo_culture .proposal__link:hover{
+	color: #A54700;
+	border-color:  #fff;
+	background-color: #fff;
+}
+.promo_culture .promo__title, .promo_life .promo__title {
+	padding-top: 50px;
+}
+.promo_culture .promo__head-title, .promo_life .promo__head-title{
+	margin: 5px 0;
+	font-size: 35px;
+}
+.promo__subtitle_top, .promo_culture .promo__subtitle, .promo_life .promo__subtitle{
+	color: #D7D7D7;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+.promo_culture .promo__subtitle, .promo_life .promo__subtitle{
+	margin-bottom: 20px;
+}
+.promo__subtitle_top{
+	margin-top: 50px;
+}
