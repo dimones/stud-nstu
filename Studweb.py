@@ -13,8 +13,9 @@ class StudNSTU:
         app.register_blueprint(api)
 
         @app.route('/')
-        def hello_world1():
-            return render_template('layout.html', header=render_template("header.html"), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
+        def infex():
+            return Page()
+            # return render_template('layout.html', header=render_template("header.html"), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
 
         @app.route('/science')
         def science():

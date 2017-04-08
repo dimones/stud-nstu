@@ -39,21 +39,25 @@
                         <div class="col-lg-9">
                           <select class="form-control" id="new-item__parent">
                             {% for item in list %}
-			                    <option value="{{ item.id }}" {% if item.id==object.sidebar_id %}
-                                    selected
-			                    {% endif %}>
+                                    <option value="{{ item.id }}"
+                                        {% if action=="edit" %}
+                                            {% if item.id==object.sidebar_id %}
+                                                selected
+			                                {% endif %}
+                                        {% endif %}
+                                        >
                                     {{ item.name }}
                                 </option>
                             {% endfor %}
                           </select>
                         </div>
                     </div>
-                 <div class="form-group">
-                    <label class="col-lg-3 control-label"  for="inputHelptext">Лид-абзац</label>
-                    <div class="col-lg-9">
-                        <textarea class="form-control" rows="7" id="lead_content"></textarea>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"  for="inputHelptext">Лид-абзац</label>
+                        <div class="col-lg-9">
+                            <textarea class="form-control" rows="7" id="lead_content"></textarea>
+                        </div>
                     </div>
-                  </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label" for="enableSocialPosts">Установить событие</label>
                         <div class="col-lg-9">
@@ -201,8 +205,9 @@ function getDate() {
         tinymce.activeEditor.setContent(obj.page_content);
     }
     $("#edit").click(function () {
-        $.post('/api/admin/page/change', {
-            "title": $("#title").val(),
+
+        $.post('/api/admin/pages/change', {
+            "title": $("#new-item__title").val(),
             "lead_content": $("#lead_content").val(),
             "page_content": tinymce.activeEditor.getContent(),
             "date": getDate(),

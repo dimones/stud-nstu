@@ -32,6 +32,7 @@ def pages_add():
 @api.route('/api/admin/pages/change',methods=['POST'])
 def pages_change():
     try:
+        print(request.form['title'])
         DB().changeInDB("""UPDATE "pages" SET title='%s',lead_content='%s', page_content = '%s', author_id = %s,date = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
                         (request.form['title'],request.form['lead_content'],request.form['page_content'],request.form['author_id'],request.form['date'],request.form['id']),
                         needCommit=True)

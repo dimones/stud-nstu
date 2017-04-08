@@ -1,20 +1,23 @@
 from flask import render_template
-class header:
+from API import *
+class Header:
+    navigation=None
+    def __init__(self, nav):
+        self.navigation=nav
     def render(self):
-        return render_template('header.html')
-
-class footer:
+        return render_template('header.html', nav=self.navigation)
+class Footer:
     def render(self):
         return render_template('footer.html')
 
-class promo:
+class Promo:
     adress = None
     def __init__(self, adress):
         self.adress = adress
     def render(self):
         return render_template(self.adress)
 
-class content:
+class Content:
     sidebar = None
     posts = []
     def __init__(self, sidebar = None, posts = None):
@@ -25,38 +28,48 @@ class content:
     def render(self):
         return render_template('content.html', posts=self.posts)
 
-class main:
+class Main:
     def render(self):
         pass
 
-class sidebar:
+class Sidebar:
     side_items=[]
     def render(self):
         pass
 
-class side_item:
+class Side_item:
     def render(self):
         pass
 
-class side_menu(side_item):
+class side_menu(Side_item):
     pass
 
-class side_news(side_item):
+class side_news(Side_item):
     pass
 
-class side_cal(side_item):
+class side_cal(Side_item):
     pass
 
 class Page:
+    header=None
     promo = None
     content = None
-    def __init__(self, site):
-        self.promo = promo
-        self.content = content
+    footer=None
+    def __init__(self, site=None, sidebar_item=None, material=None):
+        temp = DB().selectFromDB("""SELECT * FROM "sites" """, needDict=True)
+        self.header = Header(temp)
+        for item in temp:
+            if site == item['id']:
+                self.promo = Promo(item['template_name'])
+                break
+        # header=
+        # promo=
+        # content=
+        self.footer=Footer()
     def __str__(self):
         return self.render()
     def render(self):
-        return render_template('layout.html', header=header().render(),
+        return render_template('layout.html', header=self.header.render(),
                                promo=self.promo.render(),
-                               content=self.content.render(),
-                               footer=footer().render())
+                               # content=self.content.render(),
+                               footer=self.footer.render())
