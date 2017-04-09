@@ -1,5 +1,5 @@
 from flask import Flask, render_template,wrappers
-from view import *
+from View import *
 from API import *
 from Utils import *
 
@@ -14,8 +14,8 @@ class StudNSTU:
 
         @app.route('/')
         def infex():
-            return Page()
-            # return render_template('layout.html', header=render_template("header.html"), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
+            # return Page().render()
+            return render_template('layout.html', header=Header().render(), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
 
         @app.route('/science')
         def science():
