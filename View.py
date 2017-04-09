@@ -32,7 +32,8 @@ class Content:
     content = []
     posts=[]
     def __init__(self, site):
-        self.sidebar=Side_item(site)
+        pass
+        # self.sidebar=Side_item(site)
     def render(self):
         return render_template('content.html', posts=self.content)
 

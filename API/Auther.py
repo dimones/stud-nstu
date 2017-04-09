@@ -43,7 +43,7 @@ class AdminHelper(AuthHelper):
 
     def getUserInfo(self):
         try:
-            return DB().selectFromDB("SELECT id, role , name, surname  FROM \"ADMIN_USERS\" WHERE id = (SELECT user_id FROM \"ADMIN_TOKENS\" tok WHERE tok.device_id = '%s' "
+            return DB().selectFromDB("SELECT id, role ,site_id name, surname  FROM \"ADMIN_USERS\" WHERE id = (SELECT user_id FROM \"ADMIN_TOKENS\" tok WHERE tok.device_id = '%s' "
                     "AND tok.device_token = '%s')" % (self.device_id, self.device_token),needOne=True)
         except Exception as e:
             print(str(e))
