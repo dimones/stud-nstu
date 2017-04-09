@@ -35,20 +35,34 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-lg-3 control-label" for="new-item__site">Выберите раздел</label>
+                        <div class="col-lg-9">
+                          <select class="form-control" id="new-item__site">
+                            {% for item in  sites %}
+                                <option value="{{ item.id }}">
+                                    {{ item.title }}
+                                </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-3 control-label" for="new-item__parent">Выберите категорию</label>
                         <div class="col-lg-9">
                           <select class="form-control" id="new-item__parent">
-                            {% for item in list %}
+                            {% if action=="edit" %}
+                              {% for item in list %}
                                     <option value="{{ item.id }}"
-                                        {% if action=="edit" %}
+
                                             {% if item.id==object.sidebar_id %}
                                                 selected
 			                                {% endif %}
-                                        {% endif %}
+
                                         >
                                     {{ item.name }}
                                 </option>
                             {% endfor %}
+                          {% endif %}
                           </select>
                         </div>
                     </div>
@@ -170,7 +184,11 @@
     </div>
 </div>
 <script>
+    $( "#new-item__site").on('change',function() {
+      console.log( $( "#new-item__site option:selected" ).val() );
+    });
 function getDate() {
+
     var d = new Date(),
     month = '' + (d.getMonth() + 1),
     day = '' + d.getDate(),
@@ -182,10 +200,12 @@ function getDate() {
     return [day, month, year].join('.');
 }
 {% if action =='create' %}
+
     $("#add").click(function (e) {
 	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
                                         'title':$("#new-item__title").val(),
                                         'sitebar_id': $("#new-item__parent").val(),
+                                        '':$("#new-item_site").val(),
                                         'date': getDate()
 
         }).done(function (data) {

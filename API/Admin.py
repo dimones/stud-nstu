@@ -13,6 +13,7 @@ def login():
 @api.route('/admin/forms/list')
 @need_admin
 def forms_list():
+
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/forms/forms_list.html"))
@@ -27,9 +28,17 @@ def forms_add():
 @api.route('/admin/news/add')
 @need_admin
 def forms():
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/news/add.html", action="create"))
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    if user[0]['site_id']==0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/news/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+    else:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/news/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
 
 @api.route('/admin/news/edit/<int:_id>', methods=['GET'])
 @need_admin
@@ -52,6 +61,7 @@ def lists():
 @api.route('/admin/users/add')
 @need_admin
 def Profile():
+
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/users/add.html"))
@@ -83,9 +93,17 @@ def sidebar_menus_add():
 @api.route('/admin/pages/add')
 @need_admin
 def page_add():
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/add.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """)))
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    if user[0]['site_id']==0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/page/add.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
+                                                                           sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+    else:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/page/add.html", list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
+                                                                           sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
 
 @api.route('/admin/pages/list')
 @need_admin

@@ -10,7 +10,7 @@ def sidebar_menu_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = %s """
                                         % request.args.get('site_id')))
 
-
+@api.route('/api/admin/sites/sidebars/menu/getDict',methods=["GET"])
 def sidebar_menu_get_dict(site_id):
     main_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id=0 AND site_id = %s """
                                         % site_id)
