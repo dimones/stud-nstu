@@ -16,18 +16,28 @@
 .promo_life{
 	background-image: url('../img/some2.jpg');
 	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
 	height: 380px;
 }
 .promo_culture{
 	background-image: url('../img/some.jpg');
 	height: 450px;
 	padding-top: 75px;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 .promo_sport{
 	background-image: url('../img/some3.jpg');
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 .promo_health{
 	background-image: url('../img/some4.jpg');	
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 .promo_life .proposal__link{
 	color: #fff;
