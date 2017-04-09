@@ -23,6 +23,12 @@
 	height: 450px;
 	padding-top: 75px;
 }
+.promo_sport{
+	background-image: url('../img/some3.jpg');
+}
+.promo_health{
+	background-image: url('../img/some4.jpg');	
+}
 .promo_life .proposal__link{
 	color: #fff;
 	border: 1px solid #B56C87;
@@ -41,19 +47,37 @@
 	border-color:  #fff;
 	background-color: #fff;
 }
-.promo_culture .promo__title, .promo_life .promo__title {
+.promo_sport .proposal__link{
+	color: #fff;
+	border: 1px solid #1777EE;
+}
+.promo_sport .proposal__link:hover{
+	color: #045FD2;
+	border-color:  #fff;
+	background-color: #fff;
+}
+.promo_health .proposal__link{
+	color: #fff;
+	border: 1px solid #fff;
+}
+.promo_health .proposal__link:hover{
+	color: #088C53;
+	border-color:  #fff;
+	background-color: #fff;
+}
+.promo_culture .promo__title, .promo_life .promo__title, .promo_sport .promo__title, .promo_health .promo__title {
 	padding-top: 50px;
 }
-.promo_culture .promo__head-title, .promo_life .promo__head-title{
+.promo_culture .promo__head-title, .promo_life .promo__head-title, .promo_sport .promo__head-title, .promo_health .promo__head-title{
 	margin: 5px 0;
 	font-size: 35px;
 }
-.promo__subtitle_top, .promo_culture .promo__subtitle, .promo_life .promo__subtitle{
+.promo__subtitle_top, .promo_culture .promo__subtitle, .promo_life .promo__subtitle, .promo_sport .promo__subtitle, .promo_health .promo__subtitle{
 	color: #D7D7D7;
 	font-size: 15px;
 	text-transform: uppercase;
 }
-.promo_culture .promo__subtitle, .promo_life .promo__subtitle{
+.promo_culture .promo__subtitle, .promo_life .promo__subtitle, .promo_sport .promo__subtitle, .promo_health .promo__subtitle{
 	margin-bottom: 20px;
 }
 .promo__subtitle_top{

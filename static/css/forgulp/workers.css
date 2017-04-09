@@ -1,25 +1,41 @@
 
 .workers {
-	padding: 90px;
+	padding: 90px 150px;
 	font-family: IntroRegular;
 }
 
 .workers__title {
-	font-size: 20px;
+	font-size: 22px;
 	color: #696969;
-	width: 200px;
+	width: 250px;
 	text-align: center;
 	margin: 0 auto;
 }
-
+.workers__block{
+	padding-bottom: 30px;
+}
 .workers__block-title {
 	color: #339355;
 	font-size: 16px;
-	margin: 60px auto 75px;
+	margin: 60px 0 75px;
 	position: relative;
-	padding: 5px 0;
 	text-align: center;
+	
+}
+.workers__block-title span{
 	width: 200px;
+	background-color: #fff;
+	padding: 0 45px;
+}
+.workers__block-title:before{
+	content: ' ';
+	height: 1px;
+	background-color: #E3E3E3;
+	width: 800px;
+	position: absolute;
+	display: block;
+	z-index: -1;
+	top: 15px;
 }
 .workers__item{
 	height: 65px;
@@ -27,18 +43,20 @@
 	float: left;
 }
 .workers__img{
-	height: 65px;
 	width: 65px;
 	display: inline-block;
 	border-radius: 50%;
 	background-color: #CFCFCF;
-	margin-right: 30px
-	
+	margin-right: 30px;
+	vertical-align:	middle;
+	height:	100%;
+
 }
 .workers__name{
 	color: #A9A9A9;
 	display: inline-block;
-	height: 65px;
 	vertical-align: middle;
-	font-size: 15px;
+	font-size: 14px;
+	width: 140px;
 }
+
