@@ -9,22 +9,12 @@
         <nav>
             <ul class="main-nav">
                 {% for item in nav %}
-                <li class="main-nav__item">
-                    <a href="/{{ item.id }}" class="main-nav__link">{{ item.title }}</a>
-                </li>
+                    {% if item.sub==0 %}
+                        <li class="main-nav__item">
+                            <a href="/{{ item.id }}" class="main-nav__link">{{ item.title }}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
-{#                <li class="main-nav__item">#}
-{#                    <a href="/dev" class="main-nav__link">СПОРТ</a>#}
-{#                </li>#}
-{#                <li class="main-nav__item">#}
-{#                    <a href="/culture" class="main-nav__link">КУЛЬТУРА</a>#}
-{#                </li>#}
-{#                <li class="main-nav__item">#}
-{#                    <a href="/dev" class="main-nav__link">ОБЩЕСТВЕННАЯ ЖИЗНЬ</a>#}
-{#                </li>#}
-{#                <li class="main-nav__item">#}
-{#                    <a href="/dev" class="main-nav__link">ЗДОРОВЬЕ</a>#}
-{#                </li>#}
             </ul>
             <ul class="sub-nav">
                 <li class="sub-nav__item">
