@@ -19,32 +19,32 @@ class StudNSTU:
 
         @app.route('/science')
         def science():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                         content=render_template("science.html"), footer=render_template("footer.html"))
 
         @app.route('/culture')
         def culture():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                content=render_template("culture.html"), footer=render_template("footer.html"))
 
         @app.route('/schedule')
         def schedule():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                content=render_template("schedule.html"), footer=render_template("footer.html"))
 
         @app.route('/map')
         def map():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                        content=render_template("map.html"), footer=render_template("footer.html"))
 
         @app.route('/om')
         def om():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("om.html"), footer=render_template("footer.html"))
 
         @app.route('/3d-nstu')
         def _3dnstu():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("panoramas.html"), footer=render_template("footer.html"))
 
         @app.route('/test')
@@ -56,7 +56,7 @@ class StudNSTU:
 
         @app.route('/dev')
         def dev():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("dev.html"), footer=render_template("footer.html"))
 
         @app.route('/news')
@@ -65,7 +65,7 @@ class StudNSTU:
 
         @app.route('/onirs')
         def onirs():
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
                                                            page=render_template("news_list.html",
@@ -75,7 +75,7 @@ class StudNSTU:
         @app.route('/onirs/<int:page>')
         def onirs_page(page):
             print(DB().selectFromDB("""SELECT id, title, page_content FROM "pages" WHERE sidebar_id=%s """% page, needDict=True))
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
                                                            page=render_template("conf_template.html",
@@ -84,7 +84,7 @@ class StudNSTU:
                                    footer=render_template("footer.html"))
         @app.route('/news/<int:news>')
         def piece_of_news(news):
-            return render_template('layout.html', header=render_template("header.html"),
+            return render_template('layout.html', header=Header().render(),
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
                                                            page=render_template("news.html",
