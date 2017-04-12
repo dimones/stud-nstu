@@ -83,12 +83,23 @@ def sidebar_menus_list():
 @api.route('/admin/sidebar_menus/add')
 @need_admin
 def sidebar_menus_add():
-    items = sidebar_menu_get_dict(1)
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/sidebars/add.html",
-                                                list=items,
-                                                count=len(items)+2))
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    # items = sidebar_menu_get_dict(1)
+    if user[0]['site_id'] == 0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/sidebars/add.html",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1"""))
+                                                    # list=items,
+                                                    # count=len(items)+2)
+                               )
+    else:
+         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/sidebars/add.html",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
+                                                    # list=items,
+                                                    # count=len(items)+2))
 
 @api.route('/admin/pages/add')
 @need_admin

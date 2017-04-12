@@ -11,11 +11,11 @@ def sidebar_menu_get():
                                         % request.args.get('site_id')))
 
 @api.route('/api/admin/sites/sidebars/menu/getDict',methods=["GET"])
-def sidebar_menu_get_dict(site_id):
+def sidebar_menu_get_dict():
     main_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id=0 AND site_id = %s """
-                                        % site_id)
+                                        % request.args.get('site_id'))
     sub_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id!=0 AND site_id = %s """
-                                        % site_id)
+                                        % request.args.get('site_id'))
     for item in main_items:
         sub_nav=[]
         for sub_item in sub_items:
@@ -23,7 +23,7 @@ def sidebar_menu_get_dict(site_id):
                 sub_nav.append(sub_item)
 
         item["submenu"] = sub_nav
-    return main_items
+    return json.dumps(main_items)
 
 @api.route('/api/admin/sites/sidebars/menu/add',methods=["POST"])
 def sidebar_menu_add():
