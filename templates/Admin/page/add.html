@@ -72,38 +72,38 @@
                             <textarea class="form-control" rows="7" id="lead_content"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label" for="enableSocialPosts">Установить событие</label>
-                        <div class="col-lg-9">
-                            <div class="onoffswitch">
-                              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="enableSocialPosts" checked>
-                              <label class="onoffswitch-label" for="enableSocialPosts">
-                                <div class="onoffswitch-inner"></div>
-                                <div class="onoffswitch-switch"></div>
-                              </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label" >Дата события</label>
-                        <div class="col-lg-9">
-                            <div class="datepicker-here" data-timepicker="true"></div>
-                        </div>
-                        <script>
-                            $('#enableSocialPosts').change(function () {
-                                if ($('#enableSocialPosts').is(":checked")==true)
-                                    $('.datepicker-here').parents('.form-group').show(500)
-                                else
-                                    $('.datepicker-here').parents('.form-group').hide(500);
-                            });
-                            $('.datepicker-here').datepicker({
-                                    onSelect: function(date) {
-                                }
-                            });
-                            var datepicker = $('#my-elem').datepicker().data('datepicker');
+{#                    <div class="form-group">#}
+{#                        <label class="col-lg-3 control-label" for="enableSocialPosts">Установить событие</label>#}
+{#                        <div class="col-lg-9">#}
+{#                            <div class="onoffswitch">#}
+{#                              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="enableSocialPosts" checked>#}
+{#                              <label class="onoffswitch-label" for="enableSocialPosts">#}
+{#                                <div class="onoffswitch-inner"></div>#}
+{#                                <div class="onoffswitch-switch"></div>#}
+{#                              </label>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                        <label class="col-lg-3 control-label" >Дата события</label>#}
+{#                        <div class="col-lg-9">#}
+{#                            <div class="datepicker-here" data-timepicker="true"></div>#}
+{#                        </div>#}
+{#                        <script>#}
+{#                            $('#enableSocialPosts').change(function () {#}
+{#                                if ($('#enableSocialPosts').is(":checked")==true)#}
+{#                                    $('.datepicker-here').parents('.form-group').show(500)#}
+{#                                else#}
+{#                                    $('.datepicker-here').parents('.form-group').hide(500);#}
+{#                            });#}
+{#                            $('.datepicker-here').datepicker({#}
+{#                                    onSelect: function(date) {#}
+{#                                }#}
+{#                            });#}
+{#                            var datepicker = $('#my-elem').datepicker().data('datepicker');#}
 {#                            console.log(datepicker.selectDate());#}
-                        </script>
-                    </div>
+{#                        </script>#}
+{#                    </div>#}
                     <div class="form-group"><div class="col-lg-12">
                             <textarea class="wysiwyg" id="content"></textarea>
                             <input name="image" type="file" id="upload" style="display:none" onchange="">
@@ -111,8 +111,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12 col-lg-offset-10">
-                            {% if action=="action" %}
-                            <button name="button" type="button" id="add" class="btn btn-success" onchange="">Добавить</button>
+                            {% if action=="create" %}
+                                <button name="button" type="button" id="add" class="btn btn-success" onchange="">Добавить</button>
                             {% elif action=="edit" %}
                                 <button name="button" type="button" id="edit" class="btn btn-success" onchange="">Править</button>
                             {% endif %}
@@ -187,6 +187,25 @@
     $( "#new-item__site").on('change',function() {
       console.log( $( "#new-item__site option:selected" ).val() );
     });
+     window.onload = function(e) {
+        sideBarList();
+     };
+     $('#new-item__site').on('change', function () {
+         $('#new-item__parent').empty();
+         sideBarList();
+     })
+     function sideBarList() {
+              $.get('/api/admin/sites/sidebars/menu/getDict/' + $('#new-item__site').val())
+                .done(function (e) {
+                    var list=JSON.parse(e);
+                    $("#new-item__parent").empty();
+                    $("#new-item__parent").append('<option value="0">Нет родительского раздела</option>');
+                    list.forEach(function (item, i, list) {
+                        console.log(item);
+                        $("#new-item__parent").append( $('<option value="'+item.id+'">'+item.name+'</option>'));
+                    })
+        })
+     }
 function getDate() {
 
     var d = new Date(),
@@ -205,13 +224,10 @@ function getDate() {
 	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
                                         'title':$("#new-item__title").val(),
                                         'sitebar_id': $("#new-item__parent").val(),
-                                        '':$("#new-item_site").val(),
                                         'date': getDate()
-
         }).done(function (data) {
             var ret = JSON.parse(data);
             toastr.success("Запись успешно добавлена");
-
         }).fail(function(data) {
           toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
       });
@@ -225,7 +241,6 @@ function getDate() {
         tinymce.activeEditor.setContent(obj.page_content);
     }
     $("#edit").click(function () {
-
         $.post('/api/admin/pages/change', {
             "title": $("#new-item__title").val(),
             "lead_content": $("#lead_content").val(),

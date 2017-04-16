@@ -10,12 +10,12 @@ def sidebar_menu_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = %s """
                                         % request.args.get('site_id')))
 
-@api.route('/api/admin/sites/sidebars/menu/getDict',methods=["GET"])
-def sidebar_menu_get_dict():
-    main_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id=0 AND site_id = %s """
-                                        % request.args.get('site_id'))
-    sub_items=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id!=0 AND site_id = %s """
-                                        % request.args.get('site_id'))
+@api.route('/api/admin/sites/sidebars/menu/getDict/<int:id>',methods=["GET"])
+def sidebar_menu_get_dict(id):
+    main_items = DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id=0 AND site_id = %s """
+                                        % id)
+    sub_items = DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE dropdown_id!=0 AND site_id = %s """
+                                        % id)
     for item in main_items:
         sub_nav=[]
         for sub_item in sub_items:
@@ -29,9 +29,9 @@ def sidebar_menu_get_dict():
 def sidebar_menu_add():
     try:
         print (request.form)
-        DB().changeInDB("""INSERT INTO "sidebar_menus" (name, site_id, item_order, dropdown_id) VALUES('%s',%s,%s,%s)"""
+        DB().changeInDB("""INSERT INTO "sidebar_menus" (name, site_id, dropdown_id) VALUES('%s',%s,%s)"""
                         % (request.form['name'], request.form['site_id'],
-                           request.form['order'],request.form['dropdown_id']),needCommit=True)
+                           request.form['dropdown_id']),needCommit=True)
         print("succeed")
         return json.dumps({'succeed': True})
     except Exception as e:

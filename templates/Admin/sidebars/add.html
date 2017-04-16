@@ -57,18 +57,18 @@
         <div class="sidebar-menu-preview col-sm-10 col-sm-offset-2">
             <ul class="sidebar-menu">
               <li class="sidebar-menu__item" id="new-item"><a href="/" class="sidebar-menu__link">Новый пункт</a></li>
-                {% for item in list %}
-                    <li class="sidebar-menu__item {%   if item.submenu | length > 0%} sidebar-menu__item_share {% endif %}"><a href="#" class="sidebar-menu__link">{{ item.name }}</a>
-
-                        {%   if item.submenu | length > 0 %}
-                            <ul class="sidebar-menu__second-level">
-                            {% for sub in item.submenu %}
-                                <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">{{ sub.name }}</a></li>
-                            {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
-                {% endfor %}
+{#                {% for item in list %}#}
+{#                    <li class="sidebar-menu__item {%   if item.submenu | length > 0%} sidebar-menu__item_share {% endif %}"><a href="#" class="sidebar-menu__link">{{ item.name }}</a>#}
+{##}
+{#                        {%   if item.submenu | length > 0 %}#}
+{#                            <ul class="sidebar-menu__second-level">#}
+{#                            {% for sub in item.submenu %}#}
+{#                                <li class="sidebar-menu__item"><a href="" class="sidebar-menu__link">{{ sub.name }}</a></li>#}
+{#                            {% endfor %}#}
+{#                            </ul>#}
+{#                        {% endif %}#}
+{#                    </li>#}
+{#                {% endfor %}#}
 		  </ul>
         </div>
         </div>
@@ -88,12 +88,16 @@
          sideBarList();
      })
      function sideBarList() {
-              $.get('/api/admin/sites/sidebars/menu/getDict',{'site_id':$('#new-item__site').val()})
+              $.get('/api/admin/sites/sidebars/menu/getDict/' + $('#new-item__site').val())
                 .done(function (e) {
                     var list=JSON.parse(e);
+                    $(".sidebar-menu").empty();
+                    $("#new-item__parent").empty();
+                    $("#new-item__parent").append('<option value="0">Нет родительского раздела</option>');
                     list.forEach(function (item, i, list) {
                         console.log(item);
                         $("#new-item__parent").append( $('<option value="'+item.id+'">'+item.name+'</option>'));
+                        $(".sidebar-menu").append('<li class="sidebar-menu__item"><a href="#" class="sidebar-menu__link">'+item.name +'</a>')
                     })
         })
      }
@@ -166,8 +170,9 @@
 
 
 	$(".btn-success").click(function (e) {
+
 	     $.post('/api/admin/sites/sidebars/menu/add',{'name': $("#new-item__name").val(),
-                                                     'site_id':1,
+                                                     'site_id':$("#new-item__site").val(),
                                                      'order':$("#new-item__number").val(),
                                                      'dropdown_id':$("#new-item__parent").val()
 
