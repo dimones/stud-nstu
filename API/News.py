@@ -22,6 +22,10 @@ class DateEncoder(json.JSONEncoder):
 def admin_news_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1 ORDER BY date desc"""),ensure_ascii=False,cls=DateEncoder)
 
+@api.route('/api/admin/news/getMain',methods=['GET'])
+def admin_news_getTop():
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top =1 ORDER BY date desc LIMIT 5"""),ensure_ascii=False,cls=DateEncoder)
+
 @api.route('/api/admin/news/get/<int:_id>',methods=['GET'])
 def admin_news_get_by_id(_id):
     return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""%_id),ensure_ascii=False,cls=DateEncoder)
@@ -29,10 +33,10 @@ def admin_news_get_by_id(_id):
 @api.route('/api/admin/news/add', methods=['POST'])
 def admin_news_add():
     try:
-        news_id = DB().changeInDB("""INSERT INTO "NEWS"(site_id,title,lead_content,content,date,is_active,author_id) VALUES
-                        (%s,'%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,%s)""" %
+        news_id = DB().changeInDB("""INSERT INTO "NEWS"(site_id,title,lead_content,content,date,is_active,author_id, in_top) VALUES
+                        (%s,'%s','%s','%s', TO_DATE('%s','DD.MM.YYYY'),%s,%s, %s)""" %
                         (request.form['site_id'],request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['is_active'],request.form['author_id']),needCommit=True,needIDs=True)
+                         request.form['date'],request.form['is_active'],request.form['author_id'], request.form['in_top']),needCommit=True,needIDs=True)
         return json.dumps({"succeed": True, 'news_id' : news_id})
     except Exception as e:
         print(e)

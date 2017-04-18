@@ -42,24 +42,38 @@ class Main:
         pass
 
 class Sidebar:
-    side_items=[]
+    site_items=[]
     def __init__(self, site):
-        self.side_items.append(Side_menu(site))
-        self.side_items.append(Side_news())
+        self.site_items.append(Side_menu(site))
+        self.site_items.append(Side_news())
     def render(self):
-        pass
+        if self.site_items== None:
+            return
+        else:
+            pass
 
 class Side_item:
     def render(self):
         pass
 
 class Side_menu(Side_item):
-    menu=None
-    def __init__(self, site):
-        self.menu=sidebar_menu_get_dict(site)
-
+    menu = None
+    def __init__(self, site=None):
+        if site == None:
+            pass
+        else:
+            self.menu = sidebar_menu_get_dict(site)
+    def render(self):
+        if self.menu == None:
+            return
+        else:
+            return render_template("sidenav.html", sidebar=self.menu)
 class Side_news(Side_item):
-    pass
+    news=[]
+    def __init__(self):
+        news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1""")
+    def render(self):
+        pass
 
 class Side_cal(Side_item):
     pass
