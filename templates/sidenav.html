@@ -1,13 +1,29 @@
-<ul class="sidebar-menu">
-  {% for item in sidebar %}
-    <li class="sidebar-menu__item {%   if item.submenu | length > 0 %} sidebar-menu__item_share {% endif %}"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ item.name }}</a>
-    {% if item.submenu | length > 0 %}
-        <ul class="sidebar-menu__second-level">
-        {% for sub in item.submenu %}
-            <li class="sidebar-menu__item"><a href="/onirs/{{ sub.id }}" class="sidebar-menu__link">{{ sub.name }}</a></li>
+<div class="sidebar">
+    <ul class="sidebar-menu">
+      {% for item in sidebar %}
+        <li class="sidebar-menu__item {%   if item.submenu | length > 0 %} sidebar-menu__item_share {% endif %}"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ item.name }}</a>
+        {% if item.submenu | length > 0 %}
+            <ul class="sidebar-menu__second-level">
+            {% for sub in item.submenu %}
+                <li class="sidebar-menu__item"><a href="/onirs/{{ sub.id }}" class="sidebar-menu__link">{{ sub.name }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+
+
+    <div class="events">
+        {% for item in news %}
+
+        <a href="#" class="events__item">
+            <img class="events__img" src="../static/photo/{{ item.image_name }}"></img>
+            <p class="events__title">{{ item.title }}</p>
+        </a>
         {% endfor %}
-        </ul>
-    {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+    </div>
+{#    <div class="more-events">#}
+{#        <a href="/">больше мероприятий и акций</a>#}
+{#    </div>#}
+</div>

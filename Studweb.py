@@ -95,6 +95,9 @@ class StudNSTU:
         def getSite(site):
             return Page(site).render()
 
+        app.route('/<int:site>/<int:page>')
+        def getPage(site, page):
+            return Page(site, page).render()
 
     def run(self):
         self.app.run(debug=True)

@@ -33,28 +33,35 @@ class Content:
     posts=[]
     def __init__(self, site):
         pass
-        # self.sidebar=Side_item(site)
+        self.sidebar=Sidebar(site)
     def render(self):
-        return render_template('content.html', posts=self.content)
+        return render_template('content.html', sidebar=self.sidebar.render(),
+                               posts=self.content)
 
 class Main:
     def render(self):
         pass
 
 class Sidebar:
-    site_items=[]
+    menu=None
+    news=None
+
     def __init__(self, site):
-        self.site_items.append(Side_menu(site))
-        self.site_items.append(Side_news())
+        self.menu=Side_menu(site)
+        self.news=Side_news()
     def render(self):
-        if self.site_items== None:
-            return
-        else:
-            pass
+        print(self.menu)
+        return render_template("sidenav.html", sidebar=self.menu.menu,
+                               news=self.news.news)
+
 
 class Side_item:
-    def render(self):
+    def __init__(self, site):
+        self.site_items.append(Side_menu(site))
+
+    def render(self, item):
         pass
+
 
 class Side_menu(Side_item):
     menu = None
@@ -62,16 +69,17 @@ class Side_menu(Side_item):
         if site == None:
             pass
         else:
-            self.menu = sidebar_menu_get_dict(site)
+            self.menu = json.loads(sidebar_menu_get_dict(site))
     def render(self):
         if self.menu == None:
             return
         else:
             return render_template("sidenav.html", sidebar=self.menu)
+
 class Side_news(Side_item):
-    news=[]
+    news=None
     def __init__(self):
-        news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1""")
+        self.news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1 LIMIT 2""")
     def render(self):
         pass
 
@@ -83,7 +91,7 @@ class Page:
     promo = None
     content = None
     footer=None
-    def __init__(self, site=None, sidebar_item=None, material=None):
+    def __init__(self, site=None, page=None, material=None):
         self.header = Header()
         self.promo = Promo(site)
         self.content = Content(site)
@@ -91,12 +99,12 @@ class Page:
     def __str__(self):
         return self.render()
     def render(self):
-        try:
-            return render_template('layout.html', header=self.header.render(),
+        # try:
+        return render_template('layout.html', header=self.header.render(),
                                promo=self.promo.render(),
                                content=self.content.render(),
                                footer=self.footer.render())
-        except:
-            return render_template('layout.html', header=Header().render(),
-                                                  promo=render_template('dev.html'),
-                                                  footer=Footer(None).render())
+        # except:
+        #     return render_template('layout.html', header=Header().render(),
+        #                                           promo=render_template('dev.html'),
+        #                                           footer=Footer(None).render())
