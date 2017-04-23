@@ -45,13 +45,15 @@ class Main:
 class Sidebar:
     menu=None
     news=None
-
+    site=None
     def __init__(self, site):
         self.menu=Side_menu(site)
         self.news=Side_news()
+        self.site=site
     def render(self):
         print(self.menu)
-        return render_template("sidenav.html", sidebar=self.menu.menu,
+        return render_template("sidenav.html",site=self.site,
+                               sidebar=self.menu.menu,
                                news=self.news.news)
 
 
