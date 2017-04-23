@@ -4,3 +4,39 @@
         <div class="info">&copy; 2005-2017, <a href="https://nstu.ru"> Новосибирский государственный технический университет.</a> Свидетельство о регистрации: СМИ Эл № ФС77-45108 от 18 мая 2011 г. Выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)</div>
    </div>
 </footer>
+<script src="../../static/js/jquery-3.1.1.min.js"></script>
+<script>
+	(function(){
+		$.ajax({
+			url: 'api/admin/news/getMain',
+			type: 'GET',
+			error: function(a,b){
+				console.log(b);
+			},
+			success: function(data, textStatus){
+				data = JSON.parse(data);
+				console.log(data);
+				for(var i = 0; i < 5 && i < data.length; i++){
+					$('.events-gallery__buttons').append('<button data-id=' + i + ' class="events-gallery__button"></button>');
+				}
+				
+				var more_link = $('.events-gallery__link');
+				var img_src= $('.events-gallery__img');
+				var preview_text = $('.events-gallery__description');
+				var preview_date = $('.events-gallery__date');
+				var preview_title = $('.events-gallery__title');
+
+				function setGallery(n){
+					preview_text.text(data[n].lead_content);
+					preview_date.text(data[n].date);
+					preview_title.text(data[n].title);
+				}
+				setGallery(0);
+				$('.events-gallery__button').click(function(e){
+					var number = $(e.currentTarget).data('id');
+					setGallery(number);
+				});
+			}
+		});
+	})();
+</script>

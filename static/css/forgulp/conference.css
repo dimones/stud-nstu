@@ -9,10 +9,7 @@
     height: auto;
     margin-right: 25px;
 }
-.conference-preview__head, .conference-preview__body{
-    width: 635px;
-    float: left;
-}
+
 .conference-preview__head{
     margin: 15px 0 20px;
 }
@@ -28,11 +25,21 @@
     float: right;
     color: #989898;
     font-size:10px;
-    text-aligh: right;
+    text-align: right;
 }
 .conference-preview__status{
     color: #E50B38;
     font-family: IntroBold;
     font-size: 15px;
     margin-top: 10px;
+}
+.max-width>div{
+	width: 100%;
+}
+img+.conference-preview__wrapper{
+	width: 635px;	
+	float: right;
+}
+.conference-preview__wrapper{
+	width: 100%;
 }

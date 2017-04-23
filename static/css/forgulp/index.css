@@ -73,6 +73,7 @@
 }
 .events-gallery__button:hover{
 	border-color: rgba(255, 255, 255, 1);
+	cursor: pointer;
 }
 .events-gallery__button.active{
 	border-color: rgba(255, 255, 255, 1);
