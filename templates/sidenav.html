@@ -1,7 +1,7 @@
 <div class="sidebar">
     <ul class="sidebar-menu">
       {% for item in sidebar %}
-        <li class="sidebar-menu__item {%   if item.submenu | length > 0 %} sidebar-menu__item_share {% endif %}"><a href="/onirs/{{ item.id }}" class="sidebar-menu__link">{{ item.name }}</a>
+        <li class="sidebar-menu__item {%   if item.submenu | length > 0 %} sidebar-menu__item_share {% endif %}"><a href="/{{ site }}/{{ item.id }}" class="sidebar-menu__link">{{ item.name }}</a>
         {% if item.submenu | length > 0 %}
             <ul class="sidebar-menu__second-level">
             {% for sub in item.submenu %}
@@ -12,9 +12,7 @@
         </li>
       {% endfor %}
     </ul>
-
-
-    <div class="events">
+   <div class="events">
         {% for item in news %}
 
         <a href="#" class="events__item">

@@ -29,18 +29,28 @@ class Promo:
 
 class Content:
     sidebar = None
-    content = []
-    posts=[]
-    def __init__(self, site):
-        pass
-        self.sidebar=Sidebar(site)
+    content = None
+    isContent=None
+    def __init__(self, site, page):
+        self.isContent=(DB().selectFromDB("""SELECT editable FROM sites WHERE id=%s""" % site)[0]['editable'])
+        if self.isContent==1:
+            self.sidebar=Sidebar(site)
+            self.content=Main(page)
     def render(self):
-        return render_template('content.html', sidebar=self.sidebar.render(),
-                               posts=self.content)
+        if self.isContent==1:
+            return render_template('content.html', sidebar=self.sidebar.render(),
+                               posts=self.content.render())
 
 class Main:
+    posts=None
+    def __init__(self, main=None):
+        if main!= None:
+            self.posts=DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
     def render(self):
-        pass
+        if self.posts!=None:
+            return render_template("conf_template.html", pages=self.posts)
+        else:
+            return
 
 class Sidebar:
     menu=None
@@ -96,7 +106,8 @@ class Page:
     def __init__(self, site=None, page=None, material=None):
         self.header = Header()
         self.promo = Promo(site)
-        self.content = Content(site)
+        self.content = Content(site,page)
+
         self.footer = Footer(site)
     def __str__(self):
         return self.render()

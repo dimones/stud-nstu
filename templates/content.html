@@ -2,9 +2,9 @@
     <div class="wrapper cleafix">
        {{ sidebar | safe }}
         <div class="main-content">
-            {% for post in posts %}
-                {{ post | safe }}
-            {% endfor %}
+            {% if posts !=None %}
+                {{ posts | safe}}
+            {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>

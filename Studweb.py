@@ -13,7 +13,7 @@ class StudNSTU:
         app.register_blueprint(api)
 
         @app.route('/')
-        def infex():
+        def index():
             # return Page().render()
             return render_template('layout.html', header=Header().render(), content=render_template("index/index.html"), footer=render_template("index/footer.html"))
 
@@ -95,7 +95,7 @@ class StudNSTU:
         def getSite(site):
             return Page(site).render()
 
-        app.route('/<int:site>/<int:page>')
+        @app.route('/<int:site>/<int:page>')
         def getPage(site, page):
             return Page(site, page).render()
 
