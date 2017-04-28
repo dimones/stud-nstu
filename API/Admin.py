@@ -26,19 +26,19 @@ def forms_add():
                            page=render_template("Admin/forms/forms_add.html"))
 
 @api.route('/admin/news/add')
-@need_admin
+# @need_admin
 def forms():
-    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
-    if user[0]['site_id']==0:
-        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+    # user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    # if user[0]['site_id']==0:
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),
-                               page=render_template("Admin/news/add.html", action="create",
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
-    else:
-        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                               sidebar=render_template("Admin/sidebar.html"),
-                               page=render_template("Admin/news/add.html", action="create",
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
+                               page=render_template("Admin/news/add.html", action="create"))
+                                                    # sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
+    # else:
+    #     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+    #                            sidebar=render_template("Admin/sidebar.html"),
+    #                            page=render_template("Admin/news/add.html", action="create",
+    #                                                 sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
 
 @api.route('/admin/news/edit/<int:_id>', methods=['GET'])
 @need_admin
@@ -61,7 +61,6 @@ def lists():
 @api.route('/admin/users/add')
 @need_admin
 def Profile():
-
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/users/add.html"))
@@ -101,22 +100,22 @@ def sidebar_menus_add():
                                                     # count=len(items)+2))
 
 @api.route('/admin/pages/add')
-@need_admin
+# @need_admin
 def page_add():
-    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
-    if user[0]['site_id']==0:
-        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+    # user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    # if user[0]['site_id']==0:
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),
                                page=render_template("Admin/page/add.html",
-                                                    action='create',
-                                                    list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 7 """),
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
-    else:
-        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                               sidebar=render_template("Admin/sidebar.html"),
-                               page=render_template("Admin/page/add.html",action='create',
-                                                    list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 7 """),
-                                                                           sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
+                                                    action='create'))
+                                                    # list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 7 """),
+                                                    # sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+    # else:
+    #     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+    #                            sidebar=render_template("Admin/sidebar.html"),
+    #                            page=render_template("Admin/page/add.html",action='create',
+    #                                                 list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 7 """),
+    #                                                                        sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
 
 @api.route('/admin/pages/list')
 @need_admin
