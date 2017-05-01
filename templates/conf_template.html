@@ -1,8 +1,8 @@
-{% for page in pages %}
-    <span class="content__data">Обновлено {{ page.date }}</span>
-    <h2>{{ page.title }}</h2>
-    {{ page.page_content |safe }}
-
+{#{% for page in pages %}#}
+{#    <span class="content__data">Обновлено {{ page.date }}</span>#}
+{#    <h2>{{ page.title }}</h2>#}
+{#    {{ page.page_content |safe }}#}
+{##}
 {#<div class="docs">#}
 {#    {% for file in files %}#}
 {#  <a href="" class="docs__item">#}
@@ -11,7 +11,54 @@
 {#      <span class="docs__info">(word, 39кб)</span>#}
 {#  </a>#}
 {#</div>#}
+{#{% endfor %}#}
+{{ base_url }}
+{% for page in pages %}
+  <div class="conference-preview clearfix">
+    <div class="conference-preview__wrapper">
+      <div class="conference-preview__head clearfix">
+          {{ base_url }} {{ page.id }}
+          <div class="conference-preview__title"><a href="{{ base_url }}/{{ page.id }}">{{ page.title }}</a></div>
+          <div class="conference-preview__date">Обновлено {{ page.date }}</div>
+      </div>
+      <div class="conference-preview__body">
+          <p> {{ page.lead_content }} </p>
+{#          <p class="conference-preview__status">Принимаются заявки</p>#}
+      </div>
+    </div>
+  </div>
 {% endfor %}
+
+{#<div class="main-content">#}
+{#  <h2>Конференции</h2>#}
+{#  <div class="conference-preview clearfix">#}
+{#    <div class="conference-preview__wrapper">#}
+{#      <div class="conference-preview__head clearfix">#}
+{#          <div class="conference-preview__title"><a href="">Наука. Технологии. Инновации.</a></div>#}
+{#          <div class="conference-preview__date">Обновлено 21.06.2016</div>#}
+{#      </div>#}
+{#      <div class="conference-preview__body">#}
+{#          <p>Всероссийская научная конференция молодых ученых "Наука. Технологии. Инновации" (НТИ-201_), проходит при поддержке Министерства образования и науки Российской федерации в рамках Программы развития деятельности студенческих объединений (ПРДСО-2016)...</p>#}
+{#          <p class="conference-preview__status">Принимаются заявки</p>#}
+{#      </div>#}
+{#      </div>#}
+{#  </div>#}
+{#  <div class="conference-preview clearfix">#}
+{#      <img class="conference-preview__img" src="../static/img/conference.png">#}
+{#      <div class="conference-preview__wrapper">#}
+{#          <div class="conference-preview__head clearfix">#}
+{#              <div class="conference-preview__title"><a href="">Наука. Технологии. Инновации.</a></div>#}
+{#              <div class="conference-preview__date">Обновлено 21.06.2016</div>#}
+{#          </div>#}
+{#          <div class="conference-preview__body">#}
+{#              <p>Всероссийская научная конференция молодых ученых "Наука. Технологии. Инновации" (НТИ-201_), проходит при поддержке Министерства образования и науки Российской федерации в рамках Программы развития деятельности студенческих объединений (ПРДСО-2016)...</p>#}
+{#              <p class="conference-preview__status">Принимаются заявки</p>#}
+{#          </div>#}
+{#      </div>#}
+{#  </div>#}
+{#</div>#}
+
+
 
 <script>
 var acc = document.getElementsByClassName("accordion__button");

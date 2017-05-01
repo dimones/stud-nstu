@@ -33,11 +33,11 @@ class Content:
     isContent=None
     def __init__(self, site, page):
         self.isContent=(DB().selectFromDB("""SELECT editable FROM sites WHERE id=%s""" % site)[0]['editable'])
-        if self.isContent==1:
-            self.sidebar=Sidebar(site)
-            self.content=Main(page)
+        if self.isContent == 1:
+            self.sidebar = Sidebar(site)
+            self.content = Main(page)
     def render(self):
-        if self.isContent==1:
+        if self.isContent == 1:
             return render_template('content.html', sidebar=self.sidebar.render(),
                                posts=self.content.render())
 
@@ -48,7 +48,7 @@ class Main:
             self.posts=DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
     def render(self):
         if self.posts!=None:
-            return render_template("conf_template.html", pages=self.posts)
+            return render_template("conf_template.html", pages=self.posts, base_url=request.path)
         else:
             return
 
