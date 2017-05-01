@@ -12,12 +12,10 @@
 {#  </a>#}
 {#</div>#}
 {#{% endfor %}#}
-{{ base_url }}
 {% for page in pages %}
   <div class="conference-preview clearfix">
     <div class="conference-preview__wrapper">
       <div class="conference-preview__head clearfix">
-          {{ base_url }} {{ page.id }}
           <div class="conference-preview__title"><a href="{{ base_url }}/{{ page.id }}">{{ page.title }}</a></div>
           <div class="conference-preview__date">Обновлено {{ page.date }}</div>
       </div>
