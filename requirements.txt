@@ -3,3 +3,4 @@ psycopg2
 nose
 coverage
 python-magic
+Flask-Session

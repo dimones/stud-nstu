@@ -93,16 +93,18 @@ import os
 
 
 class uploadfile():
-    def __init__(self, name, type=None, size=None, not_allowed_msg='',site='onir', _id=''):
+    def __init__(self, name, type=None, size=None, not_allowed_msg='',site='onir', _id='', isGal = False):
         self.name = name
         self.type = type
         self.size = size
         self.not_allowed_msg = not_allowed_msg
         self.url = '/static/files/' + site +'/' + str(_id)+'/' + name
+
         self.thumbnail_url = "thumbnail/%s" % name
         self.delete_url = '/api/admin/pages/files/delete/' + site + '/' + str(_id) +'/' + name
-        print('fuck')
-        print(self.delete_url)
+        if isGal:
+            self.url = '/static/galleries/' + site + '/' + str(_id) + '/' + name
+            self.delete_url = '/api/admin/galleries/files/delete/' + site + '/' + str(_id) + '/' + name
         self.delete_type = "DELETE"
 
     def is_image(self):
@@ -205,8 +207,9 @@ def create_thumbnail(image):
         return False
 
 
-@api.route("/api/admin/pages/files/upload/<string:_site>/<int:_id>", methods=['GET', 'POST'])
-def upload(_site,_id):
+@api.route("/api/admin/<string:_type>/files/upload/<string:_site>/<int:_id>", methods=['GET', 'POST'])
+def upload(_type,_site,_id):
+    site = DB().selectFromDB("SELECT lat_name FROM \"sites\" WHERE id = %s " % _site)[0]['lat_name']
     if request.method == 'POST':
         files = request.files['file']
 
@@ -220,63 +223,110 @@ def upload(_site,_id):
             # if not allowed_file(files.filename):
             #     result = uploadfile(name=filename, type=mime_type, size=0, not_allowed_msg="File type not allowed")
             # else:
-            path = api.root_path[:-4] + '/static/files/' + _site +'/'  + str(_id)
-            # save file to disk
-            if os.path.exists(path) != True:
-                os.mkdir(path)
-            # _filename = str(uuid.uuid4().hex) + '.' + filename.split('.')[-1]
-            uploaded_file_path = os.path.join(path, filename)
-            files.save(uploaded_file_path)
-            #TODO site_id
-            DB().changeInDB("""INSERT INTO "DOCUMENTS"(filename,site_id,mime_type,page_id) VALUES('%s',1,'%s',%s)"""
-                            % (filename,mime_type,_id),needCommit=True)
-            # create thumbnail after saving
-            # if mime_type.startswith('image'):
-            #     create_thumbnail(filename)
+            if _type == 'pages':
+                path = api.root_path[:-4] + '/static/files/' + site +'/'  + str(_id)
+                # save file to disk
+                if os.path.exists(path) != True:
+                    os.makedirs(path,exist_ok=True)
+                # _filename = str(uuid.uuid4().hex) + '.' + filename.split('.')[-1]
+                uploaded_file_path = os.path.join(path, filename)
+                files.save(uploaded_file_path)
+                #TODO site_id
+                DB().changeInDB("""INSERT INTO "DOCUMENTS"(filename,site_id,mime_type,page_id) VALUES('%s',%s,'%s',%s)"""
+                                % (filename,_site,mime_type,_id),needCommit=True)
+                # create thumbnail after saving
+                # if mime_type.startswith('image'):
+                #     create_thumbnail(filename)
 
-            # get file size after saving
-            size = os.path.getsize(uploaded_file_path)
+                # get file size after saving
+                size = os.path.getsize(uploaded_file_path)
 
-            # return json for js call back
-            result = uploadfile(name=filename, type=mime_type, size=size,site=_site,_id=_id)
+                # return json for js call back
+                result = uploadfile(name=filename, type=mime_type, size=size,site=site,_id=_id)
 
-            return json.dumps({"files": [result.get_file()]})
+                return json.dumps({"files": [result.get_file()]})
+            elif _type == 'galleries':
+                path = api.root_path[:-4] + '/static/galleries/' + site + '/' + str(_id)
+                # save file to disk
+                if os.path.exists(path) != True:
+                    os.mkdir(path)
+                # _filename = str(uuid.uuid4().hex) + '.' + filename.split('.')[-1]
+                uploaded_file_path = os.path.join(path, filename)
+                files.save(uploaded_file_path)
+                # TODO site_id
+                DB().changeInDB("""INSERT INTO "GALLERIES_PHOTO"(filename,site_id,mime_type,gal_id) VALUES('%s',%s,'%s',%s)"""
+                                % (filename, site, mime_type, _id), needCommit=True)
+                # create thumbnail after saving
+                # if mime_type.startswith('image'):
+                #     create_thumbnail(filename)
+
+                # get file size after saving
+                size = os.path.getsize(uploaded_file_path)
+
+                # return json for js call back
+                result = uploadfile(name=filename, type=mime_type, size=size, site=_site, _id=_id)
+
+                return json.dumps({"files": [result.get_file()]})
 
     if request.method == 'GET':
-        # get all file in ./data directory
-        files = [f for f in os.listdir(api.root_path[:-4] + '/static/files/' + _site +'/'  + str(_id)) if
-                 os.path.isfile(os.path.join(api.root_path[:-4] + '/static/files/' + _site +'/'  + str(_id), f)) and f not in IGNORED_FILES]
+        temp_path = api.root_path[:-4] + '/static/files/' + site +'/'  + str(_id)
+        if _type is 'galleries':
+            temp_path = api.root_path[:-4] + '/static/galleries/' + site + '/' + str(_id)
+        if os.path.exists(temp_path):
+            # get all file in ./data directory
+            files = [f for f in os.listdir(temp_path) if
+                     os.path.isfile(temp_path) and f not in IGNORED_FILES]
 
-        file_display = []
+            file_display = []
 
-        for f in files:
-            size = os.path.getsize(os.path.join(api.root_path[:-4] + '/static/files/' + _site +'/'  + str(_id), f))
-            file_saved = uploadfile(name=f, size=size,site=_site,_id=_id)
-            file_display.append(file_saved.get_file())
+            for f in files:
+                size = os.path.getsize(os.path.join(temp_path, f))
+                file_saved = uploadfile(name=f, size=size,site=site,_id=_id)
+                file_display.append(file_saved.get_file())
 
-        return json.dumps({"files": file_display},ensure_ascii=False)
-
+            return json.dumps({"files": file_display},ensure_ascii=False)
+        else:
+            return json.dumps({"files": []}, ensure_ascii=False)
     return "ok"
 
 
-@api.route("/api/admin/pages/files/delete/<string:_site>/<int:_id>/<string:filename>", methods=['DELETE'])
-def delete(_site,_id,filename):
-    path = api.root_path[:-4] + '/static/files/' + _site +'/' + str(_id)+'/' + filename
-    print(path)
-    # file_thumb_path = os.path.join(upload_config['THUMBNAIL_DOCUMENTS_FOLDER'], filename)
+@api.route("/api/admin/<string:_type>/files/delete/<string:_site>/<int:_id>/<string:filename>", methods=['DELETE'])
+def delete(_type,_site,_id,filename):
+    if _type is 'pages':
+        path = api.root_path[:-4] + '/static/files/' + _site +'/' + str(_id)+'/' + filename
+        print(path)
+        # file_thumb_path = os.path.join(upload_config['THUMBNAIL_DOCUMENTS_FOLDER'], filename)
 
-    if os.path.exists(path):
-        print('file exists')
-        try:
-            os.remove(path)
-            DB().changeInDB("""DELETE FROM "DOCUMENTS" WHERE page_id = %s and filename = '%s'""" % (_id,filename),needCommit=True)
+        if os.path.exists(path):
+            print('file exists')
+            try:
+                os.remove(path)
+                DB().changeInDB("""DELETE FROM "DOCUMENTS" WHERE page_id = %s and filename = '%s'""" % (_id,filename),needCommit=True)
 
-            # if os.path.exists(file_thumb_path):
-            #     os.remove(file_thumb_path)
+                # if os.path.exists(file_thumb_path):
+                #     os.remove(file_thumb_path)
 
-            return json.dumps({"filename": 'True'})
-        except:
-            return json.dumps({"filename": 'False'})
+                return json.dumps({"filename": 'True'})
+            except:
+                return json.dumps({"filename": 'False'})
+    elif _type is 'galleries':
+        path = api.root_path[:-4] + '/static/galleries/' + _site + '/' + str(_id) + '/' + filename
+        print(path)
+        # file_thumb_path = os.path.join(upload_config['THUMBNAIL_DOCUMENTS_FOLDER'], filename)
+
+        if os.path.exists(path):
+            print('file exists')
+            try:
+                os.remove(path)
+                DB().changeInDB("""DELETE FROM "GALLERIES_PHOTO" WHERE page_id = %s and filename = '%s'""" % (_id, filename),
+                                needCommit=True)
+
+                # if os.path.exists(file_thumb_path):
+                #     os.remove(file_thumb_path)
+
+                return json.dumps({"filename": 'True'})
+            except:
+                return json.dumps({"filename": 'False'})
 
 
 # serve static files

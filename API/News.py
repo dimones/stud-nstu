@@ -24,11 +24,11 @@ def admin_news_get():
 
 @api.route('/api/admin/news/getMain',methods=['GET'])
 def admin_news_getTop():
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top =1 ORDER BY date desc LIMIT 5"""),ensure_ascii=False,cls=DateEncoder)
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top = 1 ORDER BY date desc LIMIT 5"""),ensure_ascii=False,cls=DateEncoder)
 
 @api.route('/api/admin/news/get/<int:_id>',methods=['GET'])
 def admin_news_get_by_id(_id):
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""%_id),ensure_ascii=False,cls=DateEncoder)
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id = %s """%_id),ensure_ascii=False,cls=DateEncoder)
 
 @api.route('/api/admin/news/add', methods=['POST'])
 def admin_news_add():

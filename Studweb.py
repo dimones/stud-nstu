@@ -1,17 +1,24 @@
-from flask import Flask, render_template,wrappers
+from flask import Flask, render_template,wrappers,session
+from flask_session import *
 from View import *
 from API import *
 from Utils import *
-
 app = Flask(__name__)
+
+# Session(app)
 class StudNSTU:
     app = None
     # app = Flask(__name__)
-
+    # SESSION_TYPE = 'redis'
     def __init__(self,app):
+
         self.app = app
         app.register_blueprint(api)
-
+        print(app)
+        # SESSION_TYPE = 'redis'
+        # app.config.from_object(__name__)
+        # sess = Session()
+        # sess.init_app(app)
         @app.route('/')
         def index():
             # return Page().render()

@@ -13,15 +13,19 @@
 
 $(function () {
     'use strict';
+    var sites = {}
     $.get('/api/admin/pages/next_id')
     .done(function (data) {
         data = JSON.parse(data);
         console.log(data);
+        console.log('hi');
+        console.log('/api/admin/pages/files/upload/' + $("#new-item__site").val() + '/' + data.id);
         // Initialize the jQuery File Upload widget:
         $('#fileupload').fileupload({
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
-            url: '/api/admin/pages/files/upload/onir/' + data.id
+            url: '/api/admin/pages/files/upload/' + $("#new-item__site").val() + '/' + data.id
+
         });
 
         // Enable iframe cross-domain access via redirect option:
