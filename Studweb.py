@@ -1,5 +1,5 @@
 from flask import Flask, render_template,wrappers,session
-from flask_session import *
+# from flask_session import *
 from View import *
 from API import *
 from Utils import *
@@ -16,7 +16,7 @@ class StudNSTU:
         app.register_blueprint(api)
         print(app)
         # SESSION_TYPE = 'redis'
-        # app.config.from_object(__name__)
+        # app.con fig.from_object(__name__)
         # sess = Session()
         # sess.init_app(app)
         @app.route('/')
@@ -53,13 +53,6 @@ class StudNSTU:
         def _3dnstu():
             return render_template('layout.html', header=Header().render(),
                                    content=render_template("panoramas.html"), footer=render_template("footer.html"))
-
-        @app.route('/test')
-        def test():
-            return Page(promo=promo(adress="promo_garage.html"),
-                        content=content(
-                            # sidebar=sidebar()
-                            posts=("""<div>dfs</div>"""))).render()
 
         @app.route('/dev')
         def dev():
