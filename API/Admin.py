@@ -32,8 +32,8 @@ def forms():
     if user[0]['site_id']==0:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),
-                               page=render_template("Admin/news/add.html", action="create"),
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """))
+                               page=render_template("Admin/news/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
     else:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),
