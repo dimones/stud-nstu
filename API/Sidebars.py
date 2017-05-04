@@ -5,10 +5,9 @@ import json,sys,uuid,datetime
 from .DB import *
 
 
-@api.route('/api/admin/sites/sidebars/menu/get',methods=["GET"])
-def sidebar_menu_get():
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = %s """
-                                        % request.args.get('site_id')))
+@api.route('/api/admin/sites/sidebars/menu/get/<int:id>',methods=["GET"])
+def sidebar_menu_get(id):
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = %s """% id))
 
 @api.route('/api/admin/sites/sidebars/menu/getDict/<int:id>',methods=["GET"])
 def sidebar_menu_get_dict(id):

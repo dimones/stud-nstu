@@ -197,7 +197,7 @@
          sideBarList();
      })
      function sideBarList() {
-              $.get('/api/admin/sites/sidebars/menu/getDict/' + $('#new-item__site').val())
+              $.get('/api/admin/sites/sidebars/menu/get/' + $('#new-item__site').val())
                 .done(function (e) {
                     var list=JSON.parse(e);
                     $("#new-item__parent").empty();
