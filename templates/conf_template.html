@@ -12,20 +12,47 @@
 {#  </a>#}
 {#</div>#}
 {#{% endfor %}#}
-{% for page in pages %}
-  <div class="conference-preview clearfix">
-    <div class="conference-preview__wrapper">
-      <div class="conference-preview__head clearfix">
-          <div class="conference-preview__title"><a href="{{ base_url }}/{{ page.id }}">{{ page.title }}</a></div>
-          <div class="conference-preview__date">Обновлено {{ page.date }}</div>
+{% if pages | length == 1 %}
+              <div class="main-content">
+                  <span class="content__data">Обновлено {{ pages[0].date }}</span>
+                  <h2>{{ pages[0].title }}</h2>
+                  {{ pages[0].page_content |safe }}
+{##}
+{#                <div class="docs">#}
+{#                      <a href="" class="docs__item">#}
+{#                          <img src="../static/photo/doc.png" alt="" class="docs__img">#}
+{#                          <span class="dics__name">Шаблон статьи</span>#}
+{#                          <span class="docs__info">(word, 39кб)</span>#}
+{#                      </a>#}
+{#                      <a href="" class="docs__item">#}
+{#                          <img src="../static/photo/doc.png" alt="" class="docs__img">#}
+{#                          <span class="dics__name">Требования</span>#}
+{#                          <span class="docs__info">(word, 39кб)</span>#}
+{#                      </a>#}
+{#                      <a href="" class="docs__item">#}
+{#                          <img src="../static/photo/pdf.png" alt="" class="docs__img">#}
+{#                          <span class="dics__name">Участники (от 29.02.2016)</span>#}
+{#                          <span class="docs__info">(pdf, 39кб)</span>#}
+{#                      </a>#}
+{#                  </div>#}
+              </div>
+{% else %}
+    {% for page in pages %}
+      <div class="conference-preview clearfix">
+        <div class="conference-preview__wrapper">
+          <div class="conference-preview__head clearfix">
+              <div class="conference-preview__title"><a href="{{ base_url }}/{{ page.id }}">{{ page.title }}</a></div>
+              <div class="conference-preview__date">Обновлено {{ page.date }}</div>
+          </div>
+          <div class="conference-preview__body">
+              <p> {{ page.lead_content }} </p>
+    {#          <p class="conference-preview__status">Принимаются заявки</p>#}
+          </div>
+        </div>
       </div>
-      <div class="conference-preview__body">
-          <p> {{ page.lead_content }} </p>
-{#          <p class="conference-preview__status">Принимаются заявки</p>#}
-      </div>
-    </div>
-  </div>
-{% endfor %}
+    {% endfor %}
+
+{% endif %}
 
 {#<div class="main-content">#}
 {#  <h2>Конференции</h2>#}

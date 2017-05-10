@@ -44,12 +44,13 @@ class Content:
 class Main:
     posts=None
     def __init__(self, main=None, material=None):
-        print (main)
         if main == None:
-            print(12314)
-            self.posts=DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
+            pass
         else:
-            self.posts=DB().selectFromDB("""SELECT * FROM pages WHERE id=%s """% main)
+            if material ==None:
+                self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
+            else:
+                self.posts= DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
     def render(self):
         if self.posts!=None:
             return render_template("conf_template.html", pages=self.posts, base_url=request.path)

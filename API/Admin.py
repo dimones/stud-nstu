@@ -128,18 +128,26 @@ def page_list():
 @api.route('/admin/pages/edit/<int:_id>', methods=['GET'])
 @need_admin
 def change_pages(_id):
-    print(AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo())
-    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    if user[0]['site_id']==0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/add.html", action="edit",
-                                                list=DB().selectFromDB(
-                                                    """SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
-                                                object=((DB().selectFromDB(
-                                                    """SELECT * FROM "pages" WHERE id=%s""" % _id))[0]
-                                                                 ),
+                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
+                                                object=((DB().selectFromDB("""SELECT * FROM "pages" WHERE id=%s""" % _id))[0]),
                                                 id=_id,
                                                 user=(AdminHelper(request.cookies['device_token'],
                                                                   request.cookies['device_id']).getUserInfo())[0]))
+    else:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/page/add.html", action="edit",
+                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
+                                                object=((DB().selectFromDB("""SELECT * FROM "pages" WHERE id=%s""" % _id))[0]),
+                                                id=_id,
+                                                user=(AdminHelper(request.cookies['device_token'],
+                                                                  request.cookies['device_id']).getUserInfo())[0]))
+
 
 
         # tem_scr="""<!-- The template to display files available for upload -->
