@@ -8,30 +8,27 @@
         </div>
         <nav>
             <ul class="main-nav">
+                <li class="main-nav__item">
+                    <a href="" class="main-nav__link">События</a>
+                </li>
+                                <li class="main-nav__item">
+                    <a href="" class="main-nav__link">Фотоотчеты</a>
+                </li>
+                                <li class="main-nav__item">
+                    <a href="" class="main-nav__link">Новости</a>
+                </li>
+                                <li class="main-nav__item">
+                    <a href="" class="main-nav__link">Расписание</a>
+                </li>
+            </ul>
+            <ul class="sub-nav">
                 {% for item in nav %}
                     {% if item.sub==0 %}
                         <li class="main-nav__item">
-                            <a href="/{{ item.id }}" class="main-nav__link">{{ item.title }}</a>
+                            <a href="/{{ item.id }}" class="sub-nav__link">{{ item.title }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
-            </ul>
-            <ul class="sub-nav">
-{#                <li class="sub-nav__item">#}
-{#                    <a href="/" class="sub-nav__link">НОВОСТИ</a>#}
-{#                </li>#}
-                <li class="sub-nav__item">
-                    <a href="/schedule" class="sub-nav__link">РАСПИСАНИЕ</a>
-                </li>
-                <li class="sub-nav__item">
-                    <a href="/3d-nstu" class="sub-nav__link">3D-НГТУ</a>
-                </li>
-                <li class="sub-nav__item">
-                    <a href="/om" class="sub-nav__link">ТРУДОУСТРОЙСТВО</a>
-                </li>
-{#                <li class="sub-nav__item">#}
-{#                    <a class="sub-nav__link">МАГАЗИН</a>#}
-{#                </li>#}
             </ul>
         </nav>
         <ul class="social">
