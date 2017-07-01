@@ -1,0 +1,86 @@
+.logo div {
+    font-size: 11px;
+    font-weight: normal;
+    text-transform: lowercase;
+    font-family: IntroLight;
+    margin-left: 119px;}
+.promo_sovstarost, .promo_studotr, .promo_sharap, .promo_erlagol {
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: IntroLight;
+}
+.promo_sovstarost .promo__question, .promo_studotr .promo__question, .promo_sharap .promo__question, .promo_erlagol .promo__question  {
+	width:300px;
+	margin-top:7px;
+	line-height:1.34;
+	letter-spacing: 1.5px;
+}
+.promo_sovstarost .promo__head-title, .promo_studotr .promo__head-title, .promo_sharap  .promo__head-title, .promo_erlagol  .promo__head-title  {
+	font-size:36px;
+	letter-spacing: 1.6px;
+	margin:26px 0 22px 0;
+}
+.promo_sovstarost .proposal__link, .promo_studotr .proposal__link, .promo_sharap .proposal__link, .promo_erlagol .proposal__link {
+	position:relative;
+	font-family: "Open Sans";
+	border: 1px solid #11BA49;
+	color: #fff;
+}
+.promo_sovstarost .proposal__link:hover , .promo_studotr .proposal__link:hover, .promo_sharap .proposal__link:hover, .promo_erlagol .proposal__link:hover {
+	background-color: #11BA49;
+	color: #fff;
+}
+
+.promo_sovstarost {
+	background-image: url('../img/promo-sovstarost.jpg');
+	background-color: #3e761b;
+	background-position: 30% 15%;
+}
+
+.promo_studotr {
+	background-image: url('../img/promo-studotr.jpg');
+	background-color: #1b2664;
+	background-position: -75px 70%;
+}
+
+.promo_zdorovye {
+	background-image: url('../img/promo-zdorovye.jpg');
+	background-color: #e4e4e4;
+	background-position: 45% 20%;
+}
+
+	.promo_zdorovye .promo__head-title {
+		color: #353335;
+		font-size:24px;
+		letter-spacing: 1.1px;
+		margin:26px 0 22px 0;
+	}
+	.promo_zdorovye .promo__question {
+		color: #3d3b39;
+		width: 300px;
+		margin-top: 7px;
+		line-height: 1.34;
+		letter-spacing: 1.5px;
+	}
+	.promo_zdorovye .proposal__link {
+		position: relative;
+		font-family: "Open Sans";
+		margin-top: 30px;
+		border: 1px solid #373638;
+		color: #484848;
+	}
+	.promo_zdorovye .proposal__link:hover {
+		background-color: #484848;
+		color: #fff;
+	}
+
+.promo_sharap {
+	background-image: url('../img/promo-sharap.jpg');
+	background-color: #265126;
+	background-position: -120px 30%;
+}
+.promo_erlagol {
+	background-image: url('../img/promo-erlagol.jpg');
+	background-color: #0e568e;
+	background-position: -120px 20%;
+}
