@@ -103,6 +103,12 @@ class StudNSTU:
         def getMaterial(site, page, material):
             return Page(site, page, material).render()
 
+        @app.route('/events')
+        def events():
+            # return Page().render()
+            return render_template('layout.html', header=Header().render(), content=render_template("events.html"), footer=render_template("index/footer.html"))
+
+
     def run(self):
         self.app.run(debug=True)
 

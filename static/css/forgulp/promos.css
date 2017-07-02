@@ -93,3 +93,32 @@
 .promo__subtitle_top{
 	margin-top: 50px;
 }
+
+.promo_news, .promo_events{
+    background-image: url('../img/news.jpg');
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+	height: 380px;
+}
+
+.promo_news .promo__question, .promo_events .promo__question{
+    width: 280px;
+}
+
+.promo_news .promo__head-title, .promo_events .promo__head-title{
+    margin: 5px 0;
+}
+
+.promo_news .promo__about, .promo_events .promo__about{
+    margin-bottom: 20px;
+}
+
+.promo_events{
+    background-image: url('../img/events.jpg');
+    color: #1A1A1A;
+}
+
+.promo_events .promo__subtitle_top{
+    color: #1A1A1A;
+}
