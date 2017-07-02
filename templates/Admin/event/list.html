@@ -25,17 +25,18 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-9">
-                       {{ item.lead_content }}
+                       {{ item.lead_text }}
                     </div>
                 </div>
                 <div class="panel-footer clearfix">
                     <div class="pull-left">
                         <div>{{ item.name }}  {{ item.surname }}</div>
-                        <div>Дата публикации {{ item.date }}</div>
+                        <div>Дата события {{ item.event_date }}</div>
                     </div>
                     <div class="btn-group pull-right">
-                        <a href="/admin/pages/edit/{{ item.id }}" class="btn btn-info">Править</a>
-                        <button type="button" class="btn btn-primary">Удалить</button>
+                        <a href="/admin/events/edit/{{ item.id }}" class="btn btn-primary">Править</a>
+
+                        <input type="button" class="btn btn-info " value="Удалить">
                     </div>
                 </div>
             </div>
@@ -44,8 +45,9 @@
 {% endfor %}
 </div>
 <script>
-    $(".btn-primary").click(function(e){
-                $.post('/api/admin/news/remove',{
+    $(".btn-info").click(function(e){
+        console.log($(e.toElement).parents(".panel-info").attr('id'));
+                $.post('/api/admin/events/remove',{
             'id':$(e.toElement).parents(".panel-info").attr('id')
         }).done(function (data) {
             var ret = JSON.parse(data);

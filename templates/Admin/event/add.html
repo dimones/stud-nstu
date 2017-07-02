@@ -1,3 +1,7 @@
+
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
 <link rel="stylesheet" href="/static/css/uploader/style.css">
 
 <!-- blueimp Gallery styles -->
@@ -23,7 +27,7 @@
                     {% elif action=="edit" %}
                     Редактировать
                     {% endif %}
-                    Материал
+                    Событие
                 </div>
             </div>
             <div class="widget-body">
@@ -34,11 +38,13 @@
                           <input type="Text" class="form-control" placeholder="Заголовок" id="new-item__title">
                         </div>
                     </div>
-                {% if action=="create" %}
                     <div class="form-group">
-                        <label class="col-lg-3 control-label" for="new-item__site">Выберите раздел</label>
+                        <label class="col-lg-3 control-label" for="item__site">Выберите раздел</label>
                         <div class="col-lg-9">
-                          <select class="form-control" id="new-item__site">
+                          <select class="form-control" id="item__site">
+                              <option value="0">
+                                    Без раздела
+                              </option>
                             {% for item in  sites %}
                                 <option value="{{ item.id }}">
                                     {{ item.title }}
@@ -47,25 +53,11 @@
                           </select>
                         </div>
                     </div>
-                {% endif %}
+
                     <div class="form-group">
-                        <label class="col-lg-3 control-label" for="new-item__parent">Выберите категорию</label>
+                        <label class="col-lg-3 control-label" >Дата события</label>
                         <div class="col-lg-9">
-                          <select class="form-control" id="new-item__parent">
-                            {% if action=="edit" %}
-                              {% for item in list %}
-                                    <option value="{{ item.id }}"
-
-                                            {% if item.id==object.sidebar_id %}
-                                                selected
-			                                {% endif %}
-
-                                        >
-                                    {{ item.name }}
-                                </option>
-                            {% endfor %}
-                          {% endif %}
-                          </select>
+                            <input class="datepicker-here form-control" id="picker" data-timepicker="true" data-date-format="dd.mm.yyyy">
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,38 +66,6 @@
                             <textarea class="form-control" rows="7" id="lead_content"></textarea>
                         </div>
                     </div>
-{#                    <div class="form-group">#}
-{#                        <label class="col-lg-3 control-label" for="enableSocialPosts">Установить событие</label>#}
-{#                        <div class="col-lg-9">#}
-{#                            <div class="onoffswitch">#}
-{#                              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="enableSocialPosts" checked>#}
-{#                              <label class="onoffswitch-label" for="enableSocialPosts">#}
-{#                                <div class="onoffswitch-inner"></div>#}
-{#                                <div class="onoffswitch-switch"></div>#}
-{#                              </label>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="form-group">#}
-{#                        <label class="col-lg-3 control-label" >Дата события</label>#}
-{#                        <div class="col-lg-9">#}
-{#                            <div class="datepicker-here" data-timepicker="true"></div>#}
-{#                        </div>#}
-{#                        <script>#}
-{#                            $('#enableSocialPosts').change(function () {#}
-{#                                if ($('#enableSocialPosts').is(":checked")==true)#}
-{#                                    $('.datepicker-here').parents('.form-group').show(500)#}
-{#                                else#}
-{#                                    $('.datepicker-here').parents('.form-group').hide(500);#}
-{#                            });#}
-{#                            $('.datepicker-here').datepicker({#}
-{#                                    onSelect: function(date) {#}
-{#                                }#}
-{#                            });#}
-{#                            var datepicker = $('#my-elem').datepicker().data('datepicker');#}
-{#                            console.log(datepicker.selectDate());#}
-{#                        </script>#}
-{#                    </div>#}
 
                     <div class="form-group"><div class="col-lg-12">
                             <textarea class="wysiwyg" id="content"></textarea>
@@ -125,142 +85,56 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="widget">
-            <div class="widget-header">
-                <div class="title">
-                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Загрузка документов
-                </div>
-            </div>
 
-            <div class="widget-body">
-            <!-- The file upload form used as target for the file upload widget -->
-            <form id="fileupload" class="form-horizontal" action="/api/admin/pages/files/upload" method="POST" enctype="multipart/form-data">
-                <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
-                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-
-                        <!-- The fileinput-button span is used to style the file input field as button -->
-                        <span class="btn btn-success fileinput-button">
-                            <i class="glyphicon glyphicon-plus"></i>
-                            <span>Добавить файлы...</span>
-                            <input type="file" name="file" multiple>
-                        </span>
-                        <button type="submit" class="btn btn-primary start">
-                            <i class="glyphicon glyphicon-upload"></i>
-                            <span>Начать загрузку</span>
-                        </button>
-{#                        <button type="reset" class="btn btn-warning cancel">#}
-{#                            <i class="glyphicon glyphicon-ban-circle"></i>#}
-{#                            <span>Отменить загрузку</span>#}
-{#                        </button>#}
-                        <button type="button" class="btn btn-danger delete">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span>Удалить</span>
-                        </button>
-                        <input type="checkbox" class="toggle">
-                        <!-- The global file processing state -->
-                        <span class="fileupload-process"></span>
-                    <!-- The global progress state -->
-                    <div class="col-lg-5 fileupload-progress fade">
-                        <!-- The global progress bar -->
-                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                        </div>
-                        <!-- The extended global progress state -->
-                        <div class="progress-extended">&nbsp;</div>
-                    </div>
-                <!-- The table listing the files available for upload/download -->
-                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-            </form>
-            </div>
-        </div>
-    </div>
-    <!-- The blueimp Gallery widget -->
-    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-        <div class="slides"></div>
-        <h3 class="title"></h3>
-        <a class="prev">‹</a>
-        <a class="next">›</a>
-        <a class="close">×</a>
-        <a class="play-pause"></a>
-        <ol class="indicator"></ol>
-    </div>
 </div>
 <script>
-    $( "#new-item__site").on('change',function() {
-      console.log( $( "#new-item__site option:selected" ).val() );
-    });
      window.onload = function(e)
      {
-            console.log(0);
-            sideBarList();
+         $('#picker').datepicker.update(
+             dateFormat, "dd.MM.yyyy"
+         );
      };
-     $('#new-item__site').on('change', function () {
-         $('#new-item__parent').empty();
-         sideBarList();
-     })
-     function sideBarList() {
-              $.get('/api/admin/sites/sidebars/menu/get/' + $('#new-item__site').val())
-                .done(function (e) {
-                    var list=JSON.parse(e);
-                    $("#new-item__parent").empty();
-                    $("#new-item__parent").append('<option value="0">Нет родительского раздела</option>');
-                    list.forEach(function (item, i, list) {
-                        console.log(item);
-                        $("#new-item__parent").append( $('<option value="'+item.id+'">'+item.name+'</option>'));
-                    })
-        })
-     }
-function getDate() {
-
-    var d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [day, month, year].join('.');
-}
 {% if action =='create' %}
 
     $("#add").click(function (e) {
-	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
+	     $.post('/api/admin/events/add',{'text': tinyMCE.get('content').getContent(),
                                         'title':$("#new-item__title").val(),
-                                        'sitebar_id': $("#new-item__parent").val(),
-                                        'date': getDate()
+                                        'site_id': $("#item__site").val(),
+                                        'date':$('#picker').val(),
+                                        'lead_text': $("#lead_content").val()
+
         }).done(function (data) {
             var ret = JSON.parse(data);
             toastr.success("Запись успешно добавлена");
         }).fail(function(data) {
           toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')
       });
-    })
+    });
 {% elif action=='edit' %}
 
     window.onload = function() {
         var obj ={{object |tojson}};
         $("#new-item__title").val(obj.title);
-        $("#lead_content").val(obj.lead_content);
-        tinymce.activeEditor.setContent(obj.page_content);
-    }
+        $("#lead_content").val(obj.lead_text);
+        tinymce.activeEditor.setContent(obj.text);
+        $('#picker').val(obj.event_date);
+        $("#item__site").val(obj.site_id);
+    };
     $("#edit").click(function () {
-        $.post('/api/admin/pages/change', {
-            "title": $("#new-item__title").val(),
-            "lead_content": $("#lead_content").val(),
-            "page_content": tinymce.activeEditor.getContent(),
-            "date": getDate(),
-            "id": {{ object.id }}
-
+        $.post('/api/admin/events/change', {
+            'id': {{ object.id }},
+            'text': tinyMCE.get('content').getContent(),
+            'title':$("#new-item__title").val(),
+            'site_id': $("#item__site").val(),
+            'date':$('#picker').val(),
+            'lead_text': $("#lead_content").val()
         }).done(function (e) {
             var result=JSON.parse(e);
-            if (result.succeed==true)
+            if (result.succeed == true)
                 toastr.success('Материал изменен');
             else toastr.error('Произошла ошибка повторите попытку позже')
         })
-    })
+    });
 {% endif %}
 </script>
 
@@ -345,9 +219,6 @@ function getDate() {
 
 {% block scripts %}
 
-<script src="/static/js/jquery-3.1.1.min.js"></script>
-<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
-<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

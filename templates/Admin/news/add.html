@@ -35,14 +35,11 @@
                         <label class="col-lg-4 control-label" for="new-item__site">Выберите раздел сайта</label>
                         <div class="col-lg-8">
                           <select class="form-control" id="new-item__site">
+                              <option value="0">
+                                    Без раздела
+                              </option>
                             {% for item in sites %}
-                                    <option value="{{ item.id }}"
-                                        {% if action=="edit" %}
-                                            {% if item.id==object.sidebar_id %}
-                                                selected
-			                                {% endif %}
-                                        {% endif %}
-                                        >
+                                <option value="{{ item.id }}">
                                     {{ item.title }}
                                 </option>
                             {% endfor %}
@@ -166,15 +163,17 @@ function addNews(value) {
                 });
             })
             .fail(function (data) {
-                toastr.error('Произогла ошибка попробуйте позже');
+                toastr.error('Произошла ошибка попробуйте позже');
             });
 }
+
 {% elif action=='edit' %}
     window.onload = function(e) {
-        var obj ={{object | safe}};
+        var obj ={{object | tojson}};
         $("#title").val(obj.title);
         $("#lead_content").val(obj.lead_content);
         tinymce.activeEditor.setContent(obj.content);
+        $("#new-item__site").val(obj.site_id);
     }
     function edit() {
         $.post('/api/admin/news/change', {
@@ -182,7 +181,8 @@ function addNews(value) {
             "lead_content": $("#lead_content").val(),
             "content": tinymce.activeEditor.getContent(),
             "date": getDate(),
-            "id": {{ id }}
+            "id": {{ object.id }},
+            "site_id":$("#new-item__site").val()
         }).done(function (e) {
             var result=JSON.parse(e);
             if (result.succeed==true)

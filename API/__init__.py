@@ -10,3 +10,4 @@ from .Users import *
 from .Forms import *
 from .Pages import *
 from .Galleries import *
+from .Events import *
