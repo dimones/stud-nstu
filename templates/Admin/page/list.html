@@ -45,7 +45,7 @@
 </div>
 <script>
     $(".btn-primary").click(function(e){
-                $.post('/api/admin/news/remove',{
+                $.post('/api/admin/pages/remove',{
             'id':$(e.toElement).parents(".panel-info").attr('id')
         }).done(function (data) {
             var ret = JSON.parse(data);

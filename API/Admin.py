@@ -123,24 +123,27 @@ def page_list():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/list.html", list=DB().selectFromDB(
-                               """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id""")))
+                               """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id ORDER BY pages.date DESC""")))
 
 @api.route('/admin/pages/edit/<int:_id>', methods=['GET'])
 @need_admin
 def change_pages(_id):
+    obj = (DB().selectFromDB("""SELECT TO_CHAR("date",'DD.MM.YYYY HH24:MI') as "date", id, page_content, title, sidebar_id, lead_content FROM "pages" WHERE id=%s""" % _id))[0]
+    lst = DB().selectFromDB("""SELECT id, name FROM "sidebar_menus" WHERE site_id = (SELECT site_id FROM sidebar_menus where id=%s)"""% obj['sidebar_id'])
+
     user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
-    if user[0]['site_id']==0:
+    if user[0]['site_id'] == 0:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/add.html", action="edit",
-                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
-                                                object=(DB().selectFromDB("""SELECT TO_CHAR("date",'DD.MM.YYYY HH24:MI') as "date", id, page_content, title, sidebar_id FROM "pages" WHERE id=%s""" % _id))[0]))
+                                                list=lst,
+                                                object=obj))
     else:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/add.html", action="edit",
-                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
-                                                object=((DB().selectFromDB("""SELECT * FROM "pages" WHERE id=%s""" % _id))[0])))
+                           sidebar = render_template("Admin/sidebar.html"),
+                           page = render_template("Admin/page/add.html", action="edit",
+                                                list = lst,
+                                                object = obj))
 
 
 

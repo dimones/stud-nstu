@@ -22,8 +22,8 @@ def pages_get():
 def pages_add():
     try:
         userInfo = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
-        DB().changeInDB("""INSERT INTO "pages"(author_id,page_content,title, sidebar_id, date) VALUES(%s,'%s','%s', %s,TO_DATE('%s','DD.MM.YYYY'))""" %
-                         (userInfo[0]['id'],request.form['page_content'],request.form['title'],request.form['sitebar_id'],request.form['date']),needCommit=True)
+        DB().changeInDB("""INSERT INTO "pages"(author_id,page_content,title, sidebar_id, date, lead_content) VALUES(%s,'%s','%s', %s,TO_DATE('%s','DD.MM.YYYY'), '%s')""" %
+                         (userInfo[0]['id'], request.form['page_content'], request.form['title'], request.form['sitebar_id'], request.form['date'], request.form['lead_content']), needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
         print(e)
@@ -32,13 +32,11 @@ def pages_add():
 @api.route('/api/admin/pages/change',methods=['POST'])
 def pages_change():
     try:
-        print(request.form['title'])
-        DB().changeInDB("""UPDATE "pages" SET title='%s',lead_content='%s', page_content = '%s', author_id = %s,date = TO_DATE('%s','DD.MM.YYYY') WHERE id = %s""" %
-                        (request.form['title'],request.form['lead_content'],request.form['page_content'],request.form['author_id'],request.form['date'],request.form['id']),
-                        needCommit=True)
+        DB().changeInDB("""UPDATE "pages" SET title='%s',lead_content='%s', page_content = '%s',"date" = TO_DATE('%s','DD.MM.YYYY'), sidebar_id=%s WHERE id = %s""" %
+                            (request.form['title'], request.form['lead_content'], request.form['page_content'],  request.form['date'],request.form['sidebar_id'], request.form['id']),
+                            needCommit=True)
         return json.dumps({'succeed': True})
     except Exception as e:
-        print(e)
         return json.dumps({'succeed': False})
 
 @api.route('/api/admin/pages/remove', methods=['POST'])

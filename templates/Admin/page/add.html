@@ -230,7 +230,8 @@ function getDate() {
 	     $.post('/api/admin/pages/add',{'page_content': tinyMCE.get('content').getContent(),
                                         'title':$("#new-item__title").val(),
                                         'sitebar_id': $("#new-item__parent").val(),
-                                        'date': getDate()
+                                        'date': getDate(),
+                                        'lead_content': $("#lead_content").val()
         }).done(function (data) {
             var ret = JSON.parse(data);
             toastr.success("Запись успешно добавлена");
@@ -241,7 +242,9 @@ function getDate() {
 {% elif action=='edit' %}
 
     window.onload = function() {
-        var obj ={{object |tojson}};
+        var obj ={{ object |tojson }};
+        console.log(obj);
+        $("#new-item__parent").val(obj.sidebar_id);
         $("#new-item__title").val(obj.title);
         $("#lead_content").val(obj.lead_content);
         tinymce.activeEditor.setContent(obj.page_content);
@@ -251,6 +254,7 @@ function getDate() {
             "title": $("#new-item__title").val(),
             "lead_content": $("#lead_content").val(),
             "page_content": tinymce.activeEditor.getContent(),
+            "sidebar_id":$("#new-item__parent").val(),
             "date": getDate(),
             "id": {{ object.id }}
 
