@@ -229,6 +229,13 @@ def event_list():
                            page=render_template("Admin/event/list.html", list=DB().selectFromDB(
                                """SELECT * FROM "EVENTS" ORDER BY event_date DESC """)))
 
+@api.route('/admin/sites/manage')
+@need_admin
+def site_manager():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/sites/manage.html", sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+
 
 
 @api.route('/admin/events/edit/<int:_id>', methods=['GET'])

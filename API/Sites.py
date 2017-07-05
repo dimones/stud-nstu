@@ -42,3 +42,21 @@ def admin_sites_remove():
     except Exception as e:
         print(e)
         return json.dumps({'succeed': False})
+
+
+@api.route('/api/admin/sites/set/sidebar',methods=['POST'])
+def set_sidebar():
+    try:
+        DB().changeInDB("""UPDATE sites SET default_sidebar=%s WHERE id = %s""" %(request.form['sidebar'], request.form['id']), needCommit=True)
+        return json.dumps({'succeed': True})
+    except Exception as e:
+        print(e)
+        return json.dumps({'succeed': False})
+
+@api.route('/api/admin/sites/get/sidebar/<int:_id>',methods=['GET'])
+def get_sidebar(_id):
+    try:
+        return json.dumps({'succeed': True, 'sidebar_id': (DB().selectFromDB("""SELECT default_sidebar FROM sites WHERE id = %s""" % _id, needDict=False, needOne=True))[0]})
+    except Exception as e:
+        print(e)
+        return json.dumps({'succeed': False})

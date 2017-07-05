@@ -108,11 +108,14 @@ class Page:
     promo = None
     content = None
     footer=None
-    def __init__(self, site=None, page=None, material=None):
+    def __init__(self, site = None, page = None, material = None):
+        print (site, page, material)
+        if page == None:
+            page = (json.loads(get_sidebar(_id=site)))['sidebar_id']
+            print (page)
         self.header = Header()
         self.promo = Promo(site)
-        self.content = Content(site,page, material)
-
+        self.content = Content(site, page, material)
         self.footer = Footer(site)
     def __str__(self):
         return self.render()

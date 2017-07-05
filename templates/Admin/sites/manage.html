@@ -1,0 +1,81 @@
+<div class="page-title clearfix">
+    <h2>Редактор
+
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span>
+                    Управление сайтом
+                </div>
+            </div>
+            <div class="widget-body">
+                <form class="form-horizontal" role="form" action="">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label" for="item__site">Выберите раздел сайта</label>
+                        <div class="col-lg-8">
+                          <select class="form-control" id="item__site">
+                            {% for item in sites %}
+                                <option value="{{ item.id }}">
+                                    {{ item.title }}
+                                </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label" for="item__sidebar"> Категория сайта по-умолчанию</label>
+                        <div class="col-lg-8">
+                          <select class="form-control" id="item__sidebar">
+
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-lg-offset-10">
+                                <button name="button" type="button" id="save" class="btn btn-success" onchange="">Сохранить</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+     window.onload = function(e)
+     {
+            sideBarList();
+     $('#item__site').on('change', function () {
+         sideBarList();
+     });
+     function sideBarList() {
+              $.get('/api/admin/sites/sidebars/menu/get/' + $('#item__site').val())
+                .done(function (e) {
+                    var list=JSON.parse(e);
+                    $("#item__sidebar").empty();
+                    list.forEach(function (item, i, list) {
+                        console.log(item);
+                        $("#item__sidebar").append( $('<option value="'+item.id+'">'+item.name+'</option>'));
+                    })
+            })
+        }
+        $("#save").click(function () {
+            $.post('/api/admin/sites/set/sidebar', {
+                "sidebar": $("#item__sidebar").val(),
+                "id":  $("#item__site").val()
+
+            }).done(function (e) {
+                var result=JSON.parse(e);
+                if (result.succeed==true)
+                    toastr.success('Материал изменен');
+                else toastr.error('Произошла ошибка повторите попытку позже')
+            })
+        });
+     };
+</script>

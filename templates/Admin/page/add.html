@@ -188,12 +188,8 @@
     </div>
 </div>
 <script>
-    $( "#new-item__site").on('change',function() {
-      console.log( $( "#new-item__site option:selected" ).val() );
-    });
      window.onload = function(e)
      {
-            console.log(0);
             sideBarList();
      };
      $('#new-item__site').on('change', function () {
@@ -264,7 +260,7 @@ function getDate() {
                 toastr.success('Материал изменен');
             else toastr.error('Произошла ошибка повторите попытку позже')
         })
-    })
+    });
 {% endif %}
 </script>
 
