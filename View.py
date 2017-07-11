@@ -122,7 +122,7 @@ class Page:
     def render(self):
         try:
             return render_template('layout.html', header=self.header.render(),
-                               promo=self.promo.render(),
+                               promo =self.promo.render(),
                                content=self.content.render(),
                                footer=self.footer.render())
         except:
