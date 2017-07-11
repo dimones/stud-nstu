@@ -1,0 +1,130 @@
+
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
+<link rel="stylesheet" href="/static/css/uploader/style.css">
+
+<!-- blueimp Gallery styles -->
+<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="/static/css/uploader/jquery.fileupload.css">
+<link rel="stylesheet" href="/static/css/uploader/jquery.fileupload-ui.css">
+<div class="page-title clearfix">
+    <h2>Редактор
+
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span>
+                    {% if action=="create" %}
+                    Добавить
+                    {% elif action=="edit" %}
+                    Редактировать
+                    {% endif %}
+                    Событие
+                </div>
+            </div>
+            <div class="widget-body">
+                <form class="form-horizontal" role="form" method="post">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="new-item__title">Заголовок</label>
+                        <div class="col-lg-9">
+                          <input type="Text" class="form-control" placeholder="Заголовок" id="new-item__title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" for="item__site">Выберите раздел</label>
+                        <div class="col-lg-9">
+                          <select class="form-control" id="item__site">
+                              <option value="0">
+                                    Без раздела
+                              </option>
+                            {% for item in  sites %}
+                                <option value="{{ item.id }}">
+                                    {{ item.title }}
+                                </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >Дата</label>
+                        <div class="col-lg-9">
+                            <input class="datepicker-here form-control" id="picker" data-timepicker="true" data-date-format="dd.mm.yyyy">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"  for="inputHelptext">Описание</label>
+                        <div class="col-lg-9">
+                            <textarea class="form-control" rows="7" id="lead_content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-lg-offset-10">
+                            {% if action=="create" %}
+                                <button name="button" type="button" id="add" class="btn btn-success" onchange="">Добавить</button>
+                            {% elif action=="edit" %}
+                                <button name="button" type="button" id="edit" class="btn btn-success" onchange="">Править</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+</script>
+
+
+
+{% block scripts %}
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="/static/js/uploader/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
+<!-- blueimp Gallery script -->
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/static/js/uploader/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/static/js/uploader/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/static/js/uploader/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="/static/js/uploader/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="/static/js/uploader/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="/static/js/uploader/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="/static/js/uploader/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="/static/js/uploader/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script src="/static/js/uploader/main.js"></script>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+{% endblock %}
+

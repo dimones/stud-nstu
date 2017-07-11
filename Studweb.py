@@ -108,6 +108,11 @@ class StudNSTU:
             # return Page().render()
             return render_template('layout.html', header=Header().render(), content=render_template("events.html"), footer=render_template("index/footer.html"))
 
+        @app.route('/len')
+        def lens():
+            # return Page().render()
+            return render_template('update170517.html')
+
 
     def run(self):
         self.app.run(debug=True)

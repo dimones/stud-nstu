@@ -258,3 +258,19 @@ def change_event(_id):
                                                     sites=DB().selectFromDB(
                                                         """SELECT id, title FROM sites WHERE id =%s""" % user[0][
                                                             'site_id'])))
+
+@api.route('/admin/gallery/add')
+@need_admin
+def gallery():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/galleries/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
+
+
+@api.route('/admin/gallery/list')
+@need_admin
+def gallery_list():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/galleries/list.html"))
