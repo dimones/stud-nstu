@@ -7,22 +7,18 @@
         </div>
         <nav>
             <ul class="main-nav">
-                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">События</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Фотоотчеты</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Новости</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Расписание</a>
-                </li>
+
+                {% for item in nav %}
+                    {% if item.sub==0 and item.line==0 %}
+                        <li class="main-nav__item">
+                            <a href="/{{ item.id }}" class="main-nav__link">{{ item.title }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
             <ul class="sub-nav">
                 {% for item in nav %}
-                    {% if item.sub==0 %}
+                    {% if item.sub==0 and item.line==1 %}
                         <li class="main-nav__item">
                             <a href="/{{ item.id }}" class="sub-nav__link">{{ item.title }}</a>
                         </li>

@@ -6,10 +6,13 @@ from .DB import *
 
 #sites
 
-@api.route('/api/admin/sites/get',methods=['GET'])
-def admin_sites_get():
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "NAME" """))
+@api.route('/api/admin/sites/get/<int:_id>',methods=['GET'])
+def admin_sites_get(_id):
+    return json.dumps(DB().selectFromDB("""SELECT * FROM sites WHERE id=%s""" % _id))
 
+@api.route('/api/admin/sites/get/sub/<int:_id>',methods=['GET'])
+def admin_sites_get_sub(_id):
+    return json.dumps(DB().selectFromDB("""SELECT * FROM sites WHERE sub=%s""" % _id))
 
 @api.route('/api/admin/sites/add',methods=['POST'])
 def admin_sites_add():
@@ -34,7 +37,7 @@ def admin_sites_change():
         print(e)
         return json.dumps({'succeed': False})
 
-@api.route('/api/admin/sites/remove',methods=['POST'])
+@api.route('/api/admin/sites/remove', methods=['POST'])
 def admin_sites_remove():
     try:
         DB().changeInDB("""DELETE FROM "NAME" WHERE id = %s""" % request.form['id'],needCommit=True)
@@ -44,7 +47,7 @@ def admin_sites_remove():
         return json.dumps({'succeed': False})
 
 
-@api.route('/api/admin/sites/set/sidebar',methods=['POST'])
+@api.route('/api/admin/sites/set/sidebar', methods=['POST'])
 def set_sidebar():
     try:
         DB().changeInDB("""UPDATE sites SET default_sidebar=%s WHERE id = %s""" %(request.form['sidebar'], request.form['id']), needCommit=True)
@@ -53,7 +56,7 @@ def set_sidebar():
         print(e)
         return json.dumps({'succeed': False})
 
-@api.route('/api/admin/sites/get/sidebar/<int:_id>',methods=['GET'])
+@api.route('/api/admin/sites/get/sidebar/<int:_id>', methods=['GET'])
 def get_sidebar(_id):
     try:
         return json.dumps({'succeed': True, 'sidebar_id': (DB().selectFromDB("""SELECT default_sidebar FROM sites WHERE id = %s""" % _id, needDict=False, needOne=True))[0]})

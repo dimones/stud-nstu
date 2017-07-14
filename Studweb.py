@@ -32,7 +32,7 @@ class StudNSTU:
         @app.route('/culture')
         def culture():
             return render_template('layout.html', header=Header().render(),
-                               content=render_template("culture.html"), footer=render_template("footer.html"))
+                                   content=render_template("promos/culture.html"), footer=render_template("footer.html"))
 
         @app.route('/schedule')
         def schedule():
