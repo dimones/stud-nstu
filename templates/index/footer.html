@@ -38,13 +38,14 @@
 				$('.events-gallery__button').click(function(e){
 					var number = $(e.currentTarget).data('id');
 					setGallery(number);
+					count = number;
 				});
 				setInterval(function(){
 				    count++;
 				    if(count === 5)
 				        count = 0;
 				    setGallery(count);
-				}, 3000);
+				}, 5000);
 			}
 		});
 	})();
