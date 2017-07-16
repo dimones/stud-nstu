@@ -20,15 +20,37 @@
 	letter-spacing: 1.6px;
 	margin:26px 0 22px 0;
 }
-.promo_sovstarost .proposal__link, .promo_studotr .proposal__link, .promo_sharap .proposal__link, .promo_erlagol .proposal__link {
+.promo_sovstarost .proposal__link, .promo_sharap .proposal__link {
 	position:relative;
 	font-family: "Open Sans";
 	border: 1px solid #11BA49;
 	color: #fff;
 }
-.promo_sovstarost .proposal__link:hover , .promo_studotr .proposal__link:hover, .promo_sharap .proposal__link:hover, .promo_erlagol .proposal__link:hover {
+.promo_studotr .proposal__link, .promo_erlagol .proposal__link{
+    position:relative;
+	font-family: "Open Sans";
+	border: 1px solid #fff;
+	color: #fff;
+}
+.promo_studotr .proposal__link:hover, .promo_erlagol .proposal__link:hover{
+    background-color: #1B2664;
+	color: #fff;
+	border-color: #1B2664;
+}
+.promo_sovstarost .proposal__link:hover, .promo_sharap .proposal__link:hover  {
 	background-color: #11BA49;
 	color: #fff;
+}
+.promo_life .proposal__link{
+    position:relative;
+	font-family: "Open Sans";
+	border: 1px solid #fff;
+	color: #fff;
+}
+.promo_life .proposal__link:hover{
+    border-color: #B6074D;
+    background-color: #B6074D;
+    color: #fff;
 }
 
 .promo_sovstarost {
