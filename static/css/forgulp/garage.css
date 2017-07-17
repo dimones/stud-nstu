@@ -22,8 +22,9 @@
 .promo_garage .promo__head-title{
     font: 45px "IntroLight";
     margin-bottom: 0;
-    margin-top: 50px;
+    margin-top: 30px;
 }
+
 
 .promo_garage .promo__head-title small{
     font-size: 14px;
@@ -98,4 +99,16 @@
     height: 19px;
     background-image: url('../photo/icon2.png');
     margin-top: 10px;
+}
+.promo_garage .promo__title .proposal__link{
+    position:relative;
+	font-family: "Open Sans";
+	border: 1px solid #fff;
+	color: #fff;
+	margin-top: 15px;
+}
+.promo_garage .promo__title .proposal__link:hover{
+    background-color: #fff;
+	border: 1px solid #fff;
+	color: #1D1D1D;
 }

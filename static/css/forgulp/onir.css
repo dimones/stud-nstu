@@ -25,6 +25,7 @@
 
 .promo_onir .promo__head-title{
     color: #11BA49;
+    margin: 40px 0 20px;
 }
 .promo_onir .promo__about span{
     color: #11BA49;
@@ -130,4 +131,8 @@
     display: block;
     list-style: none;
     font-size:11px;
+}
+.promo_onir .promo__title .proposal__link{
+    position:relative;
+    margin-top: 15px;
 }

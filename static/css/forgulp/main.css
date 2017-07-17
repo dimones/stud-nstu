@@ -21,7 +21,7 @@ p{
     font-size: 12px;
     line-height: 16px;
     margin-bottom: 15px;
-    font-family: "Open Sans";
+    font-family: "OpenSans";
     color: inherit;
 }
 h2{
@@ -89,7 +89,7 @@ header{
 }
 header nav{
     display: inline-block;
-    margin: 27px 20px;
+    margin: 35px 20px;
     font-weight: normal;
 }
 
