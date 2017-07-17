@@ -40,10 +40,8 @@ class Content:
     content = None
     isContent=None
     def __init__(self, site, page, material):
-        self.isContent=(DB().selectFromDB("""SELECT editable FROM sites WHERE id=%s""" % site)[0]['editable'])
-        if self.isContent == 1:
-            self.sidebar = Sidebar(site)
-            self.content = Main(page, material)
+        pass
+
     def render(self):
         if self.isContent == 1:
             return render_template('content.html', sidebar=self.sidebar.render(),
@@ -103,8 +101,10 @@ class Side_menu(Side_item):
 
 class Side_news(Side_item):
     news=None
+
     def __init__(self):
         self.news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1 LIMIT 2""")
+
     def render(self):
         pass
 
@@ -125,16 +125,27 @@ class Page:
             self.promo = Promo(json.loads(admin_sites_get_sub(site)))
         else:
             self.promo = Promo([self.site_info])
+            if page == None:
+                self.content = Content(self.site_info['default_sidebar'])
+            else:
+                self.content = Content(page)
 
     def __str__(self):
         return self.render()
+
     def render(self):
-        # try:
-        return render_template('layout.html',
+        try:
+            if self.site_info['site_type'] == 8:
+                return render_template('layout.html',
                                         header=self.header.render(),
                                         promo =self.promo.render(),
                                         footer=self.footer.render())
-        # except:
-        #     return render_template('layout.html', header=Header().render(),
-        #                                           promo=render_template('dev.html'),
-        #                                           footer=Footer(None).render())
+            elif:
+                return render_template('layout.html',
+                                        header=self.header.render(),
+                                        promo =self.promo.render(),
+                                        footer=self.footer.render())
+        except:
+            return render_template('layout.html', header=Header().render(),
+                                                  promo=render_template('dev.html'),
+                                                  footer=Footer(None).render())
