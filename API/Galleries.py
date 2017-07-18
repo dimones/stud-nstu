@@ -57,5 +57,19 @@ def galleries_delete():
                                                  (request.form['gal_id']), needCommit=True)})
     except Exception as e:
         pass
+
+@api.route('/api/admin/uploads/scripts', methods=['GET'])
+def galleries_scripts():
+    #TODO: Да, такая хуйня.
+    return render_template('Admin/galleries/scripts.html')
+@api.route('/api/admin/galleries/list', methods=['GET'])
+def galleries_list():
+    try:
+        if request.args.get('site_id') is None:
+            abort(403)
+        return json.dumps(DB().selectFromDB("SELECT * FROM GALLERIES WHERE site_id = %s" % (request.args.get('site_id'))))
+
+    except Exception as e:
+        pass
 if __name__ == '__main__':
     galleries_reserve()
