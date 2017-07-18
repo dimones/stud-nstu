@@ -46,11 +46,11 @@ def change_news(_id):
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/news/add.html", action="edit",
-                                                object=json.dumps((DB().selectFromDB("""SELECT * FROM "NEWS" WHERE id=%s"""%_id))[0],ensure_ascii=False,cls=DateEncoder),
-                                                id=_id,
+                                                object=(DB().selectFromDB("""SELECT id, title, lead_content, site_id, in_top, content,TO_CHAR("date",'DD.MM.YYYY') as "date" FROM "NEWS" WHERE id=%s"""%_id))[0],
+                                                sites=DB().selectFromDB(
+                                                    """SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """),
                                                 user=(AdminHelper(request.cookies['device_token'],
                                                                   request.cookies['device_id']).getUserInfo())[0]))
-
 @api.route('/admin/news/list')
 @need_admin
 def lists():
@@ -123,30 +123,27 @@ def page_list():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/list.html", list=DB().selectFromDB(
-                               """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id""")))
+                               """SELECT pages.id, pages.page_content, pages.title,admin.name,admin.surname, pages.date FROM "pages", "ADMIN_USERS" AS  admin WHERE admin.id=pages.author_id ORDER BY pages.date DESC""")))
 
 @api.route('/admin/pages/edit/<int:_id>', methods=['GET'])
 @need_admin
 def change_pages(_id):
+    obj = (DB().selectFromDB("""SELECT TO_CHAR("date",'DD.MM.YYYY HH24:MI') as "date", id, page_content, title, sidebar_id, lead_content FROM "pages" WHERE id=%s""" % _id))[0]
+    lst = DB().selectFromDB("""SELECT id, name FROM "sidebar_menus" WHERE site_id = (SELECT site_id FROM sidebar_menus where id=%s)"""% obj['sidebar_id'])
+
     user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
-    if user[0]['site_id']==0:
+    if user[0]['site_id'] == 0:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
                            page=render_template("Admin/page/add.html", action="edit",
-                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
-                                                object=((DB().selectFromDB("""SELECT * FROM "pages" WHERE id=%s""" % _id))[0]),
-                                                id=_id,
-                                                user=(AdminHelper(request.cookies['device_token'],
-                                                                  request.cookies['device_id']).getUserInfo())[0]))
+                                                list=lst,
+                                                object=obj))
     else:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
-                           sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/page/add.html", action="edit",
-                                                list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 1 """),
-                                                object=((DB().selectFromDB("""SELECT * FROM "pages" WHERE id=%s""" % _id))[0]),
-                                                id=_id,
-                                                user=(AdminHelper(request.cookies['device_token'],
-                                                                  request.cookies['device_id']).getUserInfo())[0]))
+                           sidebar = render_template("Admin/sidebar.html"),
+                           page = render_template("Admin/page/add.html", action="edit",
+                                                list = lst,
+                                                object = obj))
 
 
 
@@ -205,3 +202,75 @@ def change_pages(_id):
 #                 </tr>
 #             {% } %}
 #             </script>"""
+
+
+
+
+@api.route('/admin/events/add')
+@need_admin
+def event():
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    if user[0]['site_id'] == 0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/event/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
+    else:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/event/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE id =%s""" % user[0]['site_id'])))
+
+@api.route('/admin/events/list')
+@need_admin
+def event_list():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/event/list.html", list=DB().selectFromDB(
+                               """SELECT * FROM "EVENTS" ORDER BY event_date DESC """)))
+
+@api.route('/admin/sites/manage')
+@need_admin
+def site_manager():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/sites/manage.html", sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+
+
+
+@api.route('/admin/events/edit/<int:_id>', methods=['GET'])
+@need_admin
+def change_event(_id):
+    print(_id, DB().selectFromDB("""SELECT id, title, text, TO_CHAR(event_date,'DD.MM.YYYY HH24:MI') as event_date, site_id, lead_text FROM "EVENTS" WHERE id =%s""" % _id))
+    user = AdminHelper(request.cookies['device_token'], request.cookies['device_id']).getUserInfo()
+    if user[0]['site_id'] == 0:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/event/add.html", action="edit",
+                                                    object=(DB().selectFromDB(
+                                                        """SELECT id, title, text, TO_CHAR(event_date,'DD.MM.YYYY HH24:MI') as event_date, site_id, lead_text FROM "EVENTS" WHERE id =%s""" % _id))[0],
+                                                    sites=DB().selectFromDB(
+                                                        """SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
+    else:
+        return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/event/add.html", action="edit",
+                                                    sites=DB().selectFromDB(
+                                                        """SELECT id, title FROM sites WHERE id =%s""" % user[0][
+                                                            'site_id'])))
+
+@api.route('/admin/gallery/add')
+@need_admin
+def gallery():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/galleries/add.html", action="create",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
+
+
+@api.route('/admin/gallery/list')
+@need_admin
+def gallery_list():
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                           sidebar=render_template("Admin/sidebar.html"),
+                           page=render_template("Admin/galleries/list.html"))

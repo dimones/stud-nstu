@@ -20,7 +20,7 @@ class DateEncoder(json.JSONEncoder):
 
 @api.route('/api/admin/news/get',methods=['GET'])
 def admin_news_get():
-    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" WHERE site_id = 1 ORDER BY date desc"""),ensure_ascii=False,cls=DateEncoder)
+    return json.dumps(DB().selectFromDB("""SELECT * FROM "NEWS" ORDER BY "date" desc"""),ensure_ascii=False,cls=DateEncoder)
 
 @api.route('/api/admin/news/getMain',methods=['GET'])
 def admin_news_getTop():
@@ -45,10 +45,11 @@ def admin_news_add():
 @api.route('/api/admin/news/change', methods=['POST'])
 def admin_news_change():
     try:
+        print(request.form)
         DB().changeInDB("""UPDATE "NEWS" SET title = '%s', lead_content = '%s', content = '%s',
-                            date = TO_DATE('%s','DD.MM.YYYY'),site_id = 1 WHERE id = %s""" %
+                            date = TO_DATE('%s','DD.MM.YYYY'),site_id = %s WHERE id = %s""" %
                         (request.form['title'],request.form['lead_content'],request.form['content'],
-                         request.form['date'],request.form['id']),needCommit=True)
+                         request.form['date'],request.form['site_id'],request.form['id']),needCommit=True)
         return json.dumps({"succeed": True })
     except Exception as e:
         print(e)

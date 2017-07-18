@@ -1,0 +1,139 @@
+.week{
+    margin: 30px 0 10px;
+}
+.week__body{
+    display: table-row;
+}
+.week:last-child{
+    margin-bottom: 100px;
+}
+.week__title{
+    color: #E62940;
+    font-size: 14px;
+    font-family: IntroBold;
+    margin-bottom: 10px;
+}
+
+.day{
+    border-left: 2px solid #E1E1E1;
+    width: 155px;
+    display: table-cell;
+}
+.day__title{
+    font-size: 12px;
+    padding: 10px;
+}
+.day__name{
+    text-transform: uppercase;
+    color: #E62940;
+}
+.day__date{
+    color: #8E8E8E;
+    font-family: IntroLight;
+}
+
+.day__event{
+    color: #8E8E8E;
+    padding: 5px 25px 5px 10px;
+    position: relative;
+    display: block;
+}
+.day__event:hover{
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #E6E6E6;
+}
+.day__event:before{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: -2px;
+    width: 2px;
+}
+.day__event_green:before{
+    background-color: #18A62F;
+}
+.day__event_red:before{
+    background-color: #E62940;
+}
+
+.day__event-time{
+    font-size: 10px;
+}
+.day__event-text{
+    font-size: 9px;
+}
+
+.day__event_empty{
+    padding: 5px 25px 5px 10px;
+    font-size: 9px;
+    color: #8E8E8E;
+}
+
+.news-list__item{
+    display: block;
+    margin-bottom: 15px;
+}
+.news-list__img{
+    width: 80px;
+    height: 80px;
+    background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+	float: left;
+}
+
+.news__link{
+    border: 1px solid #fff;
+    border-radius: 15px;
+    padding: 8px 20px;
+    height: 30px;
+    color: #fff;
+    display: inline-block;
+    min-width: 90px;
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+    border-color: #fff;
+    margin-top: 20px;
+}
+.news__link:hover{
+    color: #1F2E69;
+    border-color: #fff;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+.promo_events .news__link{
+    color: #25356F;
+    border-color: #25356F;
+}
+
+.promo_events .news__link:hover{
+    color: #fff;
+    border-color: #25356F;
+    background-color: #25356F;
+}
+
+.news-list__item .news__link{
+    float: left;
+    margin-left: 15px;
+}
+
+.news-list__body{
+    float: left;
+    width: 220px;
+    margin-left: 30px;
+}
+
+.news-list__title{
+    font-size: 11px;
+    margin: 10px 0;
+    font-family: IntroBold;
+}
+.news-list__text{
+    font-size: 9px;
+    line-height: 1.5;
+}

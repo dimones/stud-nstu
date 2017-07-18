@@ -2,28 +2,25 @@
     <div class="wrapper">
         <div class="logo">
             <a href="/">
-            <img src="/static/img/logo.png" alt="">
-            <h1>Студенческий портал Новосибирского Государственного Технического Университета</h1>
-                </a>
+              <img src="../static/img/logo.png" alt="">
+              <h1>Новосибирский Государственный Технический Университет</h1>
+              <div>Студенческий портал</div>
+            </a>
         </div>
         <nav>
             <ul class="main-nav">
-                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">События</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Фотоотчеты</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Новости</a>
-                </li>
-                                <li class="main-nav__item">
-                    <a href="" class="main-nav__link">Расписание</a>
-                </li>
+
+                {% for item in nav %}
+                    {% if item.sub==0 and item.line==0 %}
+                        <li class="main-nav__item">
+                            <a href="/{{ item.id }}" class="main-nav__link">{{ item.title }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
             <ul class="sub-nav">
                 {% for item in nav %}
-                    {% if item.sub==0 %}
+                    {% if item.sub==0 and item.line==1 %}
                         <li class="main-nav__item">
                             <a href="/{{ item.id }}" class="sub-nav__link">{{ item.title }}</a>
                         </li>
@@ -33,7 +30,7 @@
         </nav>
         <ul class="social">
             <li class="vk social__item"><a href="https://vk.com/nstu_vk" class="social__link">vk</a></li>
-            <li class="ok social__item"><a href="https://twitter.com/nstu_news" class="social__link">t</a></li>
+            <li class="ok social__item"><a href="https://www.instagram.com/nstu_online/" class="social__link">I</a></li>
             <li class="facebook social__item"><a href="https://www.facebook.com/nstunovosti/" class="social__link">fb</a></li>
         </ul>
     </div>

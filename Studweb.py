@@ -32,7 +32,7 @@ class StudNSTU:
         @app.route('/culture')
         def culture():
             return render_template('layout.html', header=Header().render(),
-                               content=render_template("culture.html"), footer=render_template("footer.html"))
+                                   content=render_template("promos/culture.html"), footer=render_template("footer.html"))
 
         @app.route('/schedule')
         def schedule():
@@ -102,6 +102,17 @@ class StudNSTU:
         @app.route('/<int:site>/<int:page>/<int:material>')
         def getMaterial(site, page, material):
             return Page(site, page, material).render()
+
+        @app.route('/events')
+        def events():
+            # return Page().render()
+            return render_template('layout.html', header=Header().render(), content=render_template("events.html"), footer=render_template("index/footer.html"))
+
+        @app.route('/len')
+        def lens():
+            # return Page().render()
+            return render_template('update170517.html')
+
 
     def run(self):
         self.app.run(debug=True)
