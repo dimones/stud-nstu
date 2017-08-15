@@ -201,7 +201,6 @@
                 .done(function (e) {
                     var list=JSON.parse(e);
                     $("#new-item__parent").empty();
-                    $("#new-item__parent").append('<option value="0">Нет родительского раздела</option>');
                     list.forEach(function (item, i, list) {
                         console.log(item);
                         $("#new-item__parent").append( $('<option value="'+item.id+'">'+item.name+'</option>'));
