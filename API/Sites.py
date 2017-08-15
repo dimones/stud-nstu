@@ -63,3 +63,7 @@ def get_sidebar(_id):
     except Exception as e:
         print(e)
         return json.dumps({'succeed': False})
+
+@api.route('/api/admin/sites/template/get/<int:_id>',methods=['GET'])
+def admin_sites_template_get(_id):
+    return (DB().selectFromDB("""SELECT template_name FROM site_types WHERE id=%s""" % _id, needOne=True, needDict=False))[0]

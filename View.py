@@ -3,11 +3,11 @@ from API import *
 class Header:
     nav=None
     def __init__(self):
-        self.nav=DB().selectFromDB("""SELECT * FROM "sites" WHERE sub=0 ORDER BY site_order ASC """, needDict=True)
+        self.nav = DB().selectFromDB("""SELECT * FROM "sites" WHERE sub=0 ORDER BY site_order ASC """, needDict=True)
     def render(self):
         return render_template('header.html', nav=self.nav)
 class Footer:
-    footer=None
+    footer = None
     def __init__(self,site):
         if site==None:
             self.footer = "index/footer.html"
@@ -20,59 +20,62 @@ class Promo:
     promos = None
     def __init__(self, info):
         self.promos = info
-        print(len(self.promos))
+
 
     def render(self):
-
         if len(self.promos) > 1:
-            print('__')
             result = ""
             for promo in self.promos:
                 print(promo)
                 result += render_template("promos/" + promo['template_name'])
             return result
         else:
-            print('_=')
             return render_template("promos/" + self.promos[0]['template_name'])
 
 class Content:
     sidebar = None
     content = None
-    isContent=None
-    def __init__(self, site, page, material):
-        pass
+    isContent = None
+    template = None
+    def __init__(self, site_info=None, page=None, material=None):
+        self.template = site_info
+        if site_info['site_type'] == 3:
+            self.sidebar = Sidebar(site_info)
+            self.content = Main(page)
+            self.template =admin_sites_template_get(3)
+
 
     def render(self):
-        if self.isContent == 1:
-            return render_template('content.html', sidebar=self.sidebar.render(),
+        return render_template('content.html', sidebar=self.sidebar.render(),
                                posts=self.content.render())
 
 class Main:
-    posts=None
-    def __init__(self, main=None, material=None):
+    posts = None
+    template = None
+    def __init__(self, template=None, main=None, material=None):
+        self.template=template
         if main == None:
             pass
         else:
             if material ==None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
             else:
-                self.posts= DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
+                self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
     def render(self):
-        if self.posts!=None:
-            return render_template("conf_template.html", pages=self.posts, base_url=request.path)
+        if self.posts != None:
+            return render_template("pages/"+self.template, pages=self.posts, base_url=request.path)
         else:
             return
 
 class Sidebar:
-    menu=None
-    news=None
-    site=None
+    menu = None
+    news = None
+    site = None
     def __init__(self, site):
-        self.menu=Side_menu(site)
-        self.news=Side_news()
-        self.site=site
+        self.menu = Side_menu(site['id'])
+        self.news = Side_news()
+        self.site = site
     def render(self):
-        print(self.menu)
         return render_template("sidenav.html",site=self.site,
                                sidebar=self.menu.menu,
                                news=self.news.news)
@@ -100,7 +103,7 @@ class Side_menu(Side_item):
             return render_template("sidenav.html", sidebar=self.menu)
 
 class Side_news(Side_item):
-    news=None
+    news = None
 
     def __init__(self):
         self.news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1 LIMIT 2""")
@@ -117,18 +120,21 @@ class Page:
     content = None
     footer = None
     site_info = None
-    def __init__(self, site = None, page = None, material = None):
+    def __init__(self, site = None, sidebar = None, material = None):
         self.site_info = json.loads(admin_sites_get(site))[0]
         self.header = Header()
         self.footer = Footer(site)
+        print (self.site_info['site_type'])
         if self.site_info['site_type'] == 8:
             self.promo = Promo(json.loads(admin_sites_get_sub(site)))
         else:
             self.promo = Promo([self.site_info])
-            if page == None:
-                self.content = Content(self.site_info['default_sidebar'])
+            if sidebar ==  None:
+                self.content = Content(self.site_info, self.site_info['default_sidebar'])
+                print(self.content.render())
             else:
-                self.content = Content(page)
+                self.content = Content(self.site_info, sidebar)
+                print(self.content.render())
 
     def __str__(self):
         return self.render()
@@ -140,10 +146,11 @@ class Page:
                                         header=self.header.render(),
                                         promo =self.promo.render(),
                                         footer=self.footer.render())
-            elif:
+            else:
                 return render_template('layout.html',
                                         header=self.header.render(),
                                         promo =self.promo.render(),
+                                        content=self.content.render(),
                                         footer=self.footer.render())
         except:
             return render_template('layout.html', header=Header().render(),

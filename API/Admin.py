@@ -87,7 +87,7 @@ def sidebar_menus_add():
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),
                                page=render_template("Admin/sidebars/add.html",
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1"""))
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE site_type =3"""))
                                                     # list=items,
                                                     # count=len(items)+2)
                                )
@@ -109,7 +109,7 @@ def page_add():
                                page=render_template("Admin/page/add.html",
                                                     action='create',
                                                     list=DB().selectFromDB("""SELECT * FROM "sidebar_menus" WHERE site_id = 7 """),
-                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1""")))
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE site_type =3""")))
     else:
         return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                                sidebar=render_template("Admin/sidebar.html"),

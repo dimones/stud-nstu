@@ -68,7 +68,7 @@ class StudNSTU:
             return render_template('layout.html', header=Header().render(),
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
-                                                           page=render_template("news_list.html",
+                                                           page=render_template("pages/news_list.html",
                                                                                 list=json.loads(admin_news_get()))),
                                    footer=render_template("footer.html"))
 
@@ -78,7 +78,7 @@ class StudNSTU:
             return render_template('layout.html', header=Header().render(),
                                    content=render_template("onir_tmp.html",
                                                            sidebar=sidebar_menu_get_dict(1),
-                                                           page=render_template("conf_template.html",
+                                                           page=render_template("pages/default.html",
                                                                                 pages=DB().selectFromDB("""SELECT id, title, page_content, date FROM "pages" WHERE sidebar_id=%s """% page, needDict=True),
                                                                                 files=pages_files_get(page))),
                                    footer=render_template("footer.html"))
@@ -106,7 +106,8 @@ class StudNSTU:
         @app.route('/events')
         def events():
             # return Page().render()
-            return render_template('layout.html', header=Header().render(), content=render_template("events.html"), footer=render_template("index/footer.html"))
+            return render_template('layout.html', header=Header().render(), content=render_template(
+                "pages/events.html"), footer=render_template("index/footer.html"))
 
         @app.route('/len')
         def lens():
