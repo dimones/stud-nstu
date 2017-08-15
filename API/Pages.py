@@ -8,6 +8,11 @@ from werkzeug.utils import secure_filename
 def pages_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "pages" """,needDict=True),ensure_ascii=False,cls=DateEncoder)
 
+
+@api.route('/api/admin/pages/template/get/<int:site_type>',methods=['GET'])
+def pages_template_get(site_type):
+    return (DB().selectFromDB("""SELECT template_name FROM "site_types" WHERE id=%s"""% site_type, needDict=False, needOne=True))[0]
+
 @api.route('/api/admin/pages/get_by_sidebar/<int:_id>',methods=['GET'])
 def pages_get_by_sidebar(_id):
     return json.dumps(DB().selectFromDB("""SELECT * FROM "pages" WHERE sidebar_id=%s""" % _id, needDict=True), ensure_ascii=False, cls=DateEncoder)
@@ -21,6 +26,9 @@ def pages_get_by_sidebar(_id):
 #     except Exception as e:
 #         print(e)
 #         return json.dumps({'succeed': False})
+
+
+
 
 @api.route('/api/admin/pages/add',methods=['POST'])
 def pages_add():

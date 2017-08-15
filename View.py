@@ -26,7 +26,6 @@ class Promo:
         if len(self.promos) > 1:
             result = ""
             for promo in self.promos:
-                print(promo)
                 result += render_template("promos/" + promo['template_name'])
             return result
         else:
@@ -39,10 +38,9 @@ class Content:
     template = None
     def __init__(self, site_info=None, page=None, material=None):
         self.template = site_info
-        if site_info['site_type'] == 3:
-            self.sidebar = Sidebar(site_info)
-            self.content = Main(page)
-            self.template =admin_sites_template_get(3)
+        self.sidebar = Sidebar(site_info['id'], site_info['site_type'])
+        self.content = Main(site_info['site_type'], page)
+        self.template = admin_sites_template_get(3)
 
 
     def render(self):
@@ -52,17 +50,20 @@ class Content:
 class Main:
     posts = None
     template = None
-    def __init__(self, template=None, main=None, material=None):
-        self.template=template
+    def __init__(self, site_type=None, main=None, material=None):
+        self.template = pages_template_get(site_type)
+        print (self.template)
         if main == None:
             pass
         else:
-            if material ==None:
+            if material == None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
+                print (self.posts)
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
     def render(self):
         if self.posts != None:
+            print("pages/"+self.template)
             return render_template("pages/"+self.template, pages=self.posts, base_url=request.path)
         else:
             return
@@ -71,10 +72,11 @@ class Sidebar:
     menu = None
     news = None
     site = None
-    def __init__(self, site):
-        self.menu = Side_menu(site['id'])
+    def __init__(self, site, site_type):
+        self.menu = Side_menu(site, site_type)
         self.news = Side_news()
         self.site = site
+
     def render(self):
         return render_template("sidenav.html",site=self.site,
                                sidebar=self.menu.menu,
@@ -91,11 +93,13 @@ class Side_item:
 
 class Side_menu(Side_item):
     menu = None
-    def __init__(self, site=None):
+    def __init__(self, site=None, site_type=None):
         if site == None:
             pass
-        else:
+        elif site_type == 3:
             self.menu = json.loads(sidebar_menu_get_dict(site))
+        elif site_type == 4 or site_type == 5:
+            self.menu = json.loads(sites_get_tree())
     def render(self):
         if self.menu == None:
             return
@@ -124,17 +128,14 @@ class Page:
         self.site_info = json.loads(admin_sites_get(site))[0]
         self.header = Header()
         self.footer = Footer(site)
-        print (self.site_info['site_type'])
         if self.site_info['site_type'] == 8:
             self.promo = Promo(json.loads(admin_sites_get_sub(site)))
         else:
             self.promo = Promo([self.site_info])
             if sidebar ==  None:
                 self.content = Content(self.site_info, self.site_info['default_sidebar'])
-                print(self.content.render())
             else:
                 self.content = Content(self.site_info, sidebar)
-                print(self.content.render())
 
     def __str__(self):
         return self.render()

@@ -25,6 +25,19 @@ def admin_sites_add():
         print(e)
         return json.dumps({'succeed': False})
 
+@api.route('/api/admin/sites/get/tree', methods=["GET"])
+def sites_get_tree():
+    main_items = DB().selectFromDB("""SELECT id, site_type, sub, title as name FROM "sites" WHERE sub=0 and line !=0""")
+    sub_items = DB().selectFromDB("""SELECT id, site_type, sub, title as name  FROM "sites" WHERE sub!=0 """)
+    for item in main_items:
+        sub_nav=[]
+        for sub_item in sub_items:
+            if item["id"] == sub_item["sub"]:
+                sub_nav.append(sub_item)
+
+        item["submenu"] = sub_nav
+    return json.dumps(main_items)
+
 @api.route('/api/admin/sites/change',methods=['POST'])
 def admin_sites_change():
     try:
