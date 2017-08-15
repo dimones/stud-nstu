@@ -21,7 +21,6 @@ class Promo:
     def __init__(self, info):
         self.promos = info
 
-
     def render(self):
         if len(self.promos) > 1:
             result = ""
@@ -39,9 +38,8 @@ class Content:
     def __init__(self, site_info=None, page=None, material=None):
         self.template = site_info
         self.sidebar = Sidebar(site_info['id'], site_info['site_type'])
-        self.content = Main(site_info['site_type'], page)
+        self.content = Main(site_info['site_type'], page, material)
         self.template = admin_sites_template_get(3)
-
 
     def render(self):
         return render_template('content.html', sidebar=self.sidebar.render(),
@@ -52,13 +50,12 @@ class Main:
     template = None
     def __init__(self, site_type=None, main=None, material=None):
         self.template = pages_template_get(site_type)
-        print (self.template)
         if main == None:
             pass
         else:
             if material == None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
-                print (self.posts)
+                print(self.posts)
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
     def render(self):
@@ -135,7 +132,7 @@ class Page:
             if sidebar ==  None:
                 self.content = Content(self.site_info, self.site_info['default_sidebar'])
             else:
-                self.content = Content(self.site_info, sidebar)
+                self.content = Content(self.site_info, sidebar, material)
 
     def __str__(self):
         return self.render()
