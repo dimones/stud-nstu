@@ -12,11 +12,11 @@
 {#  </a>#}
 {#</div>#}
 {#{% endfor %}#}
-{% if pages | length == 1 %}
+{% if list | length == 1 %}
               <div class="main-content">
-                  <span class="content__data">Обновлено {{ pages[0].date }}</span>
-                  <h2>{{ pages[0].title }}</h2>
-                  {{ pages[0].page_content |safe }}
+                  <span class="content__data">Обновлено {{ list[0].date }}</span>
+                  <h2>{{ list[0].title }}</h2>
+                  {{ list[0].page_content |safe }}
 {##}
 {#                <div class="docs">#}
 {#                      <a href="" class="docs__item">#}
@@ -37,7 +37,7 @@
 {#                  </div>#}
               </div>
 {% else %}
-    {% for page in pages %}
+    {% for page in list %}
       <div class="conference-preview clearfix">
         <div class="conference-preview__wrapper">
           <div class="conference-preview__head clearfix">

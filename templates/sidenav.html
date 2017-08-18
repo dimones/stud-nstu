@@ -15,8 +15,8 @@
    <div class="events">
         {% for item in news %}
 
-        <a href="#" class="events__item">
-            <img class="events__img" src="static/img/news/{{ item.image_name }}"></img>
+        <a href="/12/{{ item.site_id }}/{{ item.id }}" class="events__item">
+            <img class="events__img" src="/static/img/news/{{ item.image_name }}">
             <p class="events__title">{{ item.title }}</p>
         </a>
         {% endfor %}

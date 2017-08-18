@@ -54,6 +54,7 @@ class Main:
         if site_type == 3:
             if material == None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % page)
+                print (self.posts)
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
         elif site_type == 4:
@@ -68,6 +69,7 @@ class Main:
             pass
     def render(self):
         if self.posts != None:
+            print("pages/"+self.template)
             return render_template("pages/"+self.template, list=self.posts, base_url=request.path)
         else:
             return
