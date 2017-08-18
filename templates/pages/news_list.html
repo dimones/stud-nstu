@@ -1,7 +1,7 @@
 {% if list | length == 1 %}
     <div class="full-news">
       {% if list[0].image_name !=None %}
-          <img class="full-news__img" src="static/img/news/{{ list[0].image_name }}">
+          <img class="full-news__img" src="/static/img/news/{{ list[0].image_name }}">
       {% endif %}
       <div class="full-news__title clearfix">
           <div class="full-news__title-text">{{ list[0].title }}</div>
@@ -30,7 +30,7 @@
 {% else %}
     {% for item in list %}
         <div class="conference-preview clearfix">
-          <img class="conference-preview__img" src="static/img/news/{{ item.image_name }}">
+          <img class="conference-preview__img" src="/static/img/news/{{ item.image_name }}">
           <div class="conference-preview__wrapper">
               <div class="conference-preview__head clearfix">
                   <div class="conference-preview__title"><a href="12/{{ item.site_id }}/{{ item.id}}">{{ item.title }}</a></div>
