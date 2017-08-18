@@ -48,19 +48,22 @@ class Content:
 class Main:
     posts = None
     template = None
-    def __init__(self, site_type=None, main=None, material=None):
+    def __init__(self, site_type=None, page=None, material=None):
         self.template = pages_template_get(site_type)
 
         if site_type == 3:
             if material == None:
-                self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % main)
+                self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % page)
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
         elif site_type == 4:
-            if material == None:
+            if page == None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" """)
             else:
-                self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE id=%s"""% material)
+                if material == None:
+                    self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE site_id=%s""" % page)
+                else:
+                    self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE id=%s""" % material)
         elif site_type == 5:
             pass
     def render(self):
