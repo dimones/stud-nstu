@@ -57,8 +57,10 @@ class Main:
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
         elif site_type == 4:
-            self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" """)
-            print (self.posts)
+            if material == None:
+                self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" """)
+            else:
+                self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE id=%s"""% material)
         elif site_type == 5:
             pass
     def render(self):
