@@ -1,178 +1,125 @@
 <div class="wrapper">
-    <div class="week">
-      <h3 class="week__title">7 учебная неделя</h3>
-        <div class="week__body">
-          <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
+{% for item in list %}
+    {% if loop.index==1 or loop.index== 8%}
+        <div class="week">
+            <div class="week__body">
+    {% endif %}
+              <div class="day">
+                  <div class="day__title">
+                      <span class="day__name">{{ item.weekday }}</span>
+                      <span class="day__date">{{ item.day }} {{ item.month }}</span>
+                  </div>
+                  {% if item.events | length == 0 %}
+                    <p class="day__event_empty">нет событий</p>
+                  {% else %}
+                      {% for row in  item.events %}
+                           <a href="" class="day__event {{ loop.cycle('day__event_green', 'day__event_red') }} ">
+                              <p class="day__event-time">{{ row.time }}</p>
+                              <p class="day__event-text">{{ row.title }}</p>
+                           </a>
+                      {% endfor %}
+                  {% endif %}
+{#
+{#                  <a href="" class="day__event day__event_red">#}
+{#                      <p class="day__event-time">18:00 - 19:00</p>#}
+{#                      <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#                  </a>#}
               </div>
-              <a href="" class="day__event day__event_green">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-              <a href="" class="day__event day__event_red">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
-          <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-              <a href="" class="day__event day__event_green">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-              <a href="" class="day__event day__event_red">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
-            <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-                <p class="day__event_empty">нет событий</p>
-          </div>
-            <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-              <a href="" class="day__event day__event_red">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
-            <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-              <a href="" class="day__event day__event_green">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-              <a href="" class="day__event day__event_red">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
-            <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-              <a href="" class="day__event day__event_green">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
-            <div class="day">
-              <div class="day__title">
-                  <span class="day__name">ПН</span>
-                  <span class="day__date">6 апреля</span>
-              </div>
-              <a href="" class="day__event day__event_green">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-              <a href="" class="day__event day__event_red">
-                  <p class="day__event-time">18:00 - 19:00</p>
-                  <p class="day__event-text">Студенческая весна в центре культуры...</p>
-              </a>
-          </div>
+
+
+                {% if loop.index==7 or loop.index == 14%}
+            </div>
         </div>
-    </div>
-    <div class="week">
-        <h3 class="week__title">7 учебная неделя</h3>
-    <div class="week__body">
-      <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_green">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-          <a href="" class="day__event day__event_red">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-      <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_green">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-          <a href="" class="day__event day__event_red">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-        <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-            <p class="day__event_empty">нет событий</p>
-      </div>
-        <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_red">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-        <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_green">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-          <a href="" class="day__event day__event_red">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-        <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_green">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-        <div class="day">
-          <div class="day__title">
-              <span class="day__name">ПН</span>
-              <span class="day__date">6 апреля</span>
-          </div>
-          <a href="" class="day__event day__event_green">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-          <a href="" class="day__event day__event_red">
-              <p class="day__event-time">18:00 - 19:00</p>
-              <p class="day__event-text">Студенческая весна в центре культуры...</p>
-          </a>
-      </div>
-    </div>
+        {% endif %}
+{% endfor %}
 </div>
+
+{#    <div class="week">#}
+{#        <h3 class="week__title">7 учебная неделя</h3>#}
+{#    <div class="week__body">#}
+{#      <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_green">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#          <a href="" class="day__event day__event_red">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#      <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_green">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#          <a href="" class="day__event day__event_red">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#        <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#            <p class="day__event_empty">нет событий</p>#}
+{#      </div>#}
+{#        <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_red">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#        <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_green">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#          <a href="" class="day__event day__event_red">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#        <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_green">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#        <div class="day">#}
+{#          <div class="day__title">#}
+{#              <span class="day__name">ПН</span>#}
+{#              <span class="day__date">6 апреля</span>#}
+{#          </div>#}
+{#          <a href="" class="day__event day__event_green">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#          <a href="" class="day__event day__event_red">#}
+{#              <p class="day__event-time">18:00 - 19:00</p>#}
+{#              <p class="day__event-text">Студенческая весна в центре культуры...</p>#}
+{#          </a>#}
+{#      </div>#}
+{#    </div>#}
+{#</div>#}
 </div>
