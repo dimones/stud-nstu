@@ -12,8 +12,8 @@ def admin_events_get_weeks():
     months =['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     week_days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
     day = datetime.date.today()+datetime.timedelta(days=-datetime.date.today().weekday())
-    events = DB().selectFromDB("""SELECT title, to_char(DATE(event_date), 'YYYY-MM-DD') AS "date", to_char(pg_catalog.TIME(event_date), 'HH12:MI') as "time", text, lead_text, site_id 
-                                  FROM "EVENTS" WHERE  event_date>TO_TIMESTAMP('%s','YYYY-MM-DD')""" % day)
+    events = DB().selectFromDB("""SELECT title, to_char(DATE(event_date), 'YYYY-MM-DD') AS "date", to_char(pg_catalog.TIME(event_date), 'HH24:MI') as "time", text, lead_text, site_id 
+                                  FROM "EVENTS" WHERE  event_date>TO_TIMESTAMP('%s','YYYY-MM-DD') ORDER by "time" ASC""" % day)
     result = []
     for i in range(14):
         week_day = {}

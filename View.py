@@ -62,10 +62,10 @@ class Main:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
         elif site_type == 4:
             if page == None:
-                self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" """)
+                self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" ORDER BY "date" DESC  """)
             else:
                 if material == None:
-                    self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE site_id=%s """ % page)
+                    self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE site_id=%s ORDER BY "date" DESC """ % page)
                 else:
                     self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE id=%s""" % material)
         elif site_type == 5:
