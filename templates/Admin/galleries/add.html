@@ -38,7 +38,7 @@
                           <input type="Text" class="form-control" placeholder="Заголовок" id="new-item__title">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display: none;">
                         <label class="col-lg-3 control-label" for="item__site">Выберите раздел</label>
                         <div class="col-lg-9">
                           <select class="form-control" id="item__site">
@@ -54,8 +54,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label" >Дата</label>
+                    <div class="form-group" style="display: none;">
+                        <label class="col-lg-3 control-label">Дата</label>
                         <div class="col-lg-9">
                             <input class="datepicker-here form-control" id="picker" data-timepicker="true" data-date-format="dd.mm.yyyy">
                         </div>
@@ -79,17 +79,159 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14a;"></span> Загрузка изображений
+                </div>
+            </div>
 
+            <div class="widget-body">
+            <!-- The file upload form used as target for the file upload widget -->
+            <form id="fileupload" class="form-horizontal" action="/api/admin/pages/files/upload" method="POST" enctype="multipart/form-data">
+                <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
+                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                        <span class="btn btn-success fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Добавить файлы...</span>
+                            <input type="file" name="file" multiple>
+                        </span>
+                        <button type="submit" class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Начать загрузку</span>
+                        </button>
+{#                        <button type="reset" class="btn btn-warning cancel">#}
+{#                            <i class="glyphicon glyphicon-ban-circle"></i>#}
+{#                            <span>Отменить загрузку</span>#}
+{#                        </button>#}
+                        <button type="button" class="btn btn-danger delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Удалить</span>
+                        </button>
+                        <input type="checkbox" class="toggle">
+                        <!-- The global file processing state -->
+                        <span class="fileupload-process"></span>
+                    <!-- The global progress state -->
+                    <div class="col-lg-5 fileupload-progress fade">
+                        <!-- The global progress bar -->
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                        </div>
+                        <!-- The extended global progress state -->
+                        <div class="progress-extended">&nbsp;</div>
+                    </div>
+                <!-- The table listing the files available for upload/download -->
+                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
 </div>
 <script>
 
 </script>
 
 
+{% raw %}
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Начать</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Отменить</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Удалить</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Отменить</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+{% endraw %}
 
 {% block scripts %}
 
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/static/tinymce/js/tinymce/tinymce_config.js" type="text/javascript" language="javascript"></script>
 
+<script src="/static/Admin/js/Auth/js.cookie.js"> </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -121,10 +263,120 @@
 <!-- The File Upload user interface plugin -->
 <script src="/static/js/uploader/jquery.fileupload-ui.js"></script>
 <!-- The main application script -->
-<script src="/static/js/uploader/main.js"></script>
+{#<script src="/static/js/uploader/main.js"></script>#}
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
-{% endblock %}
+    <script>
 
+    function loadExistFiles() {
+        $('#fileupload').fileupload(
+            'option',
+            'redirect',
+            window.location.href.replace(
+                /\/[^\/]*$/,
+                '/cors/result.html?%s'
+            )
+        );
+        // Load existing files:
+        $('#fileupload').addClass('fileupload-processing');
+        $.ajax({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: $('#fileupload').fileupload('option', 'url'),
+            dataType: 'json',
+            context: $('#fileupload')[0]
+        }).always(function () {
+            $(this).removeClass('fileupload-processing');
+        }).done(function (result) {
+            $(this).fileupload('option', 'done')
+                .call(this, $.Event('done'), {result: result});
+        });
+    }
+    function loadReserve(){
+        $.get('/api/admin/galleries/reserve')
+        .done(function (data) {
+            data = JSON.parse(data);
+            Cookies.set('add_gal_id',data.id);
+            console.log('/api/admin/galleries/files/upload/' + $("#item__site").val() + '/' + data.id);
+            // Initialize the jQuery File Upload widget:
+            $('#fileupload').fileupload({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: '/api/admin/galleries/files/upload/' + $("#item__site").val() + '/' + data.id
+
+            });
+
+            // Enable iframe cross-domain access via redirect option:
+
+            loadExistFiles();
+
+
+        })
+        .fail(function (data) {
+            alert('Загрузка файлов не будет работать.');
+        });
+    }
+    $( document ).ready(function() {
+        $("#new-item__title").val("{{ gal_data.title }}");
+        $("#lead_content").val("{{ gal_data.description }}");
+    });
+    $(function () {
+
+        $("#add").on('click',function () {
+            $.post('/api/admin/galleries/add',
+                {'gal_id': Cookies.get('add_gal_id'),
+                'title': $("#new-item__title").val(),
+                'description': $("#lead_content").val()})
+            .done(function (data) {
+
+            })
+            .fail(function () {
+
+            });
+        });
+    'use strict';
+
+    var sites = {};
+     {% if action=="create" %}
+        if(Cookies.get('add_gal_id') == undefined)
+        {
+            loadReserve();
+        }
+        else
+        {
+            $.post('/api/admin/galleries/check',{'gal_id' : Cookies.get('add_gal_id')})
+                .done(function (data) {
+                    data = JSON.parse(data);
+                    console.log(data.res);
+                    if(data.res != true)
+                        loadReserve();
+                    else
+                    {
+                        $('#fileupload').fileupload({
+                            // Uncomment the following to send cross-domain cookies:
+                            //xhrFields: {withCredentials: true},
+                            url: '/api/admin/galleries/files/upload/' + $("#item__site").val() + '/' + Cookies.get('add_gal_id')
+
+                        });
+
+                        // Enable iframe cross-domain access via redirect option:
+
+                        loadExistFiles();
+                    }
+                })
+                .fail(function () {
+                    alert('Загрузка файлов не будет работать.');
+                });
+        }
+
+
+
+    });
+    {% elif action=="edit" %}
+
+    {% endif %}
+
+    </script>
+{% endblock %}

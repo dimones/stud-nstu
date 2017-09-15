@@ -259,6 +259,14 @@ def change_event(_id):
                                                         """SELECT id, title FROM sites WHERE id =%s""" % user[0][
                                                             'site_id'])))
 
+@api.route('/admin/gallery/edit/<int:_id>')
+@need_admin
+def gallery_edit(_id):
+    return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
+                               sidebar=render_template("Admin/sidebar.html"),
+                               page=render_template("Admin/galleries/add.html", action="edit",
+                                                    sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """),
+                                                                            gal_data = DB().selectFromDB("""SELECT id,title,description FROM "GALLERIES" WHERE "id" = """ + str(_id))[0]))
 @api.route('/admin/gallery/add')
 @need_admin
 def gallery():
@@ -267,10 +275,11 @@ def gallery():
                                page=render_template("Admin/galleries/add.html", action="create",
                                                     sites=DB().selectFromDB("""SELECT id, title FROM sites WHERE editable =1 ORDER BY id ASC """)))
 
-
 @api.route('/admin/gallery/list')
 @need_admin
 def gallery_list():
     return render_template("Admin/layout.html", header=render_template("Admin/header.html"),
                            sidebar=render_template("Admin/sidebar.html"),
-                           page=render_template("Admin/galleries/list.html"))
+                           page=render_template("Admin/galleries/list.html",list=DB().selectFromDB("""SELECT g.id,g.title,g.description,g.date, 
+                                              (SELECT gp.filename FROM "GALLERIES_PHOTOS" gp WHERE gp.gal_id = g.id AND gp.type=1 LIMIT 1)
+                                              FROM "GALLERIES" g WHERE g.is_released = 1""")))

@@ -23,18 +23,18 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-3">
+                        <img src="/static/galleries/{{ item.id }}/{{ item.filename }}">
                     </div>
                     <div class="col-md-9">
-                       {{ item.lead_text }}
+                       {{ item.description }}
                     </div>
                 </div>
                 <div class="panel-footer clearfix">
                     <div class="pull-left">
-                        <div>{{ item.name }}  {{ item.surname }}</div>
-                        <div>Дата события {{ item.event_date }}</div>
+                        <div>Дата события {{ item.date }}</div>
                     </div>
                     <div class="btn-group pull-right">
-                        <a href="/admin/events/edit/{{ item.id }}" class="btn btn-primary">Править</a>
+                        <a href="/admin/gallery/edit/{{ item.id }}" class="btn btn-primary">Править</a>
 
                         <input type="button" class="btn btn-info " value="Удалить">
                     </div>
@@ -47,8 +47,8 @@
 <script>
     $(".btn-info").click(function(e){
         console.log($(e.toElement).parents(".panel-info").attr('id'));
-                $.post('/api/admin/events/remove',{
-            'id':$(e.toElement).parents(".panel-info").attr('id')
+                $.post('/api/admin/galleries/delete',{
+            'gal_id':$(e.toElement).parents(".panel-info").attr('id')
         }).done(function (data) {
             var ret = JSON.parse(data);
             $(e.toElement).parents(".panel-info").remove();
