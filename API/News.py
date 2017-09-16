@@ -40,7 +40,7 @@ def admin_news_add():
         return json.dumps({"succeed": True, 'news_id' : news_id})
     except Exception as e:
         print(e)
-        return json.dumps({"succeed":False})
+        return json.dumps({"succeed": False})
 
 @api.route('/api/admin/news/change', methods=['POST'])
 def admin_news_change():

@@ -37,7 +37,7 @@ class StudNSTU:
         @app.route('/schedule')
         def schedule():
             return render_template('layout.html', header=Header().render(),
-                               content=render_template("schedule.html"), footer=render_template("footer.html"))
+                                   content=render_template("promos/schedule.html"), footer=render_template("footer.html"))
 
         @app.route('/map')
         def map():

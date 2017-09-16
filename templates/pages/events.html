@@ -1,4 +1,5 @@
 <div class="wrapper">
+{% if list |length !=1 %}
 {% for item in list %}
     {% if loop.index==1 or loop.index== 8%}
         <div class="week">
@@ -13,7 +14,7 @@
                     <p class="day__event_empty">нет событий</p>
                   {% else %}
                       {% for row in  item.events %}
-                           <a href="" class="day__event {{ loop.cycle('day__event_green', 'day__event_red') }} ">
+                           <a href="9/{{ row.url}}" class="day__event {{ loop.cycle('day__event_green', 'day__event_red') }} ">
                               <p class="day__event-time">{{ row.time }}</p>
                               <p class="day__event-text">{{ row.title }}</p>
                            </a>
@@ -32,6 +33,19 @@
         </div>
         {% endif %}
 {% endfor %}
+{% else %}
+    <div class="full-news">
+{#      {% if list[0].image_name !=None %}#}
+{#          <img class="full-news__img" src="/static/img/news/{{ list[0].image_name }}">#}
+{#      {% endif %}#}
+      <div class="full-news__title clearfix">
+          <div class="full-news__title-text">{{ list[0].title }}</div>
+      </div>
+      <div class="full-news__body">
+          <p class="full-news__p">{{ list[0].text | safe }}</p>
+      </div>
+    </div>
+{% endif %}
 </div>
 
 {#    <div class="week">#}
