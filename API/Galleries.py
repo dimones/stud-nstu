@@ -6,15 +6,13 @@ from .DB import *
 from werkzeug.utils import secure_filename
 
 
-@api.route('/api/admin/galleries/reserve',methods=['POST'])
+@api.route('/api/admin/galleries/reserve',methods=['GET'])
 def galleries_reserve():
     try:
-        if request.form['site_id'] is None:
-            abort(403)
         # print(request.form)
-        return json.dumps({'id': DB().changeInDB("INSERT INTO \"GALLERIES\"(is_released,site_id) VALUES(0,%s) " %
-                                                 (request.form['site_id']),
-                                                 needCommit=True,needIDs=True)})
+        t = DB().changeInDB("INSERT INTO \"GALLERIES\"(is_released) VALUES(0) ",
+                                                 needCommit=True,needIDs=True)
+        return json.dumps({'id': t})
     except Exception as e:
         pass
 
@@ -41,7 +39,7 @@ def galleries_add():
         if request.form['gal_id'] is None:
             abort(403)
         # print(request.form)
-        return json.dumps({'id': DB().changeInDB("UPDATE \"GALLERIES\" SET title = '%s',description = '%s', date=NOW() WHERE id = %s" %
+        return json.dumps({'id': DB().changeInDB("UPDATE \"GALLERIES\" SET title = '%s',description = '%s', date=NOW(), is_released = 1 WHERE id = %s" %
                                                  (request.form['title'], request.form['description'], request.form['gal_id']),
                                                  needCommit=True)})
     except Exception as e:
@@ -68,7 +66,6 @@ def galleries_list():
         if request.args.get('site_id') is None:
             abort(403)
         return json.dumps(DB().selectFromDB("SELECT * FROM GALLERIES WHERE site_id = %s" % (request.args.get('site_id'))))
-
     except Exception as e:
         pass
 if __name__ == '__main__':
