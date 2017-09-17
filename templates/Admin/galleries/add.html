@@ -319,8 +319,12 @@
         });
     }
     $( document ).ready(function() {
+
+     {% if action=="edit" %}
+        console.log("{{ gal_data.title }}");
         $("#new-item__title").val("{{ gal_data.title }}");
         $("#lead_content").val("{{ gal_data.description }}");
+    {% endif %}
     });
     $(function () {
 
