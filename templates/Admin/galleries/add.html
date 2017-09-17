@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/css/uploader/style.css">
 
 <!-- blueimp Gallery styles -->
-<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="/static/gal/css/blueimp-gallery.min.css">
 
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="/static/css/uploader/jquery.fileupload.css">
@@ -233,19 +233,19 @@
 
 <script src="/static/Admin/js/Auth/js.cookie.js"> </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/static/gal/js/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="/static/js/uploader/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
-<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<script src="/static/gal/js/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script src="/static/gal/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script src="/static/gal/js/canvas-to-blob.min.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 <!-- blueimp Gallery script -->
-<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="/static/gal/js/jquery.blueimp-gallery.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <script src="/static/js/uploader/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
@@ -270,6 +270,7 @@
 <![endif]-->
     <script>
 
+    'use strict';
     function loadExistFiles() {
         $('#fileupload').fileupload(
             'option',
@@ -334,16 +335,27 @@
                 'title': $("#new-item__title").val(),
                 'description': $("#lead_content").val()})
             .done(function (data) {
-
+                toastr.success('Материал добавлен');
             })
             .fail(function () {
-
+                toastr.error('Произошла ошибка повторите попытку позже');
             });
         });
-    'use strict';
+        $("#edit").on('click',function () {
+            $.post('/api/admin/galleries/add',
+                {'gal_id': Cookies.get('add_gal_id'),
+                'title': $("#new-item__title").val(),
+                'description': $("#lead_content").val()})
+            .done(function (data) {
+                toastr.success('Материал изменен');
+            })
+            .fail(function () {
+                toastr.error('Произошла ошибка повторите попытку позже');
+            });
+        });
 
-    var sites = {};
      {% if action=="create" %}
+         console.log('create yopta');
         if(Cookies.get('add_gal_id') == undefined)
         {
             loadReserve();
@@ -377,10 +389,17 @@
 
 
 
-    });
     {% elif action=="edit" %}
+         console.log('edit yopta');
+        $('#fileupload').fileupload({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: '/api/admin/galleries/files/upload/' + $("#item__site").val() + '/' + Cookies.get('add_gal_id')
 
+        });
+        loadExistFiles();
     {% endif %}
 
+    });
     </script>
 {% endblock %}
