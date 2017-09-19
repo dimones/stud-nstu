@@ -81,6 +81,18 @@
                             {% endif %}
                         </div>
                     </div>
+                    {% if action=='create' %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form id="upload-file" method="post" enctype="multipart/form-data">
+                                <fieldset>
+                                    <label for="file">Выберите файл для загрузки</label>
+                                    <input name="file" type="file">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                  {% endif %}
                 </form>
             </div>
         </div>
@@ -104,7 +116,29 @@
                                         'lead_text': $("#lead_content").val()
 
         }).done(function (data) {
-            var ret = JSON.parse(data);
+            var data1 = JSON.parse(data);
+            var form_data = new FormData($('#upload-file')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/admin/events/image/upload/' + data1.event_id,
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    async: false,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.succeed == true) {
+                            if (value == 0)
+                                toastr.success('Успешно добавлено событие');
+                            else {
+                                toastr.success('Успешно опубликована событие');
+                                window.top.location.href = '/admin/events/list';
+                            }
+                        }
+                    }
+                });
+
             toastr.success("Запись успешно добавлена");
         }).fail(function(data) {
           toastr.error('Произошла ошибка, попробуйте позже', 'Ошибка!')

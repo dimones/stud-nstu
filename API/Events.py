@@ -2,7 +2,10 @@ from flask import *
 from . import api
 from .DB import *
 import datetime
+import json,sys,uuid,datetime,os
+from werkzeug.utils import secure_filename
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 @api.route('/api/admin/events/get', methods=['GET'])
 def admin_events_get():
     return json.dumps(DB().selectFromDB("""SELECT * FROM "EVENTS" ORDER BY  event_date  DESC """))
@@ -40,11 +43,11 @@ def admin_events_get_weeks():
 def admin_events_add():
     try:
         print(request.form)
-        DB().changeInDB("""INSERT INTO "EVENTS"(title,text,event_date,site_id, lead_text) 
+        event_id = DB().changeInDB("""INSERT INTO "EVENTS"(title,text,event_date,site_id, lead_text) 
                            VALUES('%s','%s', TO_TIMESTAMP('%s','DD.MM.YYYY HH24:MI'),%s,'%s')"""
                         % (request.form['title'], request.form['text'], request.form['date'],
-                           request.form['site_id'], request.form['lead_text']), needCommit=True)
-        return json.dumps({'succeed': True})
+                           request.form['site_id'], request.form['lead_text']), needCommit=True,needIDs=True)
+        return json.dumps({'succeed': True, 'event_id': event_id})
     except Exception as e:
         print(e)
         return json.dumps({'succeed': False})
@@ -70,4 +73,37 @@ def event_change():
     except Exception as e:
         print(e)
         return json.dumps({"succeed":False})
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+@api.route('/api/admin/events/image/upload/<_id>', methods=['GET', 'POST'])
+def upload_file_event(_id):
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            next_id = -1
+            db = DB()
 
+            if _id != -1:
+                mypath = api.root_path[:-4] + '/static/img/events'
+                if os.path.exists(mypath) != True:
+                    os.makedirs(mypath,exist_ok=True)
+                _filename = str(uuid.uuid4().hex) + '.' + filename.rsplit('.', 1)[1]
+                try:
+                    file.save(os.path.join(mypath, _filename))
+                    print(_filename)
+                    db.changeInDB(("""UPDATE "EVENTS" SET image_name = '%s' WHERE id=%s""" %  (_filename,_id)), needCommit=True)
+                    return json.dumps({'succeed': True})
+                except Exception as e:
+                    print(e)
+                    return json.dumps({"succeed":False})
