@@ -122,3 +122,11 @@
 .promo_events .promo__subtitle_top{
     color: #1A1A1A;
 }
+
+.promo_photo{
+	background-image: url('../img/some5.jpg');
+	height: 450px;
+	padding-top: 75px;
+	-webkit-background-size: cover;
+	background-size: cover;
+}

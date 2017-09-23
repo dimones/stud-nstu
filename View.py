@@ -10,7 +10,7 @@ class Header:
 class Footer:
     footer = None
     def __init__(self,site):
-        if site==None:
+        if site == None:
             self.footer = "index/footer.html"
         else:
             self.footer = "footer.html"
@@ -36,11 +36,12 @@ class Content:
     content = None
     isContent = None
     template = None
-    def __init__(self, site_info=None, page=None, material=None):
+    def __init__(self, site_info = None, page = None, material = None):
         self.template = site_info
         self.content = Main(site_info['site_type'], page, material)
         self.template = admin_sites_template_get(3)
-        if site_info['site_type']!= 5 or site_info['site_type']!= 7:
+        print(site_info['site_type'])
+        if site_info['site_type'] != 5 and site_info['site_type'] != 7:
             self.sidebar = Sidebar(site_info['id'], site_info['site_type'])
 
     def render(self):
@@ -69,6 +70,15 @@ class Main:
                 else:
                     self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" WHERE id=%s""" % material)
         elif site_type == 5:
+            if page == None:
+                self.posts = admin_events_get_weeks()
+                pass
+            else:
+                if material == None:
+                    self.posts = DB().selectFromDB("""SELECT * FROM  "EVENTS" WHERE site_id=%s""" % page)
+                else:
+                    self.posts = DB().selectFromDB("""SELECT * FROM  "EVENTS" WHERE id=%s""" % material)
+        elif site_type == 6:
             if page == None:
                 self.posts = admin_events_get_weeks()
                 pass
@@ -127,7 +137,7 @@ class Side_news(Side_item):
     news = None
 
     def __init__(self):
-        self.news =DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1 LIMIT 2""")
+        self.news = DB().selectFromDB("""SELECT * FROM "NEWS" WHERE in_top=1 LIMIT 2""")
 
     def render(self):
         pass
@@ -158,31 +168,31 @@ class Page:
         return self.render()
 
     def render(self):
-        # try:
-        #     if self.site_info['site_type'] == 8:
-        #         return render_template('layout.html',
-        #                                 header=self.header.render(),
-        #                                 promo =self.promo.render(),
-        #                                 footer=self.footer.render())
-        #     else:
-        #         return render_template('layout.html',
-        #                                 header=self.header.render(),
-        #                                 promo =self.promo.render(),
-        #                                 content=self.content.render(),
-        #                                 footer=self.footer.render())
-        # except:
-        #     return render_template('layout.html', header=Header().render(),
-        #                                           promo=render_template('dev.html'),
-        #                                           footer=Footer(None).render())
-
-        if self.site_info['site_type'] == 8:
-            return render_template('layout.html',
+        try:
+            if self.site_info['site_type'] == 8:
+                return render_template('layout.html',
                                         header=self.header.render(),
                                         promo =self.promo.render(),
                                         footer=self.footer.render())
-        else:
-            return render_template('layout.html',
+            else:
+                return render_template('layout.html',
                                         header=self.header.render(),
                                         promo =self.promo.render(),
                                         content=self.content.render(),
                                         footer=self.footer.render())
+        except:
+            return render_template('layout.html', header=Header().render(),
+                                                  promo=render_template('dev.html'),
+                                                  footer=Footer(None).render())
+
+        # if self.site_info['site_type'] == 8:
+        #     return render_template('layout.html',
+        #                                 header=self.header.render(),
+        #                                 promo =self.promo.render(),
+        #                                 footer=self.footer.render())
+        # else:
+        #     return render_template('layout.html',
+        #                                 header=self.header.render(),
+        #                                 promo =self.promo.render(),
+        #                                 content=self.content.render(),
+        #                                 footer=self.footer.render())
