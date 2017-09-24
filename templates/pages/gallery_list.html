@@ -7,7 +7,8 @@
             </div>
             <div class="gallery-preview__imgs">
                 {% for photo in item.photo %}
-                    <div style="background-image: url('static/img/gallery/{{ photo.filename}}')" class="gallery__img"></div>
+
+                    <div style="background-image: url('/static/galleries/{{ photo.id }}/{{ photo.filename }}')" class="gallery__img"></div>
                 {% endfor %}
             </div>
                 <a class="gallery-preview__more" href="10/0/{{ item.id }}">ещё фото</a>
@@ -40,7 +41,7 @@
     </div>
 <div class="gallery-content">
 {% for photo in list[0].photo %}
-    <div style="background-image: url('/static/img/gallery/{{ photo.filename}}')" class="gallery__img"></div>
+    <div style="background-image: url('/static/galleries/{{ photo.id }}/{{ photo.filename }}')" class="gallery__img"></div>
 {% endfor %}
 </div>
 
