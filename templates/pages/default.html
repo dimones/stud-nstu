@@ -17,24 +17,16 @@
                   <span class="content__data">Обновлено {{ list[0].date }}</span>
                   <h2>{{ list[0].title }}</h2>
                   {{ list[0].page_content |safe }}
-{##}
-{#                <div class="docs">#}
-{#                      <a href="" class="docs__item">#}
-{#                          <img src="../static/photo/doc.png" alt="" class="docs__img">#}
-{#                          <span class="dics__name">Шаблон статьи</span>#}
-{#                          <span class="docs__info">(word, 39кб)</span>#}
-{#                      </a>#}
-{#                      <a href="" class="docs__item">#}
-{#                          <img src="../static/photo/doc.png" alt="" class="docs__img">#}
-{#                          <span class="dics__name">Требования</span>#}
-{#                          <span class="docs__info">(word, 39кб)</span>#}
-{#                      </a>#}
-{#                      <a href="" class="docs__item">#}
-{#                          <img src="../static/photo/pdf.png" alt="" class="docs__img">#}
-{#                          <span class="dics__name">Участники (от 29.02.2016)</span>#}
-{#                          <span class="docs__info">(pdf, 39кб)</span>#}
-{#                      </a>#}
-{#                  </div>#}
+                  {%  if list[0].documents | length != 0%}
+                      {% for doc in list[0].documents  %}
+                          <div class="docs">
+                              <a href="/static/files/onir/{{ doc.filename }}" class="docs__item">
+                                  <img src="/static/photo/doc.png" alt="" class="docs__img">
+                                  <span class="dics__name">Шаблон статьи</span>
+                              </a>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
               </div>
 {% else %}
     {% for page in list %}

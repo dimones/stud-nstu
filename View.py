@@ -61,6 +61,8 @@ class Main:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE sidebar_id=%s""" % page)
             else:
                 self.posts = DB().selectFromDB("""SELECT * FROM  pages WHERE id=%s""" % material)
+                print (len(self.posts))
+                self.posts[0]['documents'] = DB().selectFromDB("""SELECT * FROM  "DOCUMENTS" WHERE page_id=%s""" % material)
         elif site_type == 4:
             if page == None:
                 self.posts = DB().selectFromDB("""SELECT * FROM  "NEWS" ORDER BY "date" DESC  """)
