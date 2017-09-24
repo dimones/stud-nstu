@@ -32,6 +32,8 @@
 					img_src.css('background-image', 'url("/static/img/news/' + data[n].image_name + '")');
 					$('.events-gallery__button.active').removeClass('active');
 					$($('.events-gallery__button')[n]).addClass('active');
+					// Второй аргумент - ссылка
+					//more_link.attr('href', 'ссылка');
 				}
 				var count = 0;
 				setGallery(count);
