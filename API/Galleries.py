@@ -45,6 +45,34 @@ def galleries_add():
     except Exception as e:
         pass
 
+
+@api.route('/api/admin/galleries/get/preview',methods=['POST'])
+def galleries_get_prev():
+    galleries = DB().selectFromDB("""SELECT id, title, description, to_char("date",'YYYY-MM-DD') as "date" FROM "GALLERIES" WHERE  is_released=1 """)
+    galleries_photo_preview = DB().selectFromDB("""SELECT * FROM "GALLERIES_PHOTOS" WHERE "type"=1""")
+    for item in galleries:
+        photos = []
+
+        for galleries_photo in galleries_photo_preview:
+            if item["id"] == galleries_photo["gal_id"]:
+                photos.append(galleries_photo)
+            if photos.__len__()==6:
+                break
+
+        item["photo"] = photos
+
+    return json.dumps(galleries)
+
+@api.route('/api/admin/galleries/get/<int:id>',methods=['GET'])
+def galleries_get(id):
+    galleries = DB().selectFromDB("""SELECT id, title, description, to_char("date",'YYYY-MM-DD') as "date" FROM "GALLERIES" WHERE  id=%s"""% id)
+    galleries_photo_preview = DB().selectFromDB("""SELECT * FROM "GALLERIES_PHOTOS" WHERE "type"=0 AND gal_id=%s""" % id)
+
+    galleries[0]['photo'] = galleries_photo_preview
+
+    return json.dumps(galleries)
+
+
 @api.route('/api/admin/galleries/delete',methods=['POST'])
 def galleries_delete():
     try:
